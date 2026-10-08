@@ -1,11 +1,11 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Container } from '@/components/ui/container';
-import { ArrowRightIcon, ArrowUpRightIcon, MailIcon, SocialIcon } from '@/components/ui/icons';
+import { ArrowUpRightIcon, MailIcon, SocialIcon } from '@/components/ui/icons';
 import { Logo } from '@/components/ui/logo';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/cn';
 import { BRAND_SIGNATURE, CONTACT_EMAIL, isPublished, SOCIAL_LINKS } from '@/lib/constants';
-import { NAV_ITEMS, sectionHref } from '@/lib/sections';
+import { NAV_ITEMS, navHref } from '@/lib/sections';
 
 const LINK_CLASS = 'rounded-xs text-body-sm text-fg-muted transition-colors hover:text-fg';
 
@@ -24,7 +24,6 @@ const LINK_CLASS = 'rounded-xs text-body-sm text-fg-muted transition-colors hove
 export async function Footer() {
   const t = await getTranslations('footer');
   const tNav = await getTranslations('nav');
-  const tActions = await getTranslations('actions');
   const locale = await getLocale();
 
   // Sabit yıl yerine build anındaki yıl: 2027'de "© 2026" kalmaz.
@@ -45,17 +44,6 @@ export async function Footer() {
           <div className={cn('lg:col-span-4', hasLegal ? 'md:col-span-6' : 'md:col-span-4')}>
             <Logo size="lg" />
             <p className="mt-4 max-w-[28ch] text-body-sm text-fg-muted">{t('tagline')}</p>
-            {/* Hakkımızda sayfası menüde değil, içerikten açılır (bkz. lib/sections.ts);
-                footer'da ana sayfadaki linkle aynı adla durur. */}
-            {isPublished('/about') && (
-              <Link
-                href="/about"
-                className="group/about mt-5 inline-flex items-center gap-2 rounded-xs text-body-sm text-fg transition-colors hover:text-accent"
-              >
-                {tActions('aboutStudio')}
-                <ArrowRightIcon className="size-3.5 transition-transform duration-[var(--duration-fast)] group-hover/about:translate-x-0.5" />
-              </Link>
-            )}
           </div>
 
           <nav aria-label={t('navHeading')} className="md:col-span-3 lg:col-span-2">
@@ -63,7 +51,7 @@ export async function Footer() {
             <ul className="mt-4 space-y-2">
               {NAV_ITEMS.map((item) => (
                 <li key={item.id}>
-                  <a href={sectionHref(locale, item.id)} className={LINK_CLASS}>
+                  <a href={navHref(locale, item.id)} className={LINK_CLASS}>
                     {tNav(item.labelKey)}
                   </a>
                 </li>

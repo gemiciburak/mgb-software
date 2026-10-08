@@ -31,11 +31,11 @@ export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
  *
  * Sayfada dokuz bölüm var, navigasyonda dört başlık. Bir bölüm yalnızca
  * gerçekten o başlığın içeriğiyse sahiplenilir: Hizmetler'in altında
- * "Ürettiklerimiz", İşler'in altında yalnızca İşler, Hakkımızda'nın altında
- * yalnızca Yaklaşım (Hakkımızda sayfasına giden link orada), İletişim'in
- * altında kapanış bölümü.
+ * "Ürettiklerimiz", İşler'in altında yalnızca İşler, İletişim'in altında
+ * kapanış bölümü. Hakkımızda kendi sayfasına gittiği için ana sayfada hiçbir
+ * bölümü sahiplenmez; yalnızca o sayfadayken işaretlenir.
  *
- * Süreç, Teknoloji ve Neden MGB sahipsizdir (`null`): gösterge
+ * Yaklaşım, Süreç, Teknoloji ve Neden MGB sahipsizdir (`null`): gösterge
  * oradayken hiçbir başlığı işaretlemez. Önceki sürümde bu üçü Hakkımızda'ya
  * bağlıydı; bölümler İşler'in iki yanına dağıldığı için gösterge kaydırırken
  * sürekli Hakkımızda'ya geri dönüyordu. Yanlış başlığı işaretlemektense
@@ -43,7 +43,7 @@ export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
  */
 export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
   [SECTION_ID.hero]: null,
-  [SECTION_ID.about]: SECTION_ID.about,
+  [SECTION_ID.about]: null,
   [SECTION_ID.services]: SECTION_ID.services,
   [SECTION_ID.build]: SECTION_ID.services,
   [SECTION_ID.work]: SECTION_ID.work,
@@ -56,10 +56,12 @@ export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
 /**
  * Navigasyon öğeleri: İşler, Hizmetler, Hakkımızda, İletişim.
  *
- * Tek kural — **menü ana sayfanın haritasıdır.** Her öğe ana sayfadaki bir
- * bölüme kaydırır; ayrıntılı sayfalar o bölümün İÇİNDEN açılır (ör. Yaklaşım
- * bölümündeki "MGB Software'i tanıyın →" Hakkımızda sayfasına gider). Hizmet
- * ve iş sayfaları geldiğinde de aynı desen: menü değişmez, bölüme link eklenir.
+ * Kural: öğenin kendi sayfası yayındaysa doğrudan o sayfaya gider, değilse
+ * ana sayfadaki bölüme kaydırır (`navHref`). Şu an yalnızca Hakkımızda'nın
+ * sayfası var; hizmet ve iş sayfaları yayına alınınca `NAV_PAGES`'e eklenir
+ * ve menü kendiliğinden onlara döner. (Bir ara "menü yalnızca ana sayfayı
+ * gezer" kuralı denendi: Hakkımızda'ya ulaşmak için fazladan bir tık
+ * gerekiyordu, bırakıldı.)
  *
  * İletişim ile Proje Başlat aynı şey değil:
  *   • Proje Başlat → yeni proje için yapılandırılmış form (`/start`).
@@ -76,18 +78,22 @@ export const NAV_ITEMS = [
 
 export type NavItem = (typeof NAV_ITEMS)[number];
 
-/**
- * Bir bölümün derinleştiği alt sayfalar. O sayfadayken menüde bölümün
- * başlığı işaretli kalır — bir içindekiler listesinde bulunulan bölüm gibi.
- * Link yine ana sayfadaki bölüme gider; alt sayfa bölümün içinden açılır.
- */
-const SECTION_PAGES: Partial<Record<SectionId, AppPathname>> = {
+/** Kendi sayfası olan menü öğeleri. Yayında olmayan sayfaya link verilmez. */
+const NAV_PAGES: Partial<Record<SectionId, AppPathname>> = {
   [SECTION_ID.about]: '/about',
+  [SECTION_ID.services]: '/services',
+  [SECTION_ID.work]: '/work',
 };
 
-/** Bulunulan sayfa bir bölümün alt sayfasıysa o bölüm; değilse null. */
+/** Menü öğesinin hedefi: sayfası yayındaysa o sayfa, değilse bölüm çapası. */
+export function navHref(locale: Locale, id: SectionId): string {
+  const page = NAV_PAGES[id];
+  return page && isPublished(page) ? getPathname({ href: page, locale }) : sectionHref(locale, id);
+}
+
+/** Bulunulan sayfa bir menü öğesinin sayfasıysa o öğe; değilse null. */
 export function navItemForPathname(pathname: string): SectionId | null {
-  for (const [id, page] of Object.entries(SECTION_PAGES)) {
+  for (const [id, page] of Object.entries(NAV_PAGES)) {
     if (page === pathname && isPublished(page)) return id as SectionId;
   }
   return null;

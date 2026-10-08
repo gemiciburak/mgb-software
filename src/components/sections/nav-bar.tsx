@@ -15,6 +15,7 @@ import { useScrolled } from '@/hooks/use-scrolled';
 import { cn } from '@/lib/cn';
 import {
   NAV_ITEMS,
+  navHref,
   navItemForPathname,
   SECTION_ID,
   sectionHref,
@@ -141,7 +142,7 @@ export function NavBar() {
               return (
                 <a
                   key={item.id}
-                  href={sectionHref(locale, item.id)}
+                  href={navHref(locale, item.id)}
                   onMouseEnter={() => setHovered(item.id)}
                   onFocus={() => setHovered(item.id)}
                   onBlur={() => setHovered(null)}

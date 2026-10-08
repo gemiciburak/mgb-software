@@ -13,7 +13,7 @@ import { useLockBodyScroll } from '@/hooks/use-lock-body-scroll';
 import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
 import { DURATION, EASE_TRANSITION } from '@/lib/motion';
 import { cn } from '@/lib/cn';
-import { NAV_ITEMS, sectionHref, type SectionId } from '@/lib/sections';
+import { NAV_ITEMS, navHref, type SectionId } from '@/lib/sections';
 
 /** Tab döngüsünü panel içinde tutmak için odaklanabilir öğe seçicisi. */
 const FOCUSABLE = 'a[href], button:not([disabled])';
@@ -176,7 +176,7 @@ export function MobileMenu({
               return (
                 <motion.a
                   key={item.id}
-                  href={sectionHref(locale, item.id)}
+                  href={navHref(locale, item.id)}
                   onClick={onClose}
                   variants={rowVariants}
                   transition={{
