@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 const NEXT_STEPS = ['read', 'reply', 'meeting', 'proposal'] as const;
 
 /**
- * Proje başlatma sayfası (`/start` ↔ `/en/start`).
+ * Proje başlatma sayfası (`/proje-baslat` ↔ `/en/start`).
  *
  * Sitedeki bütün "Proje Başlat" düğmeleri buraya gelir. Tek giriş kapısı
  * dört adımlı form; yan paftada gönderimden sonra ne olacağı ve dosyalar için
