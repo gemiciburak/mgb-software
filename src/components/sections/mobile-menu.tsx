@@ -208,8 +208,8 @@ export function MobileMenu({
 
           {/* Alt boşluk ev göstergesi / güvenli alanla çakışmaz. */}
           <div className="shrink-0 space-y-5 px-gutter pt-6 pb-[max(--spacing(6),env(safe-area-inset-bottom))]">
-            <Link href="/start" onClick={onClose} className={buttonStyles({ className: 'w-full' })}>
-              {tActions('startProject')}
+            <Link href="/quote" onClick={onClose} className={buttonStyles({ className: 'w-full' })}>
+              {tActions('getQuote')}
             </Link>
             <div className="flex items-center justify-between">
               <LocaleSwitcher />

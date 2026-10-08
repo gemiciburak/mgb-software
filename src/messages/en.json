@@ -10,7 +10,7 @@
     "contact": "Contact"
   },
   "actions": {
-    "startProject": "Start a Project",
+    "getQuote": "Get a Quote",
     "exploreServices": "Explore Services",
     "viewService": "View service",
     "pauseMotion": "Pause motion",
@@ -53,11 +53,11 @@
     "retry": "Try again"
   },
   "contact": {
-    "eyebrow": "START A PROJECT",
+    "eyebrow": "GET A QUOTE",
     "title": "Tell us about your project.",
-    "intro": "Four short steps, about two minutes. We read every request and get back to you on the channel you prefer.",
-    "metaTitle": "Start a Project",
-    "metaDescription": "Describe your project in four short steps: needs, scope, details and contact. MGB Software will read your request and get back to you.",
+    "intro": "Four short steps, about two minutes. We read every request, get back to you on the channel you prefer and send a written proposal once the scope is clear.",
+    "metaTitle": "Get a Quote",
+    "metaDescription": "Describe your project in four short steps: needs, scope, details and contact. MGB Software will read your request and prepare a written proposal.",
     "progress": "Step {current} of {total}",
     "stepNames": {
       "services": "Needs",
@@ -189,7 +189,7 @@
   },
   "kvkk": {
     "metaTitle": "Data Protection Notice",
-    "metaDescription": "MGB Software's notice on personal data processed through its website and project request form, under Turkish Law No. 6698 (KVKK).",
+    "metaDescription": "MGB Software's notice on personal data processed through its website and quote form, under Turkish Law No. 6698 (KVKK).",
     "eyebrow": "DATA PROTECTION",
     "updated": "Last updated: {date}"
   },

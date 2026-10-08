@@ -10,7 +10,7 @@
     "contact": "İletişim"
   },
   "actions": {
-    "startProject": "Proje Başlat",
+    "getQuote": "Teklif Al",
     "exploreServices": "Hizmetlerimiz",
     "viewService": "Hizmeti gör",
     "pauseMotion": "Akışı durdur",
@@ -53,11 +53,11 @@
     "retry": "Tekrar dene"
   },
   "contact": {
-    "eyebrow": "PROJE BAŞLAT",
+    "eyebrow": "TEKLİF AL",
     "title": "Projenizi anlatın.",
-    "intro": "Dört kısa adım, yaklaşık iki dakika. Talebinizi okuyup tercih ettiğiniz kanaldan size dönüyoruz.",
-    "metaTitle": "Proje Başlat",
-    "metaDescription": "Projenizi dört kısa adımda anlatın: ihtiyaç, kapsam, detaylar ve iletişim. MGB Software talebinizi okuyup size dönsün.",
+    "intro": "Dört kısa adım, yaklaşık iki dakika. Talebinizi okuyup tercih ettiğiniz kanaldan dönüyor, kapsam netleşince yazılı bir teklif iletiyoruz.",
+    "metaTitle": "Teklif Al",
+    "metaDescription": "Projenizi dört kısa adımda anlatın: ihtiyaç, kapsam, detaylar ve iletişim. MGB Software talebinizi okuyup size yazılı bir teklif hazırlasın.",
     "progress": "Adım {current} / {total}",
     "stepNames": {
       "services": "İhtiyaç",
@@ -189,7 +189,7 @@
   },
   "kvkk": {
     "metaTitle": "KVKK Aydınlatma Metni",
-    "metaDescription": "MGB Software'in internet sitesi ve proje başlatma formu üzerinden işlenen kişisel veriler hakkında 6698 sayılı KVKK kapsamında aydınlatma metni.",
+    "metaDescription": "MGB Software'in internet sitesi ve teklif formu üzerinden işlenen kişisel veriler hakkında 6698 sayılı KVKK kapsamında aydınlatma metni.",
     "eyebrow": "KVKK",
     "updated": "Son güncelleme: {date}"
   },

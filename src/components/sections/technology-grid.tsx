@@ -56,7 +56,7 @@ const SETTLED = { opacity: 1, x: 0, y: 0, z: 0, rotate: 0 } as const;
  * silüeti ve rengi, gözleri olan küçük bir figür. Logolar değil silüetler
  * kullanıldığı için dokuz renk yan yana bir sponsor bandı gibi değil, bir
  * ekip gibi okunur; ad ve rol altında yazar. (Önceden tek renkli logolardı;
- * karakterler proje başlatma sayfasının yan sütunundan buraya taşındı.)
+ * karakterler teklif sayfasının yan sütunundan buraya taşındı.)
  *
  * Hareket iki katmanlı:
  *   1. Giriş — kartlar dağınık derinliklerden ızgaraya oturur. Bir kez olur,

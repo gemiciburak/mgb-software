@@ -2,7 +2,7 @@ import { isLocale, type Locale } from './locale';
 import { isServiceSlug, type ServiceSlug } from './service';
 
 /**
- * Proje başlatma formunun sözleşmesi.
+ * Teklif formunun sözleşmesi.
  *
  * Seçenekler serbest metin değil sabit değerler: gelen talepler karşılaştırılabilir
  * kalsın ve etiketler dile göre çevrilebilsin (etiketler web'in messages

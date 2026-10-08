@@ -206,7 +206,7 @@ export const home: HomeContent = {
       {
         question: 'Bir proje nasıl başlıyor?',
         answer:
-          'Proje başlatma formunu doldurursunuz; dört kısa adım, yaklaşık iki dakika. Talebinizi okuyup tercih ettiğiniz kanaldan size dönüyoruz. İsterseniz 30 dakikalık bir ön görüşmede detayları konuşuyor, ardından kapsamı, süreyi ve bütçeyi yazılı bir teklifle iletiyoruz.',
+          'Teklif formunu doldurursunuz; dört kısa adım, yaklaşık iki dakika. Talebinizi okuyup tercih ettiğiniz kanaldan size dönüyoruz. İsterseniz 30 dakikalık bir ön görüşmede detayları konuşuyor, ardından kapsamı, süreyi ve bütçeyi yazılı bir teklifle iletiyoruz.',
       },
       {
         question: 'Fiyatlandırma nasıl belirleniyor?',

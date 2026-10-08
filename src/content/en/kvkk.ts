@@ -7,7 +7,7 @@ const email = CONTACT_EMAIL ?? '';
 export const kvkk: LegalDocument = {
   title: 'Data Protection Notice',
   updated: '2026-10-09',
-  intro: `This notice explains how personal data collected through the ${SITE_NAME} website and its project request form is processed, under Turkish Personal Data Protection Law No. 6698 (“KVKK”).`,
+  intro: `This notice explains how personal data collected through the ${SITE_NAME} website and its quote form is processed, under Turkish Personal Data Protection Law No. 6698 (“KVKK”).`,
   sections: [
     {
       heading: 'Data controller',
@@ -58,7 +58,7 @@ export const kvkk: LegalDocument = {
       blocks: [
         {
           type: 'p',
-          text: 'Your personal data is collected electronically, partly by automated means, when you fill in the project request form, email us or book an intro call.',
+          text: 'Your personal data is collected electronically, partly by automated means, when you fill in the quote form, email us or book an intro call.',
         },
         {
           type: 'list',
@@ -119,7 +119,7 @@ export const kvkk: LegalDocument = {
           items: [
             'MGB_LOCALE cookie — remembers your language choice, kept for one year.',
             'Theme preference — your light/dark choice is kept in your browser (localStorage) and never sent to the server.',
-            'Form draft — if you leave the project form unfinished, what you have entered is kept only in that tab (sessionStorage); it is deleted when the tab closes and is not sent to the server until you submit.',
+            'Form draft — if you leave the quote form unfinished, what you have entered is kept only in that tab (sessionStorage); it is deleted when the tab closes and is not sent to the server until you submit.',
             'Form draft — what you type in the form is kept in your browser (sessionStorage) until you close the tab, and deleted after sending.',
           ],
         },

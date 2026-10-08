@@ -4,7 +4,7 @@ import labels from '@/messages/tr.json';
 import { serviceNumber, validateContactPayload, type ContactPayload } from '@/shared';
 
 /**
- * Proje başlatma formunun uç noktası.
+ * Teklif formunun uç noktası.
  *
  * Veritabanı yok: doğrulanan talep Resend üzerinden ekibin gelen kutusuna
  * e-posta olarak düşer, `Reply-To` müşterinin adresidir — "Yanıtla" demek

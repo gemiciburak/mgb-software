@@ -19,7 +19,7 @@ const email = CONTACT_EMAIL ?? '';
 export const kvkk: LegalDocument = {
   title: 'KVKK Aydınlatma Metni',
   updated: '2026-10-09',
-  intro: `Bu metin, ${SITE_NAME} internet sitesi ve proje başlatma formu aracılığıyla işlenen kişisel verileriniz hakkında, 6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca sizi bilgilendirmek amacıyla hazırlanmıştır.`,
+  intro: `Bu metin, ${SITE_NAME} internet sitesi ve teklif formu aracılığıyla işlenen kişisel verileriniz hakkında, 6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca sizi bilgilendirmek amacıyla hazırlanmıştır.`,
   sections: [
     {
       heading: 'Veri sorumlusu',
@@ -70,7 +70,7 @@ export const kvkk: LegalDocument = {
       blocks: [
         {
           type: 'p',
-          text: 'Kişisel verileriniz; sitedeki proje başlatma formunu doldurmanız, bize e-posta göndermeniz veya ön görüşme planlamanız yoluyla, elektronik ortamda ve kısmen otomatik yollarla toplanır.',
+          text: 'Kişisel verileriniz; sitedeki teklif formunu doldurmanız, bize e-posta göndermeniz veya ön görüşme planlamanız yoluyla, elektronik ortamda ve kısmen otomatik yollarla toplanır.',
         },
         {
           type: 'list',
@@ -131,7 +131,7 @@ export const kvkk: LegalDocument = {
           items: [
             'MGB_LOCALE çerezi — seçtiğiniz dili hatırlar, bir yıl saklanır.',
             'Tema tercihi — açık/koyu tema seçiminiz tarayıcınızda (localStorage) tutulur, sunucuya gönderilmez.',
-            'Form taslağı — proje başlatma formunu yarıda bırakırsanız doldurduğunuz alanlar yalnızca o sekmede (sessionStorage) tutulur; sekme kapanınca silinir, gönderene kadar sunucuya iletilmez.',
+            'Form taslağı — teklif formunu yarıda bırakırsanız doldurduğunuz alanlar yalnızca o sekmede (sessionStorage) tutulur; sekme kapanınca silinir, gönderene kadar sunucuya iletilmez.',
             'Form taslağı — doldurduğunuz form, sekmeyi kapatana kadar tarayıcınızda (sessionStorage) tutulur ve gönderimden sonra silinir.',
           ],
         },

@@ -148,7 +148,7 @@ export interface BriefService {
 }
 
 /**
- * Proje başlatma formu — dört adım: ihtiyaç, kapsam, detaylar, iletişim.
+ * Teklif formu — dört adım: ihtiyaç, kapsam, detaylar, iletişim.
  *
  * Taslak `sessionStorage`'da tutulur: sayfa yenilense ya da kullanıcı KVKK
  * metnine bakıp geri gelse de yazdıkları durur. Sunucu bunu bilemediği için

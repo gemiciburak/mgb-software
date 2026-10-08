@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates: buildAlternates('/start', locale),
+    alternates: buildAlternates('/quote', locale),
     // openGraph üst düzeyde birleşmez, layout'taki nesnenin yerine geçer;
     // bu yüzden ortak alanlar burada da yazılır.
     openGraph: {
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       locale: LOCALE_TAGS[locale],
       title: t('metaTitle'),
       description: t('metaDescription'),
-      url: `${SITE_URL}${getPathname({ href: '/start', locale })}`,
+      url: `${SITE_URL}${getPathname({ href: '/quote', locale })}`,
     },
   };
 }
@@ -40,9 +40,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 const NEXT_STEPS = ['read', 'reply', 'meeting', 'proposal'] as const;
 
 /**
- * Proje başlatma sayfası (`/teklif-al` ↔ `/en/get-a-quote`).
+ * Teklif sayfası (`/teklif-al` ↔ `/en/get-a-quote`).
  *
- * Sitedeki bütün "Proje Başlat" düğmeleri buraya gelir. Tek giriş kapısı
+ * Sitedeki bütün "Teklif Al" düğmeleri buraya gelir. Tek giriş kapısı
  * dört adımlı form; yan paftada gönderimden sonra ne olacağı ve dosyalar için
  * e-posta adresi durur. Ön görüşme formdan sonra, teşekkür ekranında sunulur.
  * Başlık ve giriş sunucu HTML'inde, form istemci bileşeni.

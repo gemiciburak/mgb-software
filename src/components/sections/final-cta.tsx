@@ -24,8 +24,8 @@ import type { CtaContent } from '@/types/content';
  * modunda genel kural tarafından durdurulur.
  *
  * Menüdeki "İletişim" buraya iner; bu yüzden bölüm iki AYRI yolu yan yana
- * ve adıyla gösterir — "İletişim" ile "Proje Başlat" aynı şey değil:
- *   1. Yeni proje → "Proje Başlat" düğmesi, dört adımlı form (`/teklif-al`).
+ * ve adıyla gösterir — "İletişim" ile "Teklif Al" aynı şey değil:
+ *   1. Yeni proje → "Teklif Al" düğmesi, dört adımlı form (`/teklif-al`).
  *   2. Doğrudan ulaşın → e-posta ve sosyal hesaplar. Kısa soru, iş birliği
  *      ya da proje dışı bir konu için forma girmek gerekmez.
  *
@@ -60,8 +60,8 @@ export async function FinalCta({ content }: { content: CtaContent }) {
             <p className="mt-7 max-w-[44ch] text-body-lg text-fg-muted">{content.description}</p>
 
             <Magnetic className="mt-11 w-fit">
-              <Link href="/start" className={buttonStyles()}>
-                {t('startProject')}
+              <Link href="/quote" className={buttonStyles()}>
+                {t('getQuote')}
                 <ArrowRightIcon className="size-4" />
               </Link>
             </Magnetic>

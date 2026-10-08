@@ -180,10 +180,10 @@ export function NavBar() {
             <ThemeToggle />
 
             <Link
-              href="/start"
+              href="/quote"
               className={buttonStyles({ size: 'sm', className: 'hidden lg:inline-flex' })}
             >
-              {tActions('startProject')}
+              {tActions('getQuote')}
             </Link>
 
             <button

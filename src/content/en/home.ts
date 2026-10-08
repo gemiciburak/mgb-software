@@ -200,7 +200,7 @@ export const home: HomeContent = {
       {
         question: 'How does a project start?',
         answer:
-          'You fill in the project form: four short steps, about two minutes. We read your request and get back to you through the channel you chose. If you like, we go over the details in a 30-minute call, then send scope, timeline and budget in a written proposal.',
+          'You fill in the quote form: four short steps, about two minutes. We read your request and get back to you through the channel you chose. If you like, we go over the details in a 30-minute call, then send scope, timeline and budget in a written proposal.',
       },
       {
         question: 'How is pricing determined?',

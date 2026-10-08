@@ -145,7 +145,7 @@ olmayan sayfalara link verilmez: `src/lib/constants.ts` içindeki
 proje eklemek bir nesne eklemektir. Dizi boşken bölüm bilinçli bekleme
 durumunu gösterir — uydurma proje yok.
 
-**Proje başlatma formu** (`/teklif-al` ↔ `/en/get-a-quote`) dört adımdır: ihtiyaç,
+**Teklif formu** (`/teklif-al` ↔ `/en/get-a-quote`) dört adımdır: ihtiyaç,
 kapsam, detaylar, iletişim. Seçenekler ve doğrulama `src/shared/contact.ts`
 içinde — istemci her adımda, sunucu gönderimde aynı fonksiyonu çalıştırır.
 Bütçe aralıkları TL (KDV hariç). Yarım kalan form `sessionStorage`'da durur.

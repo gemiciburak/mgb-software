@@ -63,15 +63,15 @@ export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
  * İşler bölümüne gidiyordu.)
  *
  * Kural: menü ana sayfanın haritasıdır; her öğe ana sayfadaki bölümüne
- * kaydırır. Ayrı sayfa olarak yalnızca proje başlatma formu var (sağdaki
- * "Proje Başlat" düğmesi). Hakkımızda bir dönem ayrı sayfaydı; menüde tek
+ * kaydırır. Ayrı sayfa olarak yalnızca teklif formu var (sağdaki
+ * "Teklif Al" düğmesi). Hakkımızda bir dönem ayrı sayfaydı; menüde tek
  * öğenin farklı davranması tutarsız durduğu için içeriği ana sayfaya taşındı.
  *
  * `navHref` ileriye dönük: hizmet veya iş sayfaları yayına alınırsa
  * `NAV_PAGES` üzerinden menü kendiliğinden onlara döner.
  *
- * İletişim ile Proje Başlat aynı şey değil:
- *   • Proje Başlat → yeni proje için yapılandırılmış form (`/teklif-al`).
+ * İletişim ile Teklif Al aynı şey değil:
+ *   • Teklif Al → yeni proje için yapılandırılmış form (`/teklif-al`).
  *   • İletişim → kapanış bölümü; orada form ile doğrudan kanallar (e-posta,
  *     sosyal hesaplar) yan yana ve ayrı ayrı anlatılır — soru, iş birliği
  *     ya da proje dışı bir konu için forma girmek gerekmez.
