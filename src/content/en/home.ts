@@ -9,9 +9,15 @@ import type { HomeContent } from '@/types/content';
 export const home: HomeContent = {
   philosophy: {
     eyebrow: 'ABOUT',
+    title: 'Design and software, end to end.',
     body: [
-      'MGB Software is a technology studio that designs and builds digital products for businesses, from first idea to launch, end to end. Web and mobile applications, interface design, backend systems, e-commerce and technical drawing are handled under one roof, with the same care.',
-      'Looking good is not enough. A product has to load fast, behave correctly and keep up when you grow. So we treat design and engineering as two sides of one job, not two separate ones.',
+      'MGB Software is a technology studio that designs and builds digital products for businesses, from first idea to launch.',
+      'We treat design and engineering as two sides of one job, not two separate ones. The result: products that look good, load fast, work correctly and can still be maintained years from now.',
+    ],
+    facts: [
+      { label: 'MODEL', value: 'Founder-led studio' },
+      { label: 'SCOPE', value: 'Design to launch' },
+      { label: 'LANGUAGES', value: 'Türkçe · English' },
     ],
     caption: 'WIREFRAME + INK',
   },
@@ -24,7 +30,7 @@ export const home: HomeContent = {
       'I founded MGB Software out of a passion for software development and digital design. I believe every project has its own needs, and I aim to build modern, functional and long-lasting digital solutions.',
       'When you start a project, you are not talking to a sales rep — you are talking to the person who designs your product and writes its code. You ask me directly and get the answer first-hand.',
     ],
-    contactLine: 'If you would like to write to me directly:',
+    contactLabel: 'DIRECT CONTACT',
   },
 
   services: {

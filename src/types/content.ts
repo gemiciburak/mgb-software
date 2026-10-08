@@ -30,7 +30,12 @@ export interface HeroContent {
 
 export interface PhilosophyContent {
   eyebrow: string;
+  /** Orta boy başlık (display-3) — bölümün odağı, ekranı domine etmez. */
+  title: string;
+  /** İlk paragraf giriş cümlesidir (koyu), kalanlar açıklama (gri). */
   body: readonly string[];
+  /** Doğrulanabilir kısa gerçekler. Uydurma rakam (yıl, proje sayısı) yok. */
+  facts: readonly { label: string; value: string }[];
   /** Mürekkep küplerinin altındaki teknik çizim etiketi. */
   caption: string;
 }
@@ -127,8 +132,8 @@ export interface FounderContent {
    * Yokken yerinde baş harfler görünür — sahte/stok fotoğraf kullanılmaz.
    */
   photo?: { src: string; width: number; height: number; alt: string };
-  /** Kurucuya doğrudan ulaşma cümlesi; e-posta linkinin üstünde durur. */
-  contactLine: string;
+  /** Kurucu şeridindeki iletişim hücresinin mono etiketi. */
+  contactLabel: string;
 }
 
 export interface LocaleContent {

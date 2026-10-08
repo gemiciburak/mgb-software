@@ -10,9 +10,15 @@ import type { HomeContent } from '@/types/content';
 export const home: HomeContent = {
   philosophy: {
     eyebrow: 'HAKKIMIZDA',
+    title: 'Tasarım ve yazılım, tek elden.',
     body: [
-      'MGB Software, işletmelerin dijital ürünlerini fikir aşamasından yayına kadar tek elden tasarlayan ve geliştiren bir teknoloji stüdyosu. Web ve mobil uygulamalar, arayüz tasarımı, backend sistemleri, e-ticaret ve teknik çizim aynı çatı altında, aynı özenle ele alınıyor.',
-      'Bir ürünün iyi görünmesi yetmez; hızlı açılması, doğru çalışması ve büyüdüğünüzde ayak uydurması gerekir. Bu yüzden tasarımı ve yazılımı ayrı iki iş gibi değil, aynı işin iki yüzü gibi ele alıyoruz.',
+      'MGB Software, işletmelerin dijital ürünlerini fikirden yayına kadar tasarlayan ve geliştiren bir teknoloji stüdyosu.',
+      'Tasarımı ve yazılımı ayrı iki iş gibi değil, aynı işin iki yüzü gibi ele alıyoruz. Sonuç: iyi görünen, hızlı açılan, doğru çalışan ve yıllar sonra da bakımı yapılabilen ürünler.',
+    ],
+    facts: [
+      { label: 'MODEL', value: 'Kurucu liderliğinde stüdyo' },
+      { label: 'KAPSAM', value: 'Tasarımdan yayına' },
+      { label: 'DİL', value: 'Türkçe · English' },
     ],
     caption: 'TEL KAFES + MÜREKKEP',
   },
@@ -27,7 +33,7 @@ export const home: HomeContent = {
       'MGB Software’i, yazılım geliştirme ve dijital tasarıma duyduğum tutkuyla kurdum. Her projenin kendine özgü ihtiyaçları olduğuna inanıyor; modern, işlevsel ve uzun ömürlü dijital çözümler geliştirmeyi hedefliyorum.',
       'Bir projeye başladığınızda karşınızda bir satış temsilcisi değil, ürününüzü tasarlayan ve kodunu yazan kişi olur. Sorunuzu doğrudan bana sorar, cevabı aracısız alırsınız.',
     ],
-    contactLine: 'Doğrudan yazmak isterseniz:',
+    contactLabel: 'DOĞRUDAN İLETİŞİM',
   },
 
   services: {

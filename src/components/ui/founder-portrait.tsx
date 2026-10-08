@@ -2,7 +2,7 @@ import { cn } from '@/lib/cn';
 import type { FounderContent } from '@/types/content';
 
 /**
- * Kurucu portresi — küçük, kare bir avatar.
+ * Kurucu portresi — kare. Boyutu çağıran yer belirler (`className`).
  *
  * Fotoğraf `content` içinde tanımlıysa düz <img> ile gelir: boyutları
  * bilinen tek bir görsel için Next görüntü optimizasyonu gerekmiyor (ve
@@ -15,9 +15,12 @@ import type { FounderContent } from '@/types/content';
 export function FounderPortrait({
   founder,
   className,
+  initialsClassName = 'text-title',
 }: {
   founder: FounderContent;
   className?: string;
+  /** Fotoğraf yokken baş harflerin puntosu — kutu boyutuna göre seçilir. */
+  initialsClassName?: string;
 }) {
   const initials = founder.name
     .split(' ')
@@ -46,11 +49,14 @@ export function FounderPortrait({
         <>
           <div
             aria-hidden="true"
-            className="absolute inset-0 blueprint-grid [--grid-opacity:0.6] [--grid-size:12px]"
+            className="absolute inset-0 blueprint-grid [--grid-opacity:0.6] [--grid-size:24px]"
           />
           <span
             aria-hidden="true"
-            className="absolute inset-0 flex items-center justify-center font-display text-title text-fg-subtle"
+            className={cn(
+              'absolute inset-0 flex items-center justify-center font-display text-line-strong',
+              initialsClassName,
+            )}
           >
             {initials}
           </span>
