@@ -10,7 +10,6 @@ import type { HomeContent } from '@/types/content';
 export const home: HomeContent = {
   philosophy: {
     eyebrow: 'HAKKIMIZDA',
-    title: 'Her fikrin bir arayüze ihtiyacı var.',
     body: [
       'MGB Software, işletmelerin dijital ürünlerini fikir aşamasından yayına kadar tek elden tasarlayan ve geliştiren bir teknoloji stüdyosu. Web ve mobil uygulamalar, arayüz tasarımı, backend sistemleri, e-ticaret ve teknik çizim aynı çatı altında, aynı özenle ele alınıyor.',
       'Bir ürünün iyi görünmesi yetmez; hızlı açılması, doğru çalışması ve büyüdüğünüzde ayak uydurması gerekir. Bu yüzden tasarımı ve yazılımı ayrı iki iş gibi değil, aynı işin iki yüzü gibi ele alıyoruz.',

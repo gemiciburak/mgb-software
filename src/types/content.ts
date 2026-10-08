@@ -30,7 +30,6 @@ export interface HeroContent {
 
 export interface PhilosophyContent {
   eyebrow: string;
-  title: string;
   body: readonly string[];
   /** Mürekkep küplerinin altındaki teknik çizim etiketi. */
   caption: string;

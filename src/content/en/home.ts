@@ -9,7 +9,6 @@ import type { HomeContent } from '@/types/content';
 export const home: HomeContent = {
   philosophy: {
     eyebrow: 'ABOUT',
-    title: 'Every idea needs an interface.',
     body: [
       'MGB Software is a technology studio that designs and builds digital products for businesses, from first idea to launch, end to end. Web and mobile applications, interface design, backend systems, e-commerce and technical drawing are handled under one roof, with the same care.',
       'Looking good is not enough. A product has to load fast, behave correctly and keep up when you grow. So we treat design and engineering as two sides of one job, not two separate ones.',
