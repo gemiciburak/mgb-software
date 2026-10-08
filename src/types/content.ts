@@ -30,7 +30,7 @@ export interface HeroContent {
 
 export interface PhilosophyContent {
   eyebrow: string;
-  /** Orta boy başlık (display-3) — bölümün odağı, ekranı domine etmez. */
+  /** Bölüm başlığı (display-2, diğer bölümlerle aynı ölçek). */
   title: string;
   /** İlk paragraf giriş cümlesidir (koyu), kalanlar açıklama (gri). */
   body: readonly string[];

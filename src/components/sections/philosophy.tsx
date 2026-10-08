@@ -11,9 +11,9 @@ import type { FounderContent, PhilosophyContent } from '@/types/content';
  * Hakkımızda — stüdyo ve arkasındaki kişi.
  *
  * İki satır:
- *   1. Stüdyo (kurumsal "biz"). Solda orta boy başlık, koyu bir giriş
- *      cümlesi, gri açıklama ve üç kısa gerçek; sağda çizim. Başlık bilinçli
- *      olarak display-3: bölümün odağı ama ekranı domine etmiyor — sayfanın
+ *   1. Stüdyo (kurumsal "biz"). Solda başlık, koyu bir giriş
+ *      cümlesi, gri açıklama ve üç kısa gerçek; sağda çizim. Başlık diğer
+ *      bölüm başlıklarıyla aynı ölçekte (display-2); ekranı domine etmiyor — sayfanın
  *      "büyük an"ı hero.
  *   2. Kurucu şeridi (birinci tekil). Tam genişlikte, teknik çizimdeki antet
  *      kutusu gibi üç hücre: portre | isim + biyografi | doğrudan iletişim.
@@ -34,13 +34,19 @@ export function Philosophy({
   const hasChannels = CONTACT_EMAIL !== null || SOCIAL_LINKS.length > 0;
 
   return (
-    <section id={SECTION_ID.about} className="anchor-target border-t border-line py-section">
+    // Üst boşluk genel `py-section`dan dar: başlık bölüm çizgisine bağlı
+    // okunsun, üstünde kopuk bir boşluk kalmasın.
+    <section
+      id={SECTION_ID.about}
+      className="anchor-target border-t border-line pt-20 pb-section lg:pt-28"
+    >
       <Container>
         {/* 1 — Stüdyo. */}
-        <div className="grid gap-y-14 md:grid-cols-12 md:items-center md:gap-y-0">
+        {/* Üstten hizalı: ortalanınca uzun çizim başlığı aşağı itiyordu. */}
+        <div className="grid gap-y-14 md:grid-cols-12 md:items-start md:gap-y-0">
           <ScrollReveal className="md:col-span-6">
             <p className="font-mono text-label text-accent">{content.eyebrow}</p>
-            <h2 className="mt-6 max-w-[18ch] text-display-3 text-balance">{content.title}</h2>
+            <h2 className="mt-6 max-w-[14ch] text-display-2 text-balance">{content.title}</h2>
 
             {lead && <p className="mt-8 max-w-[40ch] text-body-lg text-fg">{lead}</p>}
             {rest.map((paragraph) => (
@@ -62,7 +68,9 @@ export function Philosophy({
             </dl>
           </ScrollReveal>
 
-          <div className="border-t border-line pt-10 md:col-span-5 md:col-start-8 md:border-t-0 md:pt-0">
+          {/* Çizim kanvasın ortasında durur, üstünde boşluk kalır; negatif
+              kenar boşluğu küpün tepesini soldaki etiketle aynı hizaya alır. */}
+          <div className="border-t border-line pt-10 md:col-span-5 md:col-start-8 md:-mt-9 md:border-t-0 md:pt-0">
             <InkPolyhedra className="mx-auto aspect-square w-full max-w-[28rem]" />
             <p className="mt-4 border-t border-line pt-4 font-mono text-mono-sm text-fg-subtle">
               {content.caption}
