@@ -9,13 +9,26 @@ import type { HomeContent } from '@/types/content';
  */
 export const home: HomeContent = {
   philosophy: {
-    eyebrow: 'YAKLAŞIM',
+    eyebrow: 'HAKKIMIZDA',
     title: 'Her fikrin bir arayüze ihtiyacı var.',
     body: [
+      'MGB Software, işletmelerin dijital ürünlerini fikir aşamasından yayına kadar tek elden tasarlayan ve geliştiren bir teknoloji stüdyosu. Web ve mobil uygulamalar, arayüz tasarımı, backend sistemleri, e-ticaret ve teknik çizim aynı çatı altında, aynı özenle ele alınıyor.',
       'Bir ürünün iyi görünmesi yetmez; hızlı açılması, doğru çalışması ve büyüdüğünüzde ayak uydurması gerekir. Bu yüzden tasarımı ve yazılımı ayrı iki iş gibi değil, aynı işin iki yüzü gibi ele alıyoruz.',
-      'Her proje tek bir soruyla başlar: bu ürün kimin, hangi işini kolaylaştıracak? Cevap netleşmeden tek satır kod yazmıyoruz.',
     ],
     caption: 'TEL KAFES + MÜREKKEP',
+  },
+
+  // Ses kuralı: stüdyo "biz" der, kurucu birinci tekil konuşur. "Ekibimiz",
+  // "uzman kadromuz" gibi gerçeği yansıtmayan ifadeler kullanılmaz.
+  founder: {
+    eyebrow: 'KURUCUSUYLA TANIŞIN',
+    name: 'Burak Gemici',
+    role: 'Founder & Software Engineer',
+    bio: [
+      'MGB Software’i, yazılım geliştirme ve dijital tasarıma duyduğum tutkuyla kurdum. Her projenin kendine özgü ihtiyaçları olduğuna inanıyor; modern, işlevsel ve uzun ömürlü dijital çözümler geliştirmeyi hedefliyorum.',
+      'Bir projeye başladığınızda karşınızda bir satış temsilcisi değil, ürününüzü tasarlayan ve kodunu yazan kişi olur. Sorunuzu doğrudan bana sorar, cevabı aracısız alırsınız.',
+    ],
+    contactLine: 'Doğrudan yazmak isterseniz:',
   },
 
   services: {
@@ -147,27 +160,31 @@ export const home: HomeContent = {
 
   values: {
     eyebrow: 'NEDEN MGB',
-    title: 'Dört net taahhüt',
+    title: 'Küçük bir stüdyonun büyük avantajları',
     entries: [
       {
+        slug: 'direct',
+        title: 'Doğrudan İletişim',
+        description:
+          'Konuştuğunuz kişi, ürününüzü geliştiren kişi; talepler aktarılırken kaybolmaz.',
+      },
+      {
+        slug: 'transparent',
+        title: 'Şeffaf Süreç',
+        description:
+          'Her hafta çalışan bir sürüm; ilerlemeyi rapordan değil, ürünün kendisinden görürsünüz.',
+      },
+      {
         slug: 'tailored',
-        title: 'Size Özel',
-        description: 'İhtiyacınıza göre kuruyoruz; hazır şablon uyarlamıyoruz.',
+        title: 'İhtiyaca Özel',
+        description:
+          'Hazır şablon uyarlamıyoruz; kapsamı işinizin gerçek ihtiyacına göre çiziyoruz.',
       },
       {
-        slug: 'modern',
-        title: 'Modern',
-        description: 'Güncel teknoloji ve güncel tasarım; beş yıl sonra da bakımı yapılabilir.',
-      },
-      {
-        slug: 'scalable',
-        title: 'Ölçeklenebilir',
-        description: 'Büyüdüğünüzde baştan yazmak gerekmeyecek şekilde kuruluyor.',
-      },
-      {
-        slug: 'endToEnd',
-        title: 'Uçtan Uca',
-        description: 'Fikirden yayına tek muhatap; aralarda kaybolan iş olmuyor.',
+        slug: 'quality',
+        title: 'Kaliteli Teslimat',
+        description:
+          'Aynı anda sınırlı sayıda proje; belgelenmiş kod, kaynak kodu ve erişimler size ait.',
       },
     ],
   },

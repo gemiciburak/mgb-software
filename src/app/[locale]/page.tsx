@@ -35,7 +35,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     // tabIndex: skip link odağı gerçekten içeriğe taşısın, yalnızca kaydırmasın.
     <main id="main" tabIndex={-1} className="outline-none">
       <Hero locale={locale} />
-      <Philosophy content={home.philosophy} />
+      <Philosophy content={home.philosophy} founder={home.founder} />
       <Services content={home.services} />
       <WhatWeBuild content={home.build} />
       {/*

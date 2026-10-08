@@ -4,7 +4,7 @@ Kurumsal site — tek bir Next.js uygulaması. Türkçe varsayılan ve öneksiz,
 İngilizce `/en` altında. Ayrı bir backend ve veritabanı yok.
 
 ```
-src/app          Rotalar (App Router): ana sayfa, /hakkimizda, /proje-baslat, /kvkk, api/contact
+src/app          Rotalar (App Router): ana sayfa, /proje-baslat, /kvkk, api/contact
 src/components   Bölümler, form, animasyonlar, UI parçaları
 src/content      Sayfa içerikleri (TR/EN, TypeScript) ve projeler
 src/messages     Kısa arayüz metinleri (next-intl)

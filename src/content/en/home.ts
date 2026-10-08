@@ -8,13 +8,24 @@ import type { HomeContent } from '@/types/content';
  */
 export const home: HomeContent = {
   philosophy: {
-    eyebrow: 'APPROACH',
+    eyebrow: 'ABOUT',
     title: 'Every idea needs an interface.',
     body: [
+      'MGB Software is a technology studio that designs and builds digital products for businesses, from first idea to launch, end to end. Web and mobile applications, interface design, backend systems, e-commerce and technical drawing are handled under one roof, with the same care.',
       'Looking good is not enough. A product has to load fast, behave correctly and keep up when you grow. So we treat design and engineering as two sides of one job, not two separate ones.',
-      'Every project starts with a single question: whose work does this make easier? We do not write a line of code until that answer is clear.',
     ],
     caption: 'WIREFRAME + INK',
+  },
+
+  founder: {
+    eyebrow: 'MEET THE FOUNDER',
+    name: 'Burak Gemici',
+    role: 'Founder & Software Engineer',
+    bio: [
+      'I founded MGB Software out of a passion for software development and digital design. I believe every project has its own needs, and I aim to build modern, functional and long-lasting digital solutions.',
+      'When you start a project, you are not talking to a sales rep — you are talking to the person who designs your product and writes its code. You ask me directly and get the answer first-hand.',
+    ],
+    contactLine: 'If you would like to write to me directly:',
   },
 
   services: {
@@ -146,27 +157,31 @@ export const home: HomeContent = {
 
   values: {
     eyebrow: 'WHY MGB',
-    title: 'Four clear commitments',
+    title: 'The big advantages of a small studio',
     entries: [
       {
+        slug: 'direct',
+        title: 'Direct Communication',
+        description:
+          'The person you talk to is the person building your product; nothing gets lost in hand-offs.',
+      },
+      {
+        slug: 'transparent',
+        title: 'Transparent Process',
+        description:
+          'A working build every week; you see progress in the product itself, not in a report.',
+      },
+      {
         slug: 'tailored',
-        title: 'Tailored',
-        description: 'Built around what you need, not adapted from a template.',
+        title: 'Built for Your Needs',
+        description:
+          'No off-the-shelf templates; scope is drawn around what your business actually needs.',
       },
       {
-        slug: 'modern',
-        title: 'Modern',
-        description: 'Current tooling and current design — still maintainable in five years.',
-      },
-      {
-        slug: 'scalable',
-        title: 'Scalable',
-        description: 'Built so that growing does not mean rewriting it.',
-      },
-      {
-        slug: 'endToEnd',
-        title: 'End-to-End',
-        description: 'One point of contact from idea to launch, so nothing falls between hands.',
+        slug: 'quality',
+        title: 'Quality Delivery',
+        description:
+          'A limited number of projects at a time; documented code, and source and accounts that are yours.',
       },
     ],
   },

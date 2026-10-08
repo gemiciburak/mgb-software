@@ -32,10 +32,10 @@ export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
  * Sayfada dokuz bölüm var, navigasyonda dört başlık. Bir bölüm yalnızca
  * gerçekten o başlığın içeriğiyse sahiplenilir: Hizmetler'in altında
  * "Ürettiklerimiz", İşler'in altında yalnızca İşler, İletişim'in altında
- * kapanış bölümü. Hakkımızda kendi sayfasına gittiği için ana sayfada hiçbir
- * bölümü sahiplenmez; yalnızca o sayfadayken işaretlenir.
+ * kapanış bölümü, Hakkımızda'nın altında yalnızca Hakkımızda bölümü
+ * (stüdyo + kurucu kartı).
  *
- * Yaklaşım, Süreç, Teknoloji ve Neden MGB sahipsizdir (`null`): gösterge
+ * Süreç, Teknoloji ve Neden MGB sahipsizdir (`null`): gösterge
  * oradayken hiçbir başlığı işaretlemez. Önceki sürümde bu üçü Hakkımızda'ya
  * bağlıydı; bölümler İşler'in iki yanına dağıldığı için gösterge kaydırırken
  * sürekli Hakkımızda'ya geri dönüyordu. Yanlış başlığı işaretlemektense
@@ -43,7 +43,7 @@ export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
  */
 export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
   [SECTION_ID.hero]: null,
-  [SECTION_ID.about]: null,
+  [SECTION_ID.about]: SECTION_ID.about,
   [SECTION_ID.services]: SECTION_ID.services,
   [SECTION_ID.build]: SECTION_ID.services,
   [SECTION_ID.work]: SECTION_ID.work,
@@ -56,12 +56,13 @@ export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
 /**
  * Navigasyon öğeleri: İşler, Hizmetler, Hakkımızda, İletişim.
  *
- * Kural: öğenin kendi sayfası yayındaysa doğrudan o sayfaya gider, değilse
- * ana sayfadaki bölüme kaydırır (`navHref`). Şu an yalnızca Hakkımızda'nın
- * sayfası var; hizmet ve iş sayfaları yayına alınınca `NAV_PAGES`'e eklenir
- * ve menü kendiliğinden onlara döner. (Bir ara "menü yalnızca ana sayfayı
- * gezer" kuralı denendi: Hakkımızda'ya ulaşmak için fazladan bir tık
- * gerekiyordu, bırakıldı.)
+ * Kural: menü ana sayfanın haritasıdır; her öğe ana sayfadaki bölümüne
+ * kaydırır. Ayrı sayfa olarak yalnızca proje başlatma formu var (sağdaki
+ * "Proje Başlat" düğmesi). Hakkımızda bir dönem ayrı sayfaydı; menüde tek
+ * öğenin farklı davranması tutarsız durduğu için içeriği ana sayfaya taşındı.
+ *
+ * `navHref` ileriye dönük: hizmet veya iş sayfaları yayına alınırsa
+ * `NAV_PAGES` üzerinden menü kendiliğinden onlara döner.
  *
  * İletişim ile Proje Başlat aynı şey değil:
  *   • Proje Başlat → yeni proje için yapılandırılmış form (`/proje-baslat`).
@@ -80,7 +81,6 @@ export type NavItem = (typeof NAV_ITEMS)[number];
 
 /** Kendi sayfası olan menü öğeleri. Yayında olmayan sayfaya link verilmez. */
 const NAV_PAGES: Partial<Record<SectionId, AppPathname>> = {
-  [SECTION_ID.about]: '/about',
   [SECTION_ID.services]: '/services',
   [SECTION_ID.work]: '/work',
 };

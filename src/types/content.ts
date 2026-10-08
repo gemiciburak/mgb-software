@@ -70,7 +70,7 @@ export interface TechEntry {
 }
 
 /** Dört değerin sabit kimlikleri; izometrik çizimler bunlara bağlı. */
-export type ValueSlug = 'tailored' | 'modern' | 'scalable' | 'endToEnd';
+export type ValueSlug = 'direct' | 'transparent' | 'tailored' | 'quality';
 
 export interface ValueEntry {
   slug: ValueSlug;
@@ -92,6 +92,8 @@ export interface CtaContent {
 
 export interface HomeContent {
   philosophy: PhilosophyContent;
+  /** Hakkımızda bölümünün ikinci yarısı — kurucu kartı. */
+  founder: FounderContent;
   services: SectionIntro & { entries: readonly ServiceEntry[] };
   build: SectionIntro & { entries: readonly string[] };
   work: WorkContent;
@@ -114,18 +116,6 @@ export interface LegalDocument {
   note?: string;
 }
 
-/** Hakkımızda sayfasındaki kısa gerçek: etiket + değer. */
-export interface AboutFact {
-  label: string;
-  value: string;
-}
-
-/** Çalışma anlayışının tek maddesi. */
-export interface AboutPrinciple {
-  title: string;
-  description: string;
-}
-
 export interface FounderContent {
   eyebrow: string;
   name: string;
@@ -142,27 +132,9 @@ export interface FounderContent {
   contactLine: string;
 }
 
-export interface AboutContent {
-  meta: PageMeta;
-  /** 1 — MGB Software hakkında: kurumsal dil. */
-  intro: {
-    eyebrow: string;
-    title: string;
-    body: readonly string[];
-    /** Doğrulanabilir kısa gerçekler. Uydurma rakam (yıl, proje sayısı) yok. */
-    facts: readonly AboutFact[];
-  };
-  /** 2 — Kurucuyla tanışın. */
-  founder: FounderContent;
-  /** 3 — Çalışma anlayışımız. */
-  principles: SectionIntro & { entries: readonly AboutPrinciple[] };
-  cta: CtaContent;
-}
-
 export interface LocaleContent {
   meta: MetaContent;
   hero: HeroContent;
   home: HomeContent;
-  about: AboutContent;
   kvkk: LegalDocument;
 }
