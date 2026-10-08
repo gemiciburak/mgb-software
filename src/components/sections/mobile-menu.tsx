@@ -13,7 +13,7 @@ import { useLockBodyScroll } from '@/hooks/use-lock-body-scroll';
 import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
 import { DURATION, EASE_TRANSITION } from '@/lib/motion';
 import { cn } from '@/lib/cn';
-import { NAV_ITEMS, navHref, type SectionId } from '@/lib/sections';
+import { NAV_ITEMS, sectionHref, type SectionId } from '@/lib/sections';
 
 /** Tab döngüsünü panel içinde tutmak için odaklanabilir öğe seçicisi. */
 const FOCUSABLE = 'a[href], button:not([disabled])';
@@ -176,7 +176,7 @@ export function MobileMenu({
               return (
                 <motion.a
                   key={item.id}
-                  href={navHref(locale, item.id)}
+                  href={sectionHref(locale, item.id)}
                   onClick={onClose}
                   variants={rowVariants}
                   transition={{
@@ -208,11 +208,7 @@ export function MobileMenu({
 
           {/* Alt boşluk ev göstergesi / güvenli alanla çakışmaz. */}
           <div className="shrink-0 space-y-5 px-gutter pt-6 pb-[max(--spacing(6),env(safe-area-inset-bottom))]">
-            <Link
-              href="/contact"
-              onClick={onClose}
-              className={buttonStyles({ className: 'w-full' })}
-            >
+            <Link href="/start" onClick={onClose} className={buttonStyles({ className: 'w-full' })}>
               {tActions('startProject')}
             </Link>
             <div className="flex items-center justify-between">

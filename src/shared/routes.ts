@@ -12,7 +12,7 @@ export const PATHNAMES = {
   '/services': { tr: '/hizmetler', en: '/services' },
   '/work': { tr: '/isler', en: '/work' },
   '/about': { tr: '/hakkimizda', en: '/about' },
-  '/contact': { tr: '/iletisim', en: '/contact' },
+  '/start': '/start',
   '/privacy': { tr: '/gizlilik', en: '/privacy' },
   '/kvkk': { tr: '/kvkk', en: '/data-protection' },
 } as const satisfies Record<string, string | Record<Locale, string>>;

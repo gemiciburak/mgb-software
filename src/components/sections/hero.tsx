@@ -79,7 +79,7 @@ export async function Hero({ locale }: { locale: Locale }) {
           className="mt-10 flex hero-reveal flex-wrap items-center gap-3"
           style={{ '--reveal-delay': '320ms' } as CSSProperties}
         >
-          <Link href="/contact" className={buttonStyles()}>
+          <Link href="/start" className={buttonStyles()}>
             {t('startProject')}
             <ArrowRightIcon className="size-4" />
           </Link>

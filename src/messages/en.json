@@ -197,5 +197,10 @@
     "metaDescription": "MGB Software's notice on personal data processed through its website and project request form, under Turkish Law No. 6698 (KVKK).",
     "eyebrow": "DATA PROTECTION",
     "updated": "Last updated: {date}"
+  },
+  "reach": {
+    "eyebrow": "REACH US DIRECTLY",
+    "body": "A quick question, a collaboration idea or something that isn’t a project? No need for the form. Just write to us here.",
+    "projectHint": "For a new project · 4 steps · ~2 minutes"
   }
 }

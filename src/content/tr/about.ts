@@ -84,7 +84,7 @@ export const about: AboutContent = {
   },
 
   cta: {
-    title: 'Projenizi anlatın, doğrudan konuşalım.',
-    description: 'Talebiniz bir form kuyruğuna değil, doğrudan kurucunun gelen kutusuna düşer.',
+    title: 'Projenizi anlatın, birlikte başlayalım.',
+    description: 'Proje talepleri bir kuyrukta beklemez; kurucunun kendisi okur ve size döner.',
   },
 };

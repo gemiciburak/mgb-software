@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates: buildAlternates('/contact', locale),
+    alternates: buildAlternates('/start', locale),
     // openGraph üst düzeyde birleşmez, layout'taki nesnenin yerine geçer;
     // bu yüzden ortak alanlar burada da yazılır.
     openGraph: {
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       locale: LOCALE_TAGS[locale],
       title: t('metaTitle'),
       description: t('metaDescription'),
-      url: `${SITE_URL}${getPathname({ href: '/contact', locale })}`,
+      url: `${SITE_URL}${getPathname({ href: '/start', locale })}`,
     },
   };
 }
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 const NEXT_STEPS = ['read', 'reply', 'meeting', 'proposal'] as const;
 
 /**
- * Proje başlatma sayfası (`/iletisim` ↔ `/en/contact`).
+ * Proje başlatma sayfası (`/start` ↔ `/en/start`).
  *
  * Sitedeki bütün "Proje Başlat" düğmeleri buraya gelir. Tek giriş kapısı
  * dört adımlı form; yan paftada gönderimden sonra ne olacağı ve dosyalar için

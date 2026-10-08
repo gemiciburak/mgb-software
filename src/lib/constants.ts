@@ -84,7 +84,7 @@ export const BRAND_SIGNATURE = 'Design. Build. Evolve.';
  * TODO: '/services', '/work' ve '/privacy' sayfaları yayına
  * alındıkça buraya eklenecek.
  */
-export const PUBLISHED_ROUTES: readonly AppPathname[] = ['/', '/about', '/contact', '/kvkk'];
+export const PUBLISHED_ROUTES: readonly AppPathname[] = ['/', '/about', '/start', '/kvkk'];
 
 export function isPublished(pathname: AppPathname): boolean {
   return PUBLISHED_ROUTES.includes(pathname);

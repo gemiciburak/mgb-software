@@ -76,7 +76,8 @@ export const about: AboutContent = {
   },
 
   cta: {
-    title: 'Tell us about your project. Let’s talk directly.',
-    description: 'Your request does not land in a queue; it goes straight to the founder’s inbox.',
+    title: 'Tell us about your project. Let’s get started.',
+    description:
+      'Project requests do not wait in a queue; the founder reads them and gets back to you.',
   },
 };

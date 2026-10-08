@@ -197,5 +197,10 @@
     "metaDescription": "MGB Software'in internet sitesi ve proje başlatma formu üzerinden işlenen kişisel veriler hakkında 6698 sayılı KVKK kapsamında aydınlatma metni.",
     "eyebrow": "KVKK",
     "updated": "Son güncelleme: {date}"
+  },
+  "reach": {
+    "eyebrow": "DOĞRUDAN ULAŞIN",
+    "body": "Kısa bir sorunuz, bir iş birliği teklifiniz ya da proje dışı bir konunuz mu var? Form doldurmanıza gerek yok, buradan doğrudan yazın.",
+    "projectHint": "Yeni bir proje için · 4 adım · ~2 dakika"
   }
 }

@@ -15,7 +15,6 @@ import { useScrolled } from '@/hooks/use-scrolled';
 import { cn } from '@/lib/cn';
 import {
   NAV_ITEMS,
-  navHref,
   navItemForPathname,
   SECTION_ID,
   sectionHref,
@@ -142,7 +141,7 @@ export function NavBar() {
               return (
                 <a
                   key={item.id}
-                  href={navHref(locale, item.id)}
+                  href={sectionHref(locale, item.id)}
                   onMouseEnter={() => setHovered(item.id)}
                   onFocus={() => setHovered(item.id)}
                   onBlur={() => setHovered(null)}
@@ -180,7 +179,7 @@ export function NavBar() {
             <ThemeToggle />
 
             <Link
-              href="/contact"
+              href="/start"
               className={buttonStyles({ size: 'sm', className: 'hidden lg:inline-flex' })}
             >
               {tActions('startProject')}

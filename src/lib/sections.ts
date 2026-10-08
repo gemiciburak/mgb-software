@@ -29,16 +29,17 @@ export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
 /**
  * Her bölümün navigasyondaki sahibi.
  *
- * Sayfada dokuz bölüm var, navigasyonda dört başlık. Aradaki bölümleri
- * sahipsiz bırakırsak konum göstergesi sayfanın yarısı boyunca bir önceki
- * başlıkta takılı kalır — ki ilk sürümde tam olarak bu oluyordu.
+ * Sayfada dokuz bölüm var, navigasyonda dört başlık. Bir bölüm yalnızca
+ * gerçekten o başlığın içeriğiyse sahiplenilir: Hizmetler'in altında
+ * "Ürettiklerimiz", İşler'in altında yalnızca İşler, Hakkımızda'nın altında
+ * yalnızca Yaklaşım (Hakkımızda sayfasına giden link orada), İletişim'in
+ * altında kapanış bölümü.
  *
- * Sahiplik anlamca kurulur, sayfadaki sıraya göre değil: Süreç, Teknoloji ve
- * Neden MGB stüdyonun kendisini anlatır, yani "Hakkımızda"ya aittir. Bu yüzden
- * gösterge İşler'den sonra Hakkımızda'ya geri döner. Geri dönmesi doğrudur:
- * navigasyon bir ilerleme çubuğu değil, bir içindekiler listesi — gösterge
- * "ne kadar ilerledin"i değil, "okuduğun şey hangi başlığın altında"yı söyler.
- * Hakkımızda sayfası yayına alınınca bu bölümler oraya taşınacak.
+ * Süreç, Teknoloji ve Neden MGB sahipsizdir (`null`): gösterge
+ * oradayken hiçbir başlığı işaretlemez. Önceki sürümde bu üçü Hakkımızda'ya
+ * bağlıydı; bölümler İşler'in iki yanına dağıldığı için gösterge kaydırırken
+ * sürekli Hakkımızda'ya geri dönüyordu. Yanlış başlığı işaretlemektense
+ * hiçbirini işaretlememek doğru.
  */
 export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
   [SECTION_ID.hero]: null,
@@ -46,18 +47,25 @@ export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
   [SECTION_ID.services]: SECTION_ID.services,
   [SECTION_ID.build]: SECTION_ID.services,
   [SECTION_ID.work]: SECTION_ID.work,
-  [SECTION_ID.process]: SECTION_ID.about,
-  [SECTION_ID.technology]: SECTION_ID.about,
-  [SECTION_ID.why]: SECTION_ID.about,
+  [SECTION_ID.process]: null,
+  [SECTION_ID.technology]: null,
+  [SECTION_ID.why]: null,
   [SECTION_ID.contact]: SECTION_ID.contact,
 };
 
 /**
- * Navigasyon öğeleri — brief'teki sıra: İşler, Hizmetler, Hakkımızda, İletişim.
+ * Navigasyon öğeleri: İşler, Hizmetler, Hakkımızda, İletişim.
  *
- * Varsayılan hedef ana sayfadaki bölüm çapası. Öğenin kendi sayfası
- * (`NAV_PAGES`) yayına alındığında link kendiliğinden o sayfaya döner —
- * bkz. `navHref`.
+ * Tek kural — **menü ana sayfanın haritasıdır.** Her öğe ana sayfadaki bir
+ * bölüme kaydırır; ayrıntılı sayfalar o bölümün İÇİNDEN açılır (ör. Yaklaşım
+ * bölümündeki "MGB Software'i tanıyın →" Hakkımızda sayfasına gider). Hizmet
+ * ve iş sayfaları geldiğinde de aynı desen: menü değişmez, bölüme link eklenir.
+ *
+ * İletişim ile Proje Başlat aynı şey değil:
+ *   • Proje Başlat → yeni proje için yapılandırılmış form (`/start`).
+ *   • İletişim → kapanış bölümü; orada form ile doğrudan kanallar (e-posta,
+ *     sosyal hesaplar) yan yana ve ayrı ayrı anlatılır — soru, iş birliği
+ *     ya da proje dışı bir konu için forma girmek gerekmez.
  */
 export const NAV_ITEMS = [
   { id: SECTION_ID.work, labelKey: 'work' },
@@ -69,28 +77,17 @@ export const NAV_ITEMS = [
 export type NavItem = (typeof NAV_ITEMS)[number];
 
 /**
- * Kendi sayfası olan navigasyon öğeleri. İletişim bilinçli olarak yok:
- * menüdeki "İletişim" sayfanın sonundaki çağrıya iner, form sayfasına
- * birincil düğme götürür.
+ * Bir bölümün derinleştiği alt sayfalar. O sayfadayken menüde bölümün
+ * başlığı işaretli kalır — bir içindekiler listesinde bulunulan bölüm gibi.
+ * Link yine ana sayfadaki bölüme gider; alt sayfa bölümün içinden açılır.
  */
-const NAV_PAGES: Partial<Record<SectionId, AppPathname>> = {
+const SECTION_PAGES: Partial<Record<SectionId, AppPathname>> = {
   [SECTION_ID.about]: '/about',
-  [SECTION_ID.services]: '/services',
-  [SECTION_ID.work]: '/work',
 };
 
-/**
- * Navigasyon öğesinin hedefi: sayfası yayındaysa o sayfa, değilse ana
- * sayfadaki bölüm çapası. Yayında olmayan sayfaya link verilmez.
- */
-export function navHref(locale: Locale, id: SectionId): string {
-  const page = NAV_PAGES[id];
-  return page && isPublished(page) ? getPathname({ href: page, locale }) : sectionHref(locale, id);
-}
-
-/** Bulunulan sayfa bir navigasyon öğesinin sayfasıysa o öğe; değilse null. */
+/** Bulunulan sayfa bir bölümün alt sayfasıysa o bölüm; değilse null. */
 export function navItemForPathname(pathname: string): SectionId | null {
-  for (const [id, page] of Object.entries(NAV_PAGES)) {
+  for (const [id, page] of Object.entries(SECTION_PAGES)) {
     if (page === pathname && isPublished(page)) return id as SectionId;
   }
   return null;
