@@ -1,0 +1,353 @@
+/* ===========================================================================
+   Temel katman. Tailwind preflight'ın üzerine yalnızca bilinçli kararlar.
+   =========================================================================== */
+
+@layer base {
+  html {
+    /* Sticky nav'ın çapa linklerinde başlığı kesmemesi için. */
+    scroll-padding-top: 6rem;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    /* Zemin açıkça boyanır — şeffaf gövde ana rengi dışarıdan miras alır. */
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Başlıklar display fontunu ve dengeli satır kırmayı varsayılan alır. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  /* Paragraflarda yalnız kalan son kelimeyi engeller. */
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Sayı hizalaması gereken her yerde (tip ölçeği tabloları, numaralı listeler). */
+  .tabular,
+  th,
+  td {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-fg);
+  }
+
+  /* Klavye odağı her zaman görünür. Fare tıklamasında gösterilmez. */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  /* Tarayıcı varsayılan odak halkasını focus-visible lehine kapat. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Resim ve canvas taşmaz. */
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Hareket azaltma — genel güvenlik ağı.
+   Bileşenler ayrıca usePrefersReducedMotion ile yapısal karar verir
+   (ör. hero canvas'ı hiç monte edilmez); bu blok kalanları süpürür.
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===========================================================================
+   Yeniden kullanılan yardımcılar
+   =========================================================================== */
+
+/* Teknik çizim grid'i. Hero, Final CTA ve Selected Work zemininde kullanılır.
+   Boyut ve opaklık çağrı yerinde --grid-size / --grid-opacity ile ayarlanır. */
+@utility blueprint-grid {
+  --grid-size: 48px;
+  --grid-opacity: 1;
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  opacity: var(--grid-opacity);
+}
+
+/* Ekran okuyucuya açık, görsel olarak gizli. Skip-link odaklanınca görünür hale gelir. */
+@utility sr-only-focusable {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+
+  &:focus-visible {
+    position: fixed;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Hero giriş animasyonu — bilinçli olarak CSS, JS değil.
+   Başlığı JavaScript ile fade-in yapmak hidrasyonu beklemek demektir ve
+   LCP'yi geciktirir; brief ise LCP öğesinin başlık metni olmasını istiyor.
+   Bu animasyon parse anında başlar, 520ms sürer ve `clip-path` kullanır —
+   metin boyanmış durumda, yalnızca kırpılıyor. Hareket azaltma modunda
+   yukarıdaki genel blok süreyi sıfırlar.
+   --------------------------------------------------------------------------- */
+@utility hero-reveal {
+  animation: hero-reveal var(--duration-slow) var(--ease-entrance) var(--reveal-delay, 0ms) both;
+}
+
+@keyframes hero-reveal {
+  from {
+    clip-path: inset(0 0 105% 0);
+    transform: translateY(0.3em);
+  }
+  to {
+    clip-path: inset(0 0 -25% 0);
+    transform: translateY(0);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   "Ürettiklerimiz" şeridi. İçerik iki kez basıldığı için -50% kayma
+   kusursuz bir döngü verir. Hareket azaltma modunda bileşen zaten marquee
+   yerine sabit ızgara render eder; bu yüzden burada ayrıca durdurmaya
+   gerek yok.
+   --------------------------------------------------------------------------- */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Okumak isteyen durdurabilmeli. */
+@utility marquee-track {
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Kapanış bölümünün zemin ızgarası. Bir hücre boyu kadar kayıp başa döner,
+   yani kayma sonsuz ve dikişsiz görünür. Hareket azaltma modunda yukarıdaki
+   genel kural animasyonu durdurur ve ızgara sabit kalır — okunurluk için
+   sorun değil, çünkü zaten dekoratif.
+   --------------------------------------------------------------------------- */
+@utility cta-grid {
+  --grid-size: 56px;
+  animation: cta-grid-drift 28s linear infinite;
+}
+
+@keyframes cta-grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 56px 56px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Kontur tipografi — hizmet satırları.
+
+   Seçili olmayan satır içi boş, yalnızca konturdan oluşan bir harf; seçili
+   satır dolu. Geçiş iki RENK arasında olduğu için yumuşak: dolgu saydamdan
+   `--fg`'ye gelirken kontur `--line-strong`'dan saydama gidiyor. Kalınlığı
+   değil rengi animasyonlamak, satırın zıplamasını da engelliyor.
+
+   `-webkit-text-stroke` desteklenmezse metin saydam kalır ve KAYBOLUR — bu
+   yüzden temel değer dolu renk, kontur yalnızca @supports içinde açılıyor.
+   --------------------------------------------------------------------------- */
+@utility type-outline {
+  color: var(--fg-muted);
+  transition:
+    color var(--duration-base) var(--ease-entrance),
+    -webkit-text-stroke-color var(--duration-base) var(--ease-entrance);
+
+  /* Kontur rengi `--line-strong` değil `--fg-muted`: bu metin dekoratif bir
+     başlık değil, tıklanabilir bir kontrolün etiketi. İnce konturda bile
+     okunur kalması gerekiyor. */
+  @supports (-webkit-text-stroke: 1px currentColor) {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--fg-muted);
+  }
+
+  [data-active='true'] & {
+    color: var(--fg);
+
+    @supports (-webkit-text-stroke: 1px currentColor) {
+      -webkit-text-stroke-color: transparent;
+    }
+  }
+}
+
+/* Aktif satırın altını soldan sağa süpüren vurgu çizgisi. */
+@utility sweep-rule {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-base) var(--ease-entrance);
+
+  [data-active='true'] & {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Çapa hedefleri.
+
+   Navigasyondan bir bölüme tıklandığında tarayıcı bölümün ÜST KENARINI
+   hizalar. Bölümlerin kendi dikey dolgusu (`py-section`, geniş ekranda 144px)
+   olduğu için başlık ekranın çok aşağısında kalıyor, üstte koca bir boşluk
+   oluşuyordu (ölçüldü: başlık 241px'e düşüyordu).
+
+   Negatif `scroll-margin-top` tarayıcıyı o dolgu kadar ileri kaydırır; üstteki
+   `scroll-padding-top: 6rem` ile birlikte bölümün ETİKETİ sabit navigasyonun
+   hemen altına gelir. Değer dolgunun kendi token'ından okunur, iki yerde ayrı
+   sayı tutulmaz.
+
+   Yalnızca navigasyon hedeflerine verilir: "Neden MGB" sabitlenmiş bir
+   track'tir, dolgusu yoktur ve ileri kaydırmak ilk kademeyi atlatırdı.
+   --------------------------------------------------------------------------- */
+@utility anchor-target {
+  scroll-margin-top: calc(-1 * var(--spacing-section));
+}
+
+/* ---------------------------------------------------------------------------
+   Teknoloji ekibi — iletişim sayfası (components/contact/tech-crew.tsx).
+
+   Gövde: kendi tabanı üzerinde birkaç derece sallanır, basılıp esner
+   (squash & stretch). Gözler: tek bir döngüde bakış yönü değişir, çubuklar
+   eğilir, kırpılır, iri yuvarlağa ve yatay çizgiye döner. Süre ve faz
+   karakter başına CSS değişkeniyle verilir; hiçbir ikisi senkron değildir.
+   Döngünün başı ve sonu aynı kare (düz bakış), yani dikiş görünmez.
+   Hareket azaltmada genel kural animasyonu durdurur → düz bakış.
+   --------------------------------------------------------------------------- */
+@utility crew-body {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: crew-sway var(--crew-sway, 4s) ease-in-out var(--crew-phase, 0s) infinite;
+}
+
+@utility crew-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: crew-look var(--crew-look, 10s) cubic-bezier(0.65, 0, 0.35, 1) var(--crew-phase, 0s)
+    infinite;
+}
+
+@keyframes crew-sway {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1, 1);
+  }
+  25% {
+    transform: rotate(-5deg) scale(1.03, 0.97);
+  }
+  50% {
+    transform: translateY(-2px) rotate(0deg) scale(0.98, 1.03);
+  }
+  75% {
+    transform: rotate(5deg) scale(1.03, 0.97);
+  }
+}
+
+@keyframes crew-look {
+  0%,
+  8%,
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1, 1);
+  }
+  /* sola eğik bakış */
+  12%,
+  22% {
+    transform: translate(-5px, 0) rotate(-16deg) scale(1, 1);
+  }
+  26% {
+    transform: translate(0, 0) rotate(0deg) scale(1, 1);
+  }
+  /* kırpma */
+  29% {
+    transform: translate(0, 0) scale(1, 0.12);
+  }
+  32% {
+    transform: translate(0, 0) scale(1, 1);
+  }
+  /* sağa ve yukarı bakış */
+  44%,
+  54% {
+    transform: translate(5px, -3px) rotate(14deg) scale(1, 1);
+  }
+  /* iri yuvarlak göz — şaşırma */
+  60%,
+  70% {
+    transform: translate(0, 0) rotate(0deg) scale(1.3, 0.6);
+  }
+  /* yatay çizgi — kısma */
+  75%,
+  84% {
+    transform: translate(0, 2px) rotate(0deg) scale(1.8, 0.2);
+  }
+  88% {
+    transform: translate(0, 0) scale(1, 1);
+  }
+  /* son bir kırpma */
+  93% {
+    transform: scale(1, 0.12);
+  }
+  96% {
+    transform: scale(1, 1);
+  }
+}

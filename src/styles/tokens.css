@@ -1,0 +1,199 @@
+/* ===========================================================================
+   MGB Software — tasarım token'ları
+   ---------------------------------------------------------------------------
+   Tek doğruluk kaynağı. Tüm renk değerleri WCAG 2.1 için ölçülmüştür;
+   oranlar _plan/blueprint.html içindeki tabloda kayıtlıdır (30/30 AA).
+
+   Tema üç durumda çalışır:
+     1. :root                      → açık tema (Paper), temel tanım
+     2. prefers-color-scheme: dark → koyu tema (Ink), açık seçim yoksa
+     3. [data-theme="dark|light"]  → kullanıcının açık seçimi, her yönde kazanır
+   Hiçbir renk yalnızca media veya [data-theme] bloğu içinde tanımlanmaz.
+   =========================================================================== */
+
+:root {
+  /* --- Paper (açık tema) ------------------------------------------------- */
+  --bg: #f6f5f2;
+  --bg-subtle: #eeede8;
+  --surface: #ffffff;
+  --surface-elevated: #faf9f7;
+
+  /* line: dekoratif hairline (grid, ayırıcı, wireframe çizgisi)
+     line-strong: anlam taşıyan sınır (input, ikincil buton) — 3:1 tutar */
+  --line: #e1dfd8;
+  --line-strong: #908e87;
+
+  --fg: #0d1015;
+  --fg-muted: #4c525a;
+  --fg-subtle: #6b717a;
+
+  /* Blueprint Cobalt — tek vurgu rengi. Gradient ve ikinci parlak renk yok. */
+  --accent: #1f46e0;
+  --accent-hover: #1736be;
+  --accent-quiet: #13308f;
+  --accent-fg: #ffffff;
+  --accent-wash: rgb(31 70 224 / 6%);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* :not([data-theme="light"]) → kullanıcı açık temayı seçtiyse işletim
+     sistemi koyu olsa bile seçim kazanır. */
+  :root:not([data-theme='light']) {
+    /* --- Ink (koyu tema) ------------------------------------------------- */
+    --bg: #0a0b0e;
+    --bg-subtle: #101217;
+    --surface: #15181e;
+    --surface-elevated: #1b1f26;
+
+    --line: #23272f;
+    --line-strong: #5f6a7c;
+
+    --fg: #f4f5f7;
+    --fg-muted: #a4abb6;
+    --fg-subtle: #7f8692;
+
+    /* Koyu zeminde doygunluktan çok az ödün verilerek yükseltilmiş yüzeyde
+       de 5.02:1 tutuluyor. accent-fg koyu: beyaz metin burada AA'yı geçmiyor. */
+    --accent: #5888ff;
+    --accent-hover: #7ba1ff;
+    --accent-quiet: #a9c0ff;
+    --accent-fg: #0a0b0e;
+    --accent-wash: rgb(88 136 255 / 8%);
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #0a0b0e;
+  --bg-subtle: #101217;
+  --surface: #15181e;
+  --surface-elevated: #1b1f26;
+
+  --line: #23272f;
+  --line-strong: #5f6a7c;
+
+  --fg: #f4f5f7;
+  --fg-muted: #a4abb6;
+  --fg-subtle: #7f8692;
+
+  --accent: #5888ff;
+  --accent-hover: #7ba1ff;
+  --accent-quiet: #a9c0ff;
+  --accent-fg: #0a0b0e;
+  --accent-wash: rgb(88 136 255 / 8%);
+
+  color-scheme: dark;
+}
+
+/* ---------------------------------------------------------------------------
+   Hareket token'ları. JS tarafı aynı değerleri lib/motion.ts üzerinden okur —
+   süre ve easing iki yerde ayrı tanımlanmaz.
+   --------------------------------------------------------------------------- */
+:root {
+  --duration-instant: 120ms;
+  --duration-fast: 200ms;
+  --duration-base: 320ms;
+  --duration-slow: 520ms;
+}
+
+/* ===========================================================================
+   Tailwind tema eşlemesi
+   `inline` kullanılıyor: üretilen yardımcı sınıflar doğrudan var(--bg) gibi
+   referans verir, böylece tema değişince renk anında yeniden çözülür.
+   =========================================================================== */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-quiet: var(--accent-quiet);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-wash: var(--accent-wash);
+}
+
+@theme {
+  /* --- Tipografi -------------------------------------------------------- */
+  /* Değişkenler next/font tarafından sağlanır (lib/fonts.ts). */
+  --font-display: var(--font-clash-display), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, 'SFMono-Regular', monospace;
+
+  /* Akışkan ölçek. display-1 masaüstünde 110px tavana oturur. */
+  --text-display-1: clamp(2.75rem, 7.6vw, 6.875rem);
+  --text-display-1--line-height: 0.92;
+  --text-display-1--letter-spacing: -0.035em;
+  --text-display-1--font-weight: 600;
+
+  --text-display-2: clamp(2rem, 4.4vw, 4rem);
+  --text-display-2--line-height: 0.98;
+  --text-display-2--letter-spacing: -0.025em;
+  --text-display-2--font-weight: 600;
+
+  --text-display-3: clamp(1.5rem, 2.6vw, 2.25rem);
+  --text-display-3--line-height: 1.05;
+  --text-display-3--letter-spacing: -0.02em;
+  --text-display-3--font-weight: 600;
+
+  --text-title: 1.25rem;
+  --text-title--line-height: 1.3;
+  --text-title--letter-spacing: -0.01em;
+  --text-title--font-weight: 600;
+
+  --text-body-lg: clamp(1.0625rem, 1.3vw, 1.25rem);
+  --text-body-lg--line-height: 1.55;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.6;
+
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.1em;
+
+  --text-mono-sm: 0.6875rem;
+  --text-mono-sm--line-height: 1.4;
+  --text-mono-sm--letter-spacing: 0.18em;
+
+  /* --- Boşluk ----------------------------------------------------------- */
+  /* Tailwind'in 0.25rem tabanı korunur (p-4 = 16px), üstüne iki anlamsal
+     token: px-gutter ve py-section. */
+  --spacing-gutter: clamp(1.25rem, 5vw, 6rem);
+  --spacing-section: clamp(5rem, 10vw, 12.5rem);
+
+  /* --- Konteyner -------------------------------------------------------- */
+  --container-content: 80rem; /* 1280px — okuma kolonu */
+  --container-wide: 90rem; /* 1440px — dış konteyner */
+
+  /* --- Kırılma noktaları ------------------------------------------------ */
+  --breakpoint-sm: 30rem; /* 480  — büyük telefon */
+  --breakpoint-md: 48rem; /* 768  — tablet dikey */
+  --breakpoint-lg: 64rem; /* 1024 — masaüstü nav, hover, sticky timeline */
+  --breakpoint-xl: 80rem; /* 1280 — asimetrik yerleşimler */
+  --breakpoint-2xl: 96rem; /* 1536 — konteyner tavanı */
+  --breakpoint-3xl: 112.5rem; /* 1800 — yalnızca ölçek tavanı, yeni yerleşim yok */
+
+  /* --- Köşe yuvarlaklığı ------------------------------------------------ */
+  /* Bilinçli olarak dar: blueprint hassasiyeti. Pill buton yok. */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* --- Easing ----------------------------------------------------------- */
+  --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-transition: cubic-bezier(0.76, 0, 0.24, 1);
+}

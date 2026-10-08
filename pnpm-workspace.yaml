@@ -1,0 +1,31 @@
+# Tek paketli proje: bu dosya workspace tanımlamaz, yalnızca pnpm 11'in
+# ayarlarını (izin verilen native build'ler, sürüm bekletme istisnaları) taşır.
+
+# Peer uyumsuzluklarını sessizce geçmesin — sürüm kararlarımız bilinçli.
+strictPeerDependencies: false
+autoInstallPeers: true
+
+# Yalnızca gerçekten gereken native build'lere izin verilir.
+# @swc/core ve unrs-resolver eslint araç zincirinin, @parcel/watcher Next
+# dev sunucusunun dosya izleyicisinin parçası.
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  unrs-resolver: true
+
+# pnpm 11, yeni yayınlanmış paketleri tedarik zinciri saldırılarına karşı
+# varsayılan olarak bekletiyor. Aşağıdaki sürümler bilinçli olarak onaylandı:
+# Next 16.4.0 ve ona bağlı resmi paketler, sürüm doğrulaması yapılarak seçildi.
+minimumReleaseAgeExclude:
+  - '@next/env@16.4.0'
+  - '@next/eslint-plugin-next@16.4.0'
+  - '@next/swc-darwin-arm64@16.4.0'
+  - '@next/swc-darwin-x64@16.4.0'
+  - '@next/swc-linux-arm64-gnu@16.4.0'
+  - '@next/swc-linux-arm64-musl@16.4.0'
+  - '@next/swc-linux-x64-gnu@16.4.0'
+  - '@next/swc-linux-x64-musl@16.4.0'
+  - '@next/swc-win32-arm64-msvc@16.4.0'
+  - '@next/swc-win32-x64-msvc@16.4.0'
+  - 'eslint-config-next@16.4.0'
+  - 'next@16.4.0'

@@ -1,0 +1,200 @@
+{
+  "nav": {
+    "menuLabel": "Ana menü",
+    "homeLabel": "MGB Software — ana sayfaya dön",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "work": "İşler",
+    "services": "Hizmetler",
+    "about": "Hakkımızda",
+    "contact": "İletişim"
+  },
+  "actions": {
+    "startProject": "Proje Başlat",
+    "exploreServices": "Hizmetlerimiz",
+    "viewService": "Hizmeti gör",
+    "sendEmail": "E-posta gönder",
+    "pauseMotion": "Akışı durdur",
+    "playMotion": "Akışı başlat"
+  },
+  "theme": {
+    "label": "Tema",
+    "system": "Sistem teması",
+    "light": "Açık tema",
+    "dark": "Koyu tema",
+    "cycle": "Temayı değiştir — şu an: {current}"
+  },
+  "locale": {
+    "label": "Dil",
+    "switchTo": "Switch to English",
+    "current": "Türkçe"
+  },
+  "a11y": {
+    "skipToContent": "İçeriğe geç",
+    "decorative": "Dekoratif animasyon"
+  },
+  "footer": {
+    "tagline": "Tasarım, yazılım ve dijital mühendislik.",
+    "navHeading": "Sayfalar",
+    "contactHeading": "İletişim",
+    "legalHeading": "Yasal",
+    "privacy": "Gizlilik Politikası",
+    "kvkk": "KVKK Aydınlatma Metni",
+    "socialHeading": "Takip edin",
+    "copyright": "© {year} MGB Software"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Bu sayfa henüz çizilmedi.",
+    "description": "Aradığınız adres taşınmış veya hiç var olmamış olabilir.",
+    "backHome": "Ana sayfaya dön"
+  },
+  "error": {
+    "code": "HATA",
+    "title": "Bir şeyler ters gitti.",
+    "description": "Beklenmeyen bir hata oluştu. Sayfayı yenilemeyi deneyin.",
+    "retry": "Tekrar dene"
+  },
+  "contact": {
+    "eyebrow": "PROJE BAŞLAT",
+    "title": "Projenizi anlatın.",
+    "intro": "Dört kısa adım, yaklaşık iki dakika. Talebinizi okuyup tercih ettiğiniz kanaldan size dönüyoruz.",
+    "metaTitle": "Proje Başlat",
+    "metaDescription": "Projenizi dört kısa adımda anlatın: ihtiyaç, kapsam, detaylar ve iletişim. MGB Software talebinizi okuyup size dönsün.",
+    "progress": "Adım {current} / {total}",
+    "stepNames": {
+      "services": "İhtiyaç",
+      "scope": "Kapsam",
+      "details": "Detaylar",
+      "contact": "İletişim"
+    },
+    "services": {
+      "title": "Ne yapalım?",
+      "hint": "Birden fazla seçebilirsiniz.",
+      "unsure": "Emin değilim, birlikte bakalım"
+    },
+    "scope": {
+      "title": "Kapsam",
+      "hint": "Kesin olması gerekmiyor; doğru yerden başlamamıza yardımcı oluyor."
+    },
+    "budget": {
+      "label": "Bütçe (KDV hariç)",
+      "under-50k": "50.000 ₺ altı",
+      "50k-150k": "50.000 – 150.000 ₺",
+      "150k-500k": "150.000 – 500.000 ₺",
+      "over-500k": "500.000 ₺ üzeri",
+      "undecided": "Henüz belli değil"
+    },
+    "timeline": {
+      "label": "Zaman",
+      "urgent": "Acil",
+      "1-3-months": "1–3 ay",
+      "flexible": "Esnek"
+    },
+    "stage": {
+      "label": "Proje durumu",
+      "new": "Sıfırdan",
+      "existing": "Mevcut ürünü geliştirme"
+    },
+    "details": {
+      "title": "Anlatın",
+      "label": "Proje hakkında",
+      "hint": "Kimin için? Hangi sorunu çözüyor? Örnek aldığınız siteler veya uygulamalar var mı?",
+      "counter": "{count} / {max}"
+    },
+    "contact": {
+      "title": "Size nasıl ulaşalım?",
+      "name": "Ad soyad",
+      "email": "E-posta",
+      "company": "Şirket",
+      "optional": "isteğe bağlı"
+    },
+    "channel": {
+      "label": "Dönüş tercihi",
+      "email": "E-posta",
+      "meeting": "Ön görüşme",
+      "whatsapp": "WhatsApp"
+    },
+    "consent": {
+      "label": "Talebimin yanıtlanabilmesi için kişisel verilerimin, yurt dışında bulunan e-posta altyapısı aracılığıyla aktarılmasına açık rıza veriyorum.",
+      "notice": "Ayrıntılar KVKK Aydınlatma Metni'nde.",
+      "alternative": "Onay vermek istemezseniz bize doğrudan {email} adresinden yazabilirsiniz."
+    },
+    "nav": {
+      "back": "Geri",
+      "next": "Devam",
+      "submit": "Talebi gönder",
+      "submitting": "Gönderiliyor…"
+    },
+    "errors": {
+      "required": "Bu alan gerekli.",
+      "invalid": "Geçerli bir değer girin.",
+      "too-short": "En az {min} karakter yazın.",
+      "too-long": "En fazla {max} karakter yazabilirsiniz.",
+      "services": "Bir hizmet seçin ya da “Emin değilim”i işaretleyin.",
+      "email": "Geçerli bir e-posta adresi girin.",
+      "consent": "Formla gönderebilmek için onay gerekli."
+    },
+    "sent": {
+      "eyebrow": "TALEP ALINDI",
+      "title": "Teşekkürler, talebiniz bize ulaştı.",
+      "body": "Talebinizi okuyup {email} adresinden size dönüyoruz.",
+      "meetingTitle": "Beklemek istemezseniz",
+      "meetingBody": "Uygun bir zamanı seçip 30 dakikalık bir ön görüşme planlayın.",
+      "meetingCta": "Görüşme planla",
+      "meetingOpen": "Takvimi yeni sekmede aç",
+      "calendarTitle": "Ön görüşme takvimi",
+      "again": "Yeni talep oluştur"
+    },
+    "failed": {
+      "title": "Talep şu an gönderilemedi.",
+      "body": "Yazdıklarınız kaybolmadı. Aynı içerikle hazır bir e-posta açabilir ya da biraz sonra tekrar deneyebilirsiniz.",
+      "rateLimited": "Kısa sürede çok fazla deneme yapıldı. Birkaç dakika sonra tekrar deneyin ya da e-posta ile gönderin.",
+      "mail": "E-posta ile gönder",
+      "retry": "Tekrar dene"
+    },
+    "aside": {
+      "title": "SONRAKİ ADIMLAR",
+      "steps": {
+        "read": {
+          "title": "Talebinizi okuyoruz",
+          "body": "İhtiyacı, kapsamı ve paylaştığınız örnekleri inceliyoruz."
+        },
+        "reply": {
+          "title": "Size dönüyoruz",
+          "body": "Seçtiğiniz kanaldan; netleşmesi gereken bir şey varsa sorularımızla birlikte."
+        },
+        "meeting": {
+          "title": "Ön görüşme",
+          "body": "İsterseniz 30 dakikalık bir görüşmede detayları birlikte konuşuyoruz."
+        },
+        "proposal": {
+          "title": "Yazılı teklif",
+          "body": "Kapsam, süre ve bütçeyi kayıt altında olacak şekilde yazılı iletiyoruz."
+        }
+      },
+      "filesTitle": "DOSYA YA DA ŞARTNAME",
+      "filesBody": "Ekleri doğrudan bu adrese gönderebilirsiniz:",
+      "crewTitle": "ARAÇ KUTUMUZ"
+    },
+    "mail": {
+      "subject": "Proje talebi — {name}",
+      "services": "Hizmetler",
+      "unsure": "Emin değil",
+      "budget": "Bütçe",
+      "timeline": "Zaman",
+      "stage": "Durum",
+      "message": "Proje",
+      "name": "Ad",
+      "email": "E-posta",
+      "company": "Şirket",
+      "channel": "Dönüş tercihi"
+    }
+  },
+  "kvkk": {
+    "metaTitle": "KVKK Aydınlatma Metni",
+    "metaDescription": "MGB Software'in internet sitesi ve proje başlatma formu üzerinden işlenen kişisel veriler hakkında 6698 sayılı KVKK kapsamında aydınlatma metni.",
+    "eyebrow": "KVKK",
+    "updated": "Son güncelleme: {date}"
+  }
+}

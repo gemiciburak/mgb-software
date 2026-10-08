@@ -1,0 +1,10 @@
+node_modules
+.next
+dist
+pnpm-lock.yaml
+_plan
+*.woff2
+*.ttf
+
+# Next.js tarafından üretilir, elle düzenlenmez
+next-env.d.ts

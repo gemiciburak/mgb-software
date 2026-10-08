@@ -1,0 +1,31 @@
+# bağımlılıklar
+node_modules/
+.pnpm-store/
+
+# build çıktıları
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+
+
+# ortam değişkenleri — .env.example dışındaki hiçbiri commit edilmez
+.env
+.env.local
+.env.*.local
+
+# editör ve işletim sistemi
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# log
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# planlama dosyaları (yayına girmez)
+_plan/

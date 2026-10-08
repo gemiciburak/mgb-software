@@ -1,0 +1,5 @@
+/* Uygulamanın tek stil giriş noktası. Sıra önemlidir: önce Tailwind,
+   sonra token tanımları, sonra temel katman. */
+@import 'tailwindcss';
+@import './tokens.css';
+@import './base.css';
