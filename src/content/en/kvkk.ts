@@ -6,7 +6,7 @@ const email = CONTACT_EMAIL ?? '';
 
 export const kvkk: LegalDocument = {
   title: 'Data Protection Notice',
-  updated: '2026-10-08',
+  updated: '2026-10-09',
   intro: `This notice explains how personal data collected through the ${SITE_NAME} website and its project request form is processed, under Turkish Personal Data Protection Law No. 6698 (“KVKK”).`,
   sections: [
     {
@@ -76,7 +76,7 @@ export const kvkk: LegalDocument = {
       blocks: [
         {
           type: 'p',
-          text: 'Your personal data is never sold or shared with third parties for marketing. The following service providers are used to deliver and answer your request; their servers are located outside Türkiye (in the US and/or EU):',
+          text: 'Your personal data is never sold or shared with third parties for marketing. The following service providers are used to serve the site and to deliver and answer your request; their servers are located outside Türkiye (in the US and/or EU):',
         },
         {
           type: 'list',
@@ -84,6 +84,7 @@ export const kvkk: LegalDocument = {
             'Resend, Inc. — the email service that delivers the form to MGB Software’s inbox.',
             'Google LLC (Gmail) — MGB Software’s email account, where your request and later correspondence are stored.',
             'Calendly LLC — only if you choose to book an intro call; Calendly then processes data under its own privacy notice.',
+            'Cloudflare, Inc. — the infrastructure that hosts and serves the site; on every visit, technical connection data such as your IP address and browser details is processed to deliver the site and protect it against attacks.',
           ],
         },
         {
@@ -117,6 +118,7 @@ export const kvkk: LegalDocument = {
           items: [
             'MGB_LOCALE cookie — remembers your language choice, kept for one year.',
             'Theme preference — your light/dark choice is kept in your browser (localStorage) and never sent to the server.',
+            'Form draft — if you leave the project form unfinished, what you have entered is kept only in that tab (sessionStorage); it is deleted when the tab closes and is not sent to the server until you submit.',
             'Form draft — what you type in the form is kept in your browser (sessionStorage) until you close the tab, and deleted after sending.',
           ],
         },

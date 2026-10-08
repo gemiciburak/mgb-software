@@ -56,7 +56,11 @@ export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
 };
 
 /**
- * Navigasyon öğeleri: İşler, Hizmetler, Hakkımızda, İletişim.
+ * Navigasyon öğeleri — sayfadaki sırayla: Hakkımızda, Hizmetler, İşler,
+ * İletişim. Sıra sayfayla aynı olunca kaydırırken gösterge soldan sağa
+ * ilerler; geri sıçramaz. (İlk sürümde brief'teki sıra kullanılıyordu —
+ * İşler önce — hem bölüm sırasıyla çelişiyor hem de ilk öğe henüz boş olan
+ * İşler bölümüne gidiyordu.)
  *
  * Kural: menü ana sayfanın haritasıdır; her öğe ana sayfadaki bölümüne
  * kaydırır. Ayrı sayfa olarak yalnızca proje başlatma formu var (sağdaki
@@ -73,9 +77,9 @@ export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
  *     ya da proje dışı bir konu için forma girmek gerekmez.
  */
 export const NAV_ITEMS = [
-  { id: SECTION_ID.work, labelKey: 'work' },
-  { id: SECTION_ID.services, labelKey: 'services' },
   { id: SECTION_ID.about, labelKey: 'about' },
+  { id: SECTION_ID.services, labelKey: 'services' },
+  { id: SECTION_ID.work, labelKey: 'work' },
   { id: SECTION_ID.contact, labelKey: 'contact' },
 ] as const;
 

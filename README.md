@@ -23,14 +23,16 @@ cp .env.example .env.local
 pnpm dev           # http://localhost:3000
 ```
 
-| Komut            | Ne yapar            |
-| ---------------- | ------------------- |
-| `pnpm dev`       | Geliştirme sunucusu |
-| `pnpm build`     | Üretim derlemesi    |
-| `pnpm start`     | Üretim sunucusu     |
-| `pnpm lint`      | ESLint              |
-| `pnpm typecheck` | Tip kontrolü        |
-| `pnpm format`    | Prettier            |
+| Komut             | Ne yapar            |
+| ----------------- | ------------------- |
+| `pnpm dev`        | Geliştirme sunucusu |
+| `pnpm build`      | Üretim derlemesi    |
+| `pnpm start`      | Üretim sunucusu     |
+| `pnpm lint`       | ESLint              |
+| `pnpm typecheck`  | Tip kontrolü        |
+| `pnpm format`     | Prettier            |
+| `pnpm cf:preview` | Cloudflare önizleme |
+| `pnpm cf:deploy`  | Cloudflare'e yayın  |
 
 ## Sürüm kararları
 
@@ -184,7 +186,30 @@ Kullanılan üç fontun da (Clash Display, Inter, JetBrains Mono) Türkçe kapsa
   olmadan form gönderimi "e-posta ile gönder" yedeğine düşer.
 - **KVKK metni** — veri sorumlusunun ticari unvanı ve adresi eklenmeli;
   saklama süresi (talep sözleşmeye dönüşmezse 1 yıl) iç süreçle uyumlu
-  olmalı; metin bir hukukçuya gözden geçirtilmeli. Barındırma sağlayıcısı
-  belli olunca aktarım listesine eklenmeli.
-- **Sonraki sayfalar** — hizmet detayları, işler, hakkımızda, gizlilik.
-  Yolları `PATHNAMES`'te hazır; yayına alınınca `PUBLISHED_ROUTES`'a eklenir.
+  olmalı; metin bir hukukçuya gözden geçirtilmeli. Barındırma (Cloudflare)
+  aktarım listesinde.
+- **Kurucu fotoğrafı** — kare kırpılmış olarak `public/founder.jpg`; ardından
+  `content/{tr,en}/home.ts` içindeki `founder.photo` alanı doldurulur.
+- **Sonraki sayfalar** — hizmet detayları, işler, gizlilik. Yolları
+  `PATHNAMES`'te hazır; yayına alınınca `PUBLISHED_ROUTES`'a eklenir ve
+  menüdeki ilgili öğe kendiliğinden o sayfaya döner (`navHref`).
+
+## Yayın (Cloudflare Workers)
+
+Site OpenNext ile Cloudflare Workers'ta çalışır (`wrangler.jsonc`,
+`open-next.config.ts`). Bütün sayfalar build sırasında statik üretildiği için
+önbellek Workers statik varlıklarında tutulur; R2/KV gerekmez.
+
+1. Cloudflare'de alan adını ekle, nameserver'ları kayıt firmasında güncelle.
+2. Workers & Pages → GitHub reposunu bağla.
+   Build: `pnpm opennextjs-cloudflare build` · Deploy: `pnpm opennextjs-cloudflare deploy`
+3. Build değişkeni: `NEXT_PUBLIC_SITE_URL=https://alanadi.com` (koda gömülür).
+4. Sırlar: `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, isteğe bağlı
+   `CONTACT_TO_EMAIL` (`wrangler secret put <AD>`). Yerelde `.dev.vars`.
+5. Worker'ı alan adına bağla (Settings → Domains & Routes).
+6. WAF'ta `/api/contact` için hız sınırı kuralı aç — koddaki sayaç Worker
+   örnekleri arasında paylaşılmaz.
+
+`patches/@opennextjs__cloudflare@1.20.9.patch`: OpenNext 1.20.9, Next 16.4'ün
+`preview-props.json` manifest'ini Worker'a gömmüyor ve her istek 500 dönüyordu.
+OpenNext güncellenince yamanın hâlâ gerekip gerekmediğine bakılmalı.

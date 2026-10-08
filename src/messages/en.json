@@ -13,7 +13,6 @@
     "startProject": "Start a Project",
     "exploreServices": "Explore Services",
     "viewService": "View service",
-    "sendEmail": "Send an email",
     "pauseMotion": "Pause motion",
     "playMotion": "Play motion"
   },
@@ -30,8 +29,7 @@
     "current": "English"
   },
   "a11y": {
-    "skipToContent": "Skip to content",
-    "decorative": "Decorative animation"
+    "skipToContent": "Skip to content"
   },
   "footer": {
     "tagline": "Design, software and digital engineering.",
@@ -40,7 +38,6 @@
     "legalHeading": "Legal",
     "privacy": "Privacy Policy",
     "kvkk": "Data Protection Notice",
-    "socialHeading": "Follow",
     "copyright": "© {year} MGB Software"
   },
   "notFound": {

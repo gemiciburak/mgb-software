@@ -13,7 +13,6 @@
     "startProject": "Proje Başlat",
     "exploreServices": "Hizmetlerimiz",
     "viewService": "Hizmeti gör",
-    "sendEmail": "E-posta gönder",
     "pauseMotion": "Akışı durdur",
     "playMotion": "Akışı başlat"
   },
@@ -30,8 +29,7 @@
     "current": "Türkçe"
   },
   "a11y": {
-    "skipToContent": "İçeriğe geç",
-    "decorative": "Dekoratif animasyon"
+    "skipToContent": "İçeriğe geç"
   },
   "footer": {
     "tagline": "Tasarım, yazılım ve dijital mühendislik.",
@@ -40,7 +38,6 @@
     "legalHeading": "Yasal",
     "privacy": "Gizlilik Politikası",
     "kvkk": "KVKK Aydınlatma Metni",
-    "socialHeading": "Takip edin",
     "copyright": "© {year} MGB Software"
   },
   "notFound": {

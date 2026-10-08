@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { LOCALE_TAGS } from '@/shared';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { Footer } from '@/components/sections/footer';
 import { NavBar } from '@/components/sections/nav-bar';
@@ -24,6 +24,18 @@ type LayoutProps = {
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+/**
+ * Mobil tarayıcının adres çubuğu sayfanın zemin rengini alır. Değerler
+ * tokens.css'teki `--bg` ile aynı; tema seçimi değil sistem teması izlenir —
+ * meta etiketi CSS değişkeni okuyamıyor.
+ */
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f6f5f2' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0b0e' },
+  ],
+};
 
 export async function generateMetadata({
   params,

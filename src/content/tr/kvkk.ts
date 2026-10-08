@@ -18,7 +18,7 @@ const email = CONTACT_EMAIL ?? '';
 
 export const kvkk: LegalDocument = {
   title: 'KVKK Aydınlatma Metni',
-  updated: '2026-10-08',
+  updated: '2026-10-09',
   intro: `Bu metin, ${SITE_NAME} internet sitesi ve proje başlatma formu aracılığıyla işlenen kişisel verileriniz hakkında, 6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca sizi bilgilendirmek amacıyla hazırlanmıştır.`,
   sections: [
     {
@@ -88,7 +88,7 @@ export const kvkk: LegalDocument = {
       blocks: [
         {
           type: 'p',
-          text: 'Kişisel verileriniz satılmaz ve pazarlama amacıyla üçüncü kişilerle paylaşılmaz. Talebinizin iletilmesi ve yanıtlanması için aşağıdaki hizmet sağlayıcılar kullanılır; bunların sunucuları yurt dışında (ABD ve/veya AB) bulunmaktadır:',
+          text: 'Kişisel verileriniz satılmaz ve pazarlama amacıyla üçüncü kişilerle paylaşılmaz. Sitenin sunulması, talebinizin iletilmesi ve yanıtlanması için aşağıdaki hizmet sağlayıcılar kullanılır; bunların sunucuları yurt dışında (ABD ve/veya AB) bulunmaktadır:',
         },
         {
           type: 'list',
@@ -96,6 +96,7 @@ export const kvkk: LegalDocument = {
             'Resend, Inc. — form içeriğini MGB Software’in e-posta kutusuna ileten e-posta altyapısı.',
             'Google LLC (Gmail) — MGB Software’in e-posta hesabı; talebiniz ve sonraki yazışmalar burada saklanır.',
             'Calendly LLC — yalnızca ön görüşme planlamayı seçerseniz; bu durumda Calendly kendi aydınlatma metnine tabi olarak veri işler.',
+            'Cloudflare, Inc. — sitenin barındırıldığı ve sunulduğu altyapı; siteye her erişimde IP adresiniz ve tarayıcı bilgileriniz gibi teknik bağlantı verileri, siteyi size ulaştırmak ve saldırılara karşı korumak için işlenir.',
           ],
         },
         {
@@ -129,6 +130,7 @@ export const kvkk: LegalDocument = {
           items: [
             'MGB_LOCALE çerezi — seçtiğiniz dili hatırlar, bir yıl saklanır.',
             'Tema tercihi — açık/koyu tema seçiminiz tarayıcınızda (localStorage) tutulur, sunucuya gönderilmez.',
+            'Form taslağı — proje başlatma formunu yarıda bırakırsanız doldurduğunuz alanlar yalnızca o sekmede (sessionStorage) tutulur; sekme kapanınca silinir, gönderene kadar sunucuya iletilmez.',
             'Form taslağı — doldurduğunuz form, sekmeyi kapatana kadar tarayıcınızda (sessionStorage) tutulur ve gönderimden sonra silinir.',
           ],
         },

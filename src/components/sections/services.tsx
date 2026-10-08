@@ -132,6 +132,20 @@ export function Services({ content }: { content: ServicesContent }) {
                       {serviceNumber(service.slug)}
                     </span>
                     <span className="text-display-3 text-fg lg:type-outline">{service.title}</span>
+                    {/* Mobil: satırın açılabildiğini gösteren artı → eksi (SSS ile aynı
+                        işaret). Masaüstünde satır açılmaz, işaret de yok. */}
+                    <span
+                      aria-hidden="true"
+                      className="relative ml-auto size-3.5 shrink-0 self-center lg:hidden"
+                    >
+                      <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-fg-muted" />
+                      <span
+                        className={cn(
+                          'absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-fg-muted transition-transform duration-[var(--duration-base)] ease-[var(--ease-transition)]',
+                          isExpanded && 'scale-y-0',
+                        )}
+                      />
+                    </span>
                     {/* Aktif satırın altını süpüren vurgu çizgisi. */}
                     <span
                       aria-hidden="true"
