@@ -171,8 +171,7 @@
         }
       },
       "filesTitle": "FILES OR A BRIEF",
-      "filesBody": "You can send attachments directly to:",
-      "crewTitle": "OUR TOOLKIT"
+      "filesBody": "You can send attachments directly to:"
     },
     "mail": {
       "subject": "Project request — {name}",

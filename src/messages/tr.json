@@ -171,8 +171,7 @@
         }
       },
       "filesTitle": "DOSYA YA DA ŞARTNAME",
-      "filesBody": "Ekleri doğrudan bu adrese gönderebilirsiniz:",
-      "crewTitle": "ARAÇ KUTUMUZ"
+      "filesBody": "Ekleri doğrudan bu adrese gönderebilirsiniz:"
     },
     "mail": {
       "subject": "Proje talebi — {name}",

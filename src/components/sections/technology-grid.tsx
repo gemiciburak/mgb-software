@@ -5,7 +5,7 @@ import type { PointerEvent } from 'react';
 import { ScrollReveal } from '@/components/animations/scroll-reveal';
 import { Container } from '@/components/ui/container';
 import { SectionHeading } from '@/components/ui/section-heading';
-import { TechMark } from '@/components/ui/tech-mark';
+import { CrewMark } from '@/components/ui/crew-mark';
 import { useIsTouch } from '@/hooks/use-is-touch';
 import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
 import { EASE_ENTRANCE } from '@/lib/motion';
@@ -52,10 +52,11 @@ const SETTLED = { opacity: 1, x: 0, y: 0, z: 0, rotate: 0 } as const;
 /**
  * Teknoloji — 3B kart levhası.
  *
- * Her kart markanın kendi işaretini taşır. Durağan halde işaretler tek renk
- * (`currentColor`) çizilir, yani sayfanın tek-vurgu disiplini bozulmaz; marka
- * rengi ancak karta gelince açılır. Dokuz logonun hepsi aynı anda kendi
- * renginde olsaydı bölüm bir sponsor bandına dönerdi.
+ * Her kartta aracın karakteri durur (bkz. ui/crew-mark.tsx): markanın
+ * silüeti ve rengi, gözleri olan küçük bir figür. Logolar değil silüetler
+ * kullanıldığı için dokuz renk yan yana bir sponsor bandı gibi değil, bir
+ * ekip gibi okunur; ad ve rol altında yazar. (Önceden tek renkli logolardı;
+ * karakterler proje başlatma sayfasının yan sütunundan buraya taşındı.)
  *
  * Hareket iki katmanlı:
  *   1. Giriş — kartlar dağınık derinliklerden ızgaraya oturur. Bir kez olur,
@@ -124,10 +125,7 @@ export function TechnologyGrid({ content }: { content: TechnologyContent }) {
                 {...(interactive ? { whileHover: { z: 30 } } : {})}
                 className="group border-r border-b border-line bg-bg px-6 py-8 transition-colors duration-[var(--duration-fast)] last:col-span-2 hover:bg-bg-subtle md:last:col-span-1 lg:px-8 lg:py-10"
               >
-                <TechMark
-                  slug={entry.slug}
-                  className="size-8 text-fg-muted transition-colors duration-[var(--duration-base)] group-hover:text-(color:--brand) lg:size-10"
-                />
+                <CrewMark slug={entry.slug} className="size-12 lg:size-14" />
                 <p className="mt-6 text-title">{entry.name}</p>
                 <p className="mt-2 font-mono text-mono-sm text-fg-subtle">{entry.role}</p>
               </motion.li>

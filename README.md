@@ -157,9 +157,9 @@ sahte başarı mesajı gösterilmez. Teşekkür ekranında Calendly ön görüş
 takvimi tıklanınca yüklenir (ad/e-posta önceden dolu). WhatsApp seçeneği
 `WHATSAPP_NUMBER` girilince görünür.
 
-**Araç kutusu karakterleri** (iletişim sayfası, yan sütun) teknoloji
+**Teknoloji karakterleri** (ana sayfa, "Ne ile kuruyoruz" bölümü) teknoloji
 işaretlerinin silüetinden ve marka renginden türetilmiş, gözleri olan küçük
-karakterlerdir (`components/contact/tech-crew.tsx`). Hareket saf CSS
+karakterlerdir (`components/ui/crew-mark.tsx`). Hareket saf CSS
 (`crew-*`, `styles/base.css`): gövde sallanır ve esner, gözler bakar, eğilir,
 kırpılır; süre ve faz karakter başına farklıdır. Logoların kendisine göz
 konmaz — harf ve detayların üstüne biniyordu.

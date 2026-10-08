@@ -3,7 +3,6 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ProjectBrief } from '@/components/contact/project-brief';
-import { TechCrew } from '@/components/contact/tech-crew';
 import { Container } from '@/components/ui/container';
 import { MailIcon } from '@/components/ui/icons';
 import { getContent } from '@/content';
@@ -126,7 +125,6 @@ export default async function ContactPage({ params }: PageProps) {
                 </div>
               )}
             </div>
-            <TechCrew title={t('aside.crewTitle')} />
           </aside>
         </div>
       </Container>

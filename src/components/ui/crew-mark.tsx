@@ -1,8 +1,9 @@
 import type { CSSProperties, ReactNode } from 'react';
+import { cn } from '@/lib/cn';
 import { TECH_MARKS, type TechSlug } from '@/lib/tech-marks';
 
 /**
- * Teknoloji ekibi — kullandığımız araçlar, gözleri olan küçük karakterler.
+ * Teknoloji karakteri — kullandığımız bir aracın gözleri olan küçük hali.
  *
  * Referans hareket dili (Grok "bot agent icons"): düz, dolu gövdeler; her
  * biri birkaç derece sallanır, basılıp esner; iki beyaz çubuk göz bakış
@@ -12,14 +13,16 @@ import { TECH_MARKS, type TechSlug } from '@/lib/tech-marks';
  * Gövdeler logoların KENDİSİ değil, silüetleri ve marka renkleri: gözler
  * logonun üstüne konunca "TS", "N", "JS" harflerinin ve React yörüngelerinin
  * üstüne biniyordu — hem logo bozuluyor hem karakter okunmuyordu. Silüet +
- * renk, markayı tanınır tutarken yüzü temiz bırakıyor; ad zaten altında yazıyor.
+ * renk, markayı tanınır tutarken yüzü temiz bırakıyor; ad zaten yanında yazıyor.
  *
  * Hareket tamamen CSS (`crew-*` yardımcıları, styles/base.css): JS yok, kare
  * başına render yok. Süre ve gecikme karakter başına farklı, negatif gecikme
  * döngüleri baştan kaydırır. Hareket azaltmada genel kural animasyonu durdurur
  * ve karakterler düz bakışta kalır.
  *
- * Sunucu bileşeni: hook kullanmaz, renkler `light-dark()` ile CSS'te seçilir.
+ * Hook kullanmaz; hem sunucu hem istemci bileşeninde kullanılabilir. Renkler
+ * `light-dark()` ile CSS'te seçilir. Yeri: Teknoloji bölümünün kartları.
+ * Dekoratiftir (aria-hidden) — erişilebilir ad kartın kendi metninden gelir.
  */
 
 /** 100×100 kutuda gövde silüetleri. */
@@ -115,75 +118,51 @@ const CREW: readonly Member[] = [
   { slug: 'swift', eyes: { x: 50, y: 52 }, eyeColor: WHITE, sway: 4.4, look: 9.9, phase: 3.8 },
 ];
 
-export function TechCrew({ title }: { title: string }) {
+const BY_SLUG = new Map(CREW.map((member) => [member.slug, member]));
+
+export function CrewMark({ slug, className }: { slug: TechSlug; className?: string }) {
+  const member = BY_SLUG.get(slug);
+  if (!member) return null;
+  const mark = TECH_MARKS[slug];
+  const style = {
+    '--crew-body': `light-dark(${mark.brand.light}, ${mark.brand.dark})`,
+    '--crew-eye': `light-dark(${member.eyeColor.light}, ${member.eyeColor.dark})`,
+    '--crew-sway': `${member.sway}s`,
+    '--crew-look': `${member.look}s`,
+    '--crew-phase': `-${member.phase}s`,
+  } as CSSProperties;
+
   return (
-    <section className="overflow-hidden rounded-sm border border-line bg-surface">
-      <div className="flex items-center justify-between border-b border-line px-6 py-4">
-        <h2 className="font-mono text-mono-sm text-fg-subtle">{title}</h2>
-        <span aria-hidden="true" className="font-mono text-mono-sm text-accent tabular-nums">
-          {String(CREW.length).padStart(2, '0')}
-        </span>
-      </div>
-
-      <ul className="grid grid-cols-3 gap-x-2 gap-y-6 px-4 py-7">
-        {CREW.map((member) => {
-          const mark = TECH_MARKS[member.slug];
-          const style = {
-            '--crew-body': `light-dark(${mark.brand.light}, ${mark.brand.dark})`,
-            '--crew-eye': `light-dark(${member.eyeColor.light}, ${member.eyeColor.dark})`,
-            '--crew-sway': `${member.sway}s`,
-            '--crew-look': `${member.look}s`,
-            '--crew-phase': `-${member.phase}s`,
-          } as CSSProperties;
-
-          return (
-            <li
-              key={member.slug}
-              className="group flex flex-col items-center gap-2.5"
-              style={style}
-            >
-              <svg
-                viewBox="0 0 100 100"
-                className="size-16 overflow-visible"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <g
-                  className="crew-body"
-                  fill="var(--crew-body)"
-                  stroke="var(--crew-body)"
-                  strokeWidth="0"
-                >
-                  {BODIES[member.slug]}
-                  {/* Her göz kendi merkezinde döner ve ölçeklenir (fill-box):
-                      eğik çubuk, yuvarlak ve yatay çizgi halleri böyle çıkıyor. */}
-                  <g fill="var(--crew-eye)" stroke="none">
-                    <rect
-                      className="crew-eye"
-                      x={member.eyes.x - 14}
-                      y={member.eyes.y - 12}
-                      width="9"
-                      height="24"
-                      rx="4.5"
-                    />
-                    <rect
-                      className="crew-eye"
-                      x={member.eyes.x + 5}
-                      y={member.eyes.y - 12}
-                      width="9"
-                      height="24"
-                      rx="4.5"
-                    />
-                  </g>
-                </g>
-              </svg>
-              <span className="font-mono text-mono-sm text-fg-subtle transition-colors group-hover:text-fg">
-                {mark.title}
-              </span>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
+    <svg
+      viewBox="0 0 100 100"
+      className={cn('overflow-visible', className)}
+      style={style}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g className="crew-body" fill="var(--crew-body)" stroke="var(--crew-body)" strokeWidth="0">
+        {BODIES[slug]}
+        {/* Her göz kendi merkezinde döner ve ölçeklenir (fill-box): eğik
+            çubuk, yuvarlak ve yatay çizgi halleri böyle çıkıyor. */}
+        <g fill="var(--crew-eye)" stroke="none">
+          <rect
+            className="crew-eye"
+            x={member.eyes.x - 14}
+            y={member.eyes.y - 12}
+            width="9"
+            height="24"
+            rx="4.5"
+          />
+          <rect
+            className="crew-eye"
+            x={member.eyes.x + 5}
+            y={member.eyes.y - 12}
+            width="9"
+            height="24"
+            rx="4.5"
+          />
+        </g>
+      </g>
+    </svg>
   );
 }

@@ -282,7 +282,7 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Teknoloji ekibi — iletişim sayfası (components/contact/tech-crew.tsx).
+   Teknoloji karakterleri — Teknoloji bölümü (components/ui/crew-mark.tsx).
 
    Gövde: kendi tabanı üzerinde birkaç derece sallanır, basılıp esner
    (squash & stretch). Gözler: tek bir döngüde bakış yönü değişir, çubuklar
