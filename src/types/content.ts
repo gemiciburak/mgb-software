@@ -89,6 +89,18 @@ export interface WorkContent extends SectionIntro {
   status: string;
 }
 
+export interface FaqEntry {
+  question: string;
+  /** Tek paragraf. Uydurma rakam (fiyat, gün sayısı) yazılmaz. */
+  answer: string;
+}
+
+export interface FaqContent extends SectionIntro {
+  entries: readonly FaqEntry[];
+  /** Başlığın altında, e-posta linkinin önünde duran kısa cümle. */
+  contactLine: string;
+}
+
 export interface CtaContent {
   title: string;
   description: string;
@@ -104,6 +116,7 @@ export interface HomeContent {
   process: SectionIntro & { steps: readonly ProcessStep[] };
   technology: SectionIntro & { entries: readonly TechEntry[] };
   values: SectionIntro & { entries: readonly ValueEntry[] };
+  faq: FaqContent;
   cta: CtaContent;
 }
 

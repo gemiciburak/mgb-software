@@ -1,6 +1,7 @@
 import { hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
+import { Faq } from '@/components/sections/faq';
 import { FinalCta } from '@/components/sections/final-cta';
 import { Hero } from '@/components/sections/hero';
 import { Philosophy } from '@/components/sections/philosophy';
@@ -13,6 +14,7 @@ import { WhyMgb } from '@/components/sections/why-mgb';
 import { getContent } from '@/content';
 import { fetchPublishedProjects } from '@/services/projects';
 import { routing } from '@/i18n/routing';
+import { faqJsonLd } from '@/lib/seo';
 
 /**
  * Ana sayfa.
@@ -53,7 +55,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <ProcessTimeline content={home.process} />
       <TechnologyGrid content={home.technology} />
       <WhyMgb content={home.values} />
+      <Faq content={home.faq} />
       <FinalCta content={home.cta} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(home.faq.entries)) }}
+      />
     </main>
   );
 }

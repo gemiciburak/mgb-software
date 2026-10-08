@@ -28,6 +28,22 @@ export function buildAlternates(pathname: AppPathname, locale: Locale): Metadata
   };
 }
 
+/**
+ * SSS yapılandırılmış verisi (FAQPage). Metin ekrandakiyle birebir aynı —
+ * yalnızca sayfada görünen soru ve cevaplar işaretlenir.
+ */
+export function faqJsonLd(entries: readonly { question: string; answer: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: entries.map((entry) => ({
+      '@type': 'Question',
+      name: entry.question,
+      acceptedAnswer: { '@type': 'Answer', text: entry.answer },
+    })),
+  };
+}
+
 /** Organizasyon yapılandırılmış verisi. Uydurma veri içermez — yalnızca doğrulanabilir alanlar. */
 export function organizationJsonLd(description: string) {
   return {

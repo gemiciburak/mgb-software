@@ -18,6 +18,7 @@ export const SECTION_ID = {
   process: 'process',
   technology: 'technology',
   why: 'why',
+  faq: 'faq',
   contact: 'contact',
 } as const;
 
@@ -29,13 +30,13 @@ export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
 /**
  * Her bölümün navigasyondaki sahibi.
  *
- * Sayfada dokuz bölüm var, navigasyonda dört başlık. Bir bölüm yalnızca
+ * Sayfada on bölüm var, navigasyonda dört başlık. Bir bölüm yalnızca
  * gerçekten o başlığın içeriğiyse sahiplenilir: Hizmetler'in altında
  * "Ürettiklerimiz", İşler'in altında yalnızca İşler, İletişim'in altında
  * kapanış bölümü, Hakkımızda'nın altında yalnızca Hakkımızda bölümü
  * (stüdyo + kurucu kartı).
  *
- * Süreç, Teknoloji ve Neden MGB sahipsizdir (`null`): gösterge
+ * Süreç, Teknoloji, Neden MGB ve SSS sahipsizdir (`null`): gösterge
  * oradayken hiçbir başlığı işaretlemez. Önceki sürümde bu üçü Hakkımızda'ya
  * bağlıydı; bölümler İşler'in iki yanına dağıldığı için gösterge kaydırırken
  * sürekli Hakkımızda'ya geri dönüyordu. Yanlış başlığı işaretlemektense
@@ -50,6 +51,7 @@ export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
   [SECTION_ID.process]: null,
   [SECTION_ID.technology]: null,
   [SECTION_ID.why]: null,
+  [SECTION_ID.faq]: null,
   [SECTION_ID.contact]: SECTION_ID.contact,
 };
 

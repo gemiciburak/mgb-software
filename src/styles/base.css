@@ -367,3 +367,28 @@
     transform: scale(1, 1);
   }
 }
+
+/* SSS: <details> açılırken yüksekliği yumuşat. `interpolate-size` ve
+   `::details-content` desteklemeyen tarayıcıda içerik anında açılır —
+   kademeli iyileştirme, kırılma yok. Hareket azaltmada geçiş kapalı. */
+@utility faq-item {
+  interpolate-size: allow-keywords;
+
+  &::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition:
+      block-size var(--duration-base) var(--ease-transition),
+      content-visibility var(--duration-base) allow-discrete;
+  }
+
+  &[open]::details-content {
+    block-size: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::details-content {
+      transition: none;
+    }
+  }
+}

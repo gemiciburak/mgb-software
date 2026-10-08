@@ -191,6 +191,55 @@ export const home: HomeContent = {
     ],
   },
 
+  faq: {
+    eyebrow: 'FAQ',
+    title: 'Frequently asked questions',
+    description: 'What people most often want to know before starting.',
+    contactLine: 'Can’t find your answer here? Write to us directly:',
+    entries: [
+      {
+        question: 'How does a project start?',
+        answer:
+          'You fill in the project form: four short steps, about two minutes. We read your request and get back to you through the channel you chose. If you like, we go over the details in a 30-minute call, then send scope, timeline and budget in a written proposal.',
+      },
+      {
+        question: 'How is pricing determined?',
+        answer:
+          'We do not sell fixed packages; the price follows the scope of the project. Once the scope is clear, we prepare a proposal that spells out exactly what is included. If you already have a budget, mentioning it in the form helps us shape the scope around it.',
+      },
+      {
+        question: 'How long does a project take?',
+        answer:
+          'It depends on the scope; a one-page site and a web application with an admin panel do not run on the same calendar. The timeline is stated in the written proposal, and during development you see where we are through a working build every week.',
+      },
+      {
+        question: 'Who builds my project?',
+        answer:
+          'MGB Software is a founder-led studio: your project is designed and built by the founder, Burak Gemici, not handed down through an account manager. If something falls outside our expertise, we work with a specialist we trust and tell you from day one.',
+      },
+      {
+        question: 'Who owns the source code and accounts?',
+        answer:
+          'You do. The source code and access to the services your product runs on are handed over to you on delivery, so another team can keep building on it later if you wish.',
+      },
+      {
+        question: 'Do you offer support after launch?',
+        answer:
+          'Yes. Launch is not the finish line for us: we watch real usage, fix what is not working and keep improving the product. The scope of maintenance and further development is stated separately in the proposal.',
+      },
+      {
+        question: 'Can you take over an existing project?',
+        answer:
+          'Yes. We first review the existing code and infrastructure and share an honest assessment. Then we decide together whether building on it or rebuilding makes more sense.',
+      },
+      {
+        question: 'Do you work in English or remotely?',
+        answer:
+          'Yes. We work in Turkish and English, and meetings can be held online, so your location does not matter.',
+      },
+    ],
+  },
+
   cta: {
     title: "Have an idea? Let's build it.",
     description: 'Tell us about your project and we will work out where to start.',

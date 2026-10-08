@@ -194,6 +194,58 @@ export const home: HomeContent = {
     ],
   },
 
+  // Cevaplar sitenin geri kalanıyla çelişmez: süreç adımları /proje-baslat
+  // sayfasındaki "Sonraki adımlar"la, sahiplik "Neden MGB"deki taahhütle aynı.
+  // Fiyat, gün sayısı gibi taahhüt edilmemiş rakamlar bilinçli olarak yok.
+  faq: {
+    eyebrow: 'SSS',
+    title: 'Sıkça sorulan sorular',
+    description: 'Başlamadan önce en çok merak edilenler.',
+    contactLine: 'Sorunuzun cevabı burada yoksa doğrudan yazın:',
+    entries: [
+      {
+        question: 'Bir proje nasıl başlıyor?',
+        answer:
+          'Proje başlatma formunu doldurursunuz; dört kısa adım, yaklaşık iki dakika. Talebinizi okuyup tercih ettiğiniz kanaldan size dönüyoruz. İsterseniz 30 dakikalık bir ön görüşmede detayları konuşuyor, ardından kapsamı, süreyi ve bütçeyi yazılı bir teklifle iletiyoruz.',
+      },
+      {
+        question: 'Fiyatlandırma nasıl belirleniyor?',
+        answer:
+          'Hazır paket satmıyoruz; fiyat projenin kapsamına göre belirleniyor. Kapsam netleştikten sonra neyin dahil olduğunu açıkça yazan bir teklif hazırlıyoruz. Bütçeniz belliyse formda belirtmeniz, kapsamı ona göre çizmemizi kolaylaştırır.',
+      },
+      {
+        question: 'Bir proje ne kadar sürüyor?',
+        answer:
+          'Kapsama göre değişiyor; tek sayfalık bir site ile yönetim paneli olan bir web uygulaması aynı takvimde ilerlemiyor. Süre yazılı teklifte belirtiliyor ve geliştirme boyunca her hafta çalışan bir sürüm üzerinden nerede olduğumuzu görüyorsunuz.',
+      },
+      {
+        question: 'Projemi kim geliştiriyor?',
+        answer:
+          'MGB Software kurucu liderliğinde bir stüdyo: projenizi kurucu Burak Gemici tasarlıyor ve geliştiriyor, aradaki bir hesap yöneticisi değil. Uzmanlık alanımızın dışında bir iş gerekirse güvendiğimiz bir uzmanla çalışıyor ve bunu en başta sizinle paylaşıyoruz.',
+      },
+      {
+        question: 'Kaynak kodu ve hesaplar kime ait?',
+        answer:
+          'Size. Kaynak kodu ve ürünün çalıştığı servislerin erişimleri teslimatla birlikte size devrediliyor. Böylece ürününüzü ileride başka bir ekip de geliştirmeye devam edebilir.',
+      },
+      {
+        question: 'Yayından sonra destek veriyor musunuz?',
+        answer:
+          'Evet. Yayın bizim için bitiş değil: gerçek kullanımı izliyor, aksayanı düzeltiyor ve ürünü geliştirmeye devam ediyoruz. Bakım ve geliştirmenin kapsamı teklifte ayrıca belirtiliyor.',
+      },
+      {
+        question: 'Mevcut bir projeyi devralabilir misiniz?',
+        answer:
+          'Evet. Önce mevcut kodu ve altyapıyı inceleyip durumunu açıkça paylaşıyoruz. Üzerine geliştirmeye devam etmenin mi yoksa yeniden kurmanın mı daha mantıklı olduğuna birlikte karar veriyoruz.',
+      },
+      {
+        question: 'İngilizce ya da uzaktan çalışabiliyor musunuz?',
+        answer:
+          'Evet. Türkçe ve İngilizce çalışıyoruz; görüşmeler çevrim içi yapılabiliyor, yani konumunuz fark etmiyor.',
+      },
+    ],
+  },
+
   cta: {
     title: 'Bir fikriniz mi var? Birlikte inşa edelim.',
     description: 'Projenizi anlatın; nereden başlayacağımıza birlikte bakalım.',

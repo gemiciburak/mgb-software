@@ -19,7 +19,7 @@ const LINE_RATIO = 0.4;
  * belirsizlik bırakmaz: `top <= çizgi` olanlar arasında en büyük `top`, yani
  * çizgiyi en son geçen.
  *
- * Dokuz bölümün hepsi izlenir, yalnızca navigasyonda karşılığı olan dördü
+ * Bölümlerin hepsi izlenir, yalnızca navigasyonda karşılığı olan dördü
  * değil. Bulunan bölüm `SECTION_NAV_OWNER` üzerinden sahibine çevrilir; yoksa
  * gösterge sayfanın yarısı boyunca bir önceki başlıkta takılı kalırdı.
  *
