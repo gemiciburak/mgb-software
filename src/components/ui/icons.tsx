@@ -126,6 +126,20 @@ export function MailIcon(props: IconProps) {
 }
 
 /**
+ * WhatsApp — kuyruklu konuşma balonu ve içinde ahize. Instagram gibi kontur
+ * hali; dolu marka logosu ikon setinde yama gibi dururdu. Balon eğrisi
+ * köşeli birleşimde kırık göründüğü için bu ikonda uçlar yuvarlak.
+ */
+export function WhatsAppIcon(props: IconProps) {
+  return (
+    <Icon strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M8 1.75a6.25 6.25 0 0 0-5.4 9.4L1.75 14.25l3.2-.83A6.25 6.25 0 1 0 8 1.75Z" />
+      <path d="M5.9 5.3c-.2.5-.1 1.4.6 2.4.8 1.1 1.8 1.8 2.6 2 .6.1 1-.1 1.3-.5l.2-.5-1.3-.7-.6.5c-.6-.3-1.2-.9-1.5-1.5l.5-.6-.6-1.3h-.5c-.3 0-.6.1-.7.2Z" />
+    </Icon>
+  );
+}
+
+/**
  * Instagram.
  *
  * Markanın dolu işareti yerine kontur hali: ikon setinin geri kalanı da

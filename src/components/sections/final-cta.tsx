@@ -3,9 +3,15 @@ import { Magnetic } from '@/components/animations/magnetic';
 import { ScrollReveal } from '@/components/animations/scroll-reveal';
 import { buttonStyles } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
-import { ArrowRightIcon, ArrowUpRightIcon, MailIcon, SocialIcon } from '@/components/ui/icons';
+import {
+  ArrowRightIcon,
+  ArrowUpRightIcon,
+  MailIcon,
+  WhatsAppIcon,
+  SocialIcon,
+} from '@/components/ui/icons';
 import { Link } from '@/i18n/navigation';
-import { CONTACT_EMAIL, SOCIAL_LINKS } from '@/lib/constants';
+import { CONTACT_EMAIL, CONTACT_PHONE, whatsappHref, SOCIAL_LINKS } from '@/lib/constants';
 import { SECTION_ID } from '@/lib/sections';
 import type { CtaContent } from '@/types/content';
 
@@ -30,7 +36,7 @@ import type { CtaContent } from '@/types/content';
 export async function FinalCta({ content }: { content: CtaContent }) {
   const t = await getTranslations('actions');
   const tReach = await getTranslations('reach');
-  const hasChannels = CONTACT_EMAIL !== null || SOCIAL_LINKS.length > 0;
+  const hasChannels = CONTACT_EMAIL !== null || CONTACT_PHONE !== null || SOCIAL_LINKS.length > 0;
 
   return (
     <section
@@ -80,6 +86,21 @@ export async function FinalCta({ content }: { content: CtaContent }) {
                     >
                       <MailIcon className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent" />
                       {CONTACT_EMAIL}
+                    </a>
+                  </li>
+                )}
+                {CONTACT_PHONE !== null && (
+                  <li>
+                    <a
+                      href={whatsappHref(CONTACT_PHONE.digits, tReach('whatsappDraft'))}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label={`${tReach('whatsappLabel')} — ${CONTACT_PHONE.display}`}
+                      className="group/link inline-flex items-center gap-2.5 rounded-xs text-body text-fg transition-colors hover:text-accent"
+                    >
+                      <WhatsAppIcon className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent" />
+                      {CONTACT_PHONE.display}
+                      <ArrowUpRightIcon className="size-3 shrink-0 text-fg-subtle" />
                     </a>
                   </li>
                 )}

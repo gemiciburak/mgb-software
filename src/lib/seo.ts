@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { DEFAULT_LOCALE, LOCALE_TAGS, LOCALES, type Locale } from '@/shared';
 import type { AppPathname } from '@/shared';
 import { getPathname } from '@/i18n/navigation';
-import { FOUNDER, SITE_NAME, SITE_URL } from './constants';
+import { CONTACT_EMAIL, CONTACT_PHONE, FOUNDER, SITE_NAME, SITE_URL } from './constants';
 
 /**
  * Bir rotanın canonical ve hreflang bağlantılarını üretir.
@@ -54,5 +54,7 @@ export function organizationJsonLd(description: string) {
     description,
     logo: `${SITE_URL}/icon.svg`,
     founder: { '@type': 'Person', name: FOUNDER.name, jobTitle: FOUNDER.jobTitle },
+    ...(CONTACT_EMAIL !== null ? { email: CONTACT_EMAIL } : {}),
+    ...(CONTACT_PHONE !== null ? { telephone: `+${CONTACT_PHONE.digits}` } : {}),
   };
 }

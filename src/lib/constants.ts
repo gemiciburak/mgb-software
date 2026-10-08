@@ -25,6 +25,25 @@ export const SITE_NAME = 'MGB Software';
 export const CONTACT_EMAIL: string | null = 'mgbsoftware.tr@gmail.com';
 
 /**
+ * İletişim numarası — WhatsApp. Sitedeki numara bağlantıları aramaya değil
+ * WhatsApp sohbetine gider, mesaj kutusunda dile göre hazır bir taslak olur
+ * (bkz. `whatsappHref`, messages/*.json → reach.whatsappDraft).
+ *
+ * `digits` wa.me için yalnızca rakam (ülke kodu dahil, başta + ve 0 yok),
+ * `display` ekranda görünen biçim. `null` bırakılırsa numara satırları hiç
+ * render edilmez.
+ */
+export const CONTACT_PHONE: { digits: string; display: string } | null = {
+  digits: '905380913700',
+  display: '+90 538 091 37 00',
+};
+
+/** WhatsApp sohbet bağlantısı; `text` mesaj kutusuna taslak olarak düşer. */
+export function whatsappHref(digits: string, text: string): string {
+  return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
+}
+
+/**
  * Ön görüşme takvimi (Calendly, 30 dk).
  *
  * `?month=` gibi parametreler bilinçli olarak yok: takvim her zaman bugünden

@@ -1,9 +1,16 @@
+import { getTranslations } from 'next-intl/server';
 import { InkPolyhedra } from '@/components/animations/ink-polyhedra';
 import { ScrollReveal } from '@/components/animations/scroll-reveal';
 import { Container } from '@/components/ui/container';
 import { FounderPortrait } from '@/components/ui/founder-portrait';
-import { ArrowUpRightIcon, MailIcon, SocialIcon } from '@/components/ui/icons';
-import { CONTACT_EMAIL, SITE_NAME, SOCIAL_LINKS } from '@/lib/constants';
+import { ArrowUpRightIcon, MailIcon, WhatsAppIcon, SocialIcon } from '@/components/ui/icons';
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  whatsappHref,
+  SITE_NAME,
+  SOCIAL_LINKS,
+} from '@/lib/constants';
 import { SECTION_ID } from '@/lib/sections';
 import type { FounderContent, PhilosophyContent } from '@/types/content';
 
@@ -23,15 +30,16 @@ import type { FounderContent, PhilosophyContent } from '@/types/content';
  * Çizim metnin görsel karşılığı: aynı iskelet, üzerine çekilen mürekkeple
  * okunur hale geliyor — tasarım ve yazılımın aynı işin iki yüzü olması.
  */
-export function Philosophy({
+export async function Philosophy({
   content,
   founder,
 }: {
   content: PhilosophyContent;
   founder: FounderContent;
 }) {
+  const tReach = await getTranslations('reach');
   const [lead, ...rest] = content.body;
-  const hasChannels = CONTACT_EMAIL !== null || SOCIAL_LINKS.length > 0;
+  const hasChannels = CONTACT_EMAIL !== null || CONTACT_PHONE !== null || SOCIAL_LINKS.length > 0;
 
   return (
     // Üst boşluk genel `py-section`dan dar: başlık bölüm çizgisine bağlı
@@ -125,6 +133,21 @@ export function Philosophy({
                       >
                         <MailIcon className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent" />
                         {CONTACT_EMAIL}
+                      </a>
+                    </li>
+                  )}
+                  {CONTACT_PHONE !== null && (
+                    <li>
+                      <a
+                        href={whatsappHref(CONTACT_PHONE.digits, tReach('whatsappDraft'))}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        aria-label={`${tReach('whatsappLabel')} — ${CONTACT_PHONE.display}`}
+                        className="group/link inline-flex items-center gap-2.5 rounded-xs text-body-sm text-fg transition-colors hover:text-accent"
+                      >
+                        <WhatsAppIcon className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent" />
+                        {CONTACT_PHONE.display}
+                        <ArrowUpRightIcon className="size-3 shrink-0 text-fg-subtle" />
                       </a>
                     </li>
                   )}

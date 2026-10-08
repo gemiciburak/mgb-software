@@ -37,7 +37,7 @@ export const kvkk: LegalDocument = {
           type: 'list',
           items: [
             'Kimlik: ad soyad.',
-            'İletişim: e-posta adresi.',
+            'İletişim: e-posta adresi; WhatsApp’tan yazarsanız telefon numaranız.',
             'Mesleki bilgi: şirket adı (isteğe bağlı).',
             'Talep bilgileri: ilgilendiğiniz hizmetler, bütçe aralığı, zaman beklentisi, proje durumu, proje açıklamanız ve tercih ettiğiniz dönüş kanalı.',
             'İşlem güvenliği: formu gönderdiğiniz IP adresi — yalnızca kötüye kullanımı önlemek için, kısa süreli olarak.',
@@ -96,6 +96,7 @@ export const kvkk: LegalDocument = {
             'Resend, Inc. — form içeriğini MGB Software’in e-posta kutusuna ileten e-posta altyapısı.',
             'Google LLC (Gmail) — MGB Software’in e-posta hesabı; talebiniz ve sonraki yazışmalar burada saklanır.',
             'Calendly LLC — yalnızca ön görüşme planlamayı seçerseniz; bu durumda Calendly kendi aydınlatma metnine tabi olarak veri işler.',
+            'WhatsApp (Meta Platforms Ireland Ltd.) — yalnızca bize WhatsApp’tan yazmayı seçerseniz; bu durumda telefon numaranız, profil bilgileriniz ve mesajlarınız WhatsApp üzerinden bize ulaşır ve WhatsApp kendi gizlilik politikasına tabi olarak veri işler.',
             'Cloudflare, Inc. — sitenin barındırıldığı ve sunulduğu altyapı; siteye her erişimde IP adresiniz ve tarayıcı bilgileriniz gibi teknik bağlantı verileri, siteyi size ulaştırmak ve saldırılara karşı korumak için işlenir.',
           ],
         },

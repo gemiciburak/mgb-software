@@ -196,6 +196,8 @@
   "reach": {
     "eyebrow": "REACH US DIRECTLY",
     "body": "A quick question, a collaboration idea or something that isn’t a project? No need for the form. Just write to us here.",
-    "projectHint": "For a new project · 4 steps · ~2 minutes"
+    "projectHint": "For a new project · 4 steps · ~2 minutes",
+    "whatsappDraft": "Hi, I’m reaching out from the MGB Software website. I’d like to talk about a project.",
+    "whatsappLabel": "Message on WhatsApp"
   }
 }

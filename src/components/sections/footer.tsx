@@ -1,10 +1,17 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Container } from '@/components/ui/container';
-import { ArrowUpRightIcon, MailIcon, SocialIcon } from '@/components/ui/icons';
+import { ArrowUpRightIcon, MailIcon, WhatsAppIcon, SocialIcon } from '@/components/ui/icons';
 import { Logo } from '@/components/ui/logo';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/cn';
-import { BRAND_SIGNATURE, CONTACT_EMAIL, isPublished, SOCIAL_LINKS } from '@/lib/constants';
+import {
+  BRAND_SIGNATURE,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  SOCIAL_LINKS,
+  isPublished,
+  whatsappHref,
+} from '@/lib/constants';
 import { NAV_ITEMS, navHref } from '@/lib/sections';
 
 const LINK_CLASS = 'rounded-xs text-body-sm text-fg-muted transition-colors hover:text-fg';
@@ -24,6 +31,7 @@ const LINK_CLASS = 'rounded-xs text-body-sm text-fg-muted transition-colors hove
 export async function Footer() {
   const t = await getTranslations('footer');
   const tNav = await getTranslations('nav');
+  const tReach = await getTranslations('reach');
   const locale = await getLocale();
 
   // Sabit yıl yerine build anındaki yıl: 2027'de "© 2026" kalmaz.
@@ -74,7 +82,7 @@ export async function Footer() {
             </div>
           )}
 
-          {(CONTACT_EMAIL !== null || SOCIAL_LINKS.length > 0) && (
+          {(CONTACT_EMAIL !== null || CONTACT_PHONE !== null || SOCIAL_LINKS.length > 0) && (
             <div
               className={cn(
                 'lg:col-span-4',
@@ -94,6 +102,21 @@ export async function Footer() {
                     >
                       <MailIcon className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent" />
                       {CONTACT_EMAIL}
+                    </a>
+                  </li>
+                )}
+                {CONTACT_PHONE !== null && (
+                  <li>
+                    <a
+                      href={whatsappHref(CONTACT_PHONE.digits, tReach('whatsappDraft'))}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label={`${tReach('whatsappLabel')} — ${CONTACT_PHONE.display}`}
+                      className="group/link inline-flex items-center gap-2.5 rounded-xs text-body-sm text-fg-muted transition-colors hover:text-fg"
+                    >
+                      <WhatsAppIcon className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent" />
+                      {CONTACT_PHONE.display}
+                      <ArrowUpRightIcon className="size-3 shrink-0 text-fg-subtle" />
                     </a>
                   </li>
                 )}

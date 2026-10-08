@@ -25,7 +25,7 @@ export const kvkk: LegalDocument = {
           type: 'list',
           items: [
             'Identity: full name.',
-            'Contact: email address.',
+            'Contact: email address; your phone number if you message us on WhatsApp.',
             'Professional: company name (optional).',
             'Request details: the services you are interested in, budget range, timeline, project stage, your project description and your preferred reply channel.',
             'Transaction security: the IP address the form was sent from — briefly, and only to prevent abuse.',
@@ -84,6 +84,7 @@ export const kvkk: LegalDocument = {
             'Resend, Inc. — the email service that delivers the form to MGB Software’s inbox.',
             'Google LLC (Gmail) — MGB Software’s email account, where your request and later correspondence are stored.',
             'Calendly LLC — only if you choose to book an intro call; Calendly then processes data under its own privacy notice.',
+            'WhatsApp (Meta Platforms Ireland Ltd.) — only if you choose to message us on WhatsApp; your phone number, profile details and messages then reach us through WhatsApp, which processes data under its own privacy policy.',
             'Cloudflare, Inc. — the infrastructure that hosts and serves the site; on every visit, technical connection data such as your IP address and browser details is processed to deliver the site and protect it against attacks.',
           ],
         },

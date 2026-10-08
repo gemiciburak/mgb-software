@@ -196,6 +196,8 @@
   "reach": {
     "eyebrow": "DOĞRUDAN ULAŞIN",
     "body": "Kısa bir sorunuz, bir iş birliği teklifiniz ya da proje dışı bir konunuz mu var? Form doldurmanıza gerek yok, buradan doğrudan yazın.",
-    "projectHint": "Yeni bir proje için · 4 adım · ~2 dakika"
+    "projectHint": "Yeni bir proje için · 4 adım · ~2 dakika",
+    "whatsappDraft": "Merhaba, MGB Software web sitesinden ulaşıyorum. Bir proje hakkında görüşmek istiyorum.",
+    "whatsappLabel": "WhatsApp’tan yazın"
   }
 }
