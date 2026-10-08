@@ -25,7 +25,7 @@ import type { CtaContent } from '@/types/content';
  *
  * Menüdeki "İletişim" buraya iner; bu yüzden bölüm iki AYRI yolu yan yana
  * ve adıyla gösterir — "İletişim" ile "Proje Başlat" aynı şey değil:
- *   1. Yeni proje → "Proje Başlat" düğmesi, dört adımlı form (`/proje-baslat`).
+ *   1. Yeni proje → "Proje Başlat" düğmesi, dört adımlı form (`/teklif-al`).
  *   2. Doğrudan ulaşın → e-posta ve sosyal hesaplar. Kısa soru, iş birliği
  *      ya da proje dışı bir konu için forma girmek gerekmez.
  *

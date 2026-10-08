@@ -194,7 +194,7 @@ export const home: HomeContent = {
     ],
   },
 
-  // Cevaplar sitenin geri kalanıyla çelişmez: süreç adımları /proje-baslat
+  // Cevaplar sitenin geri kalanıyla çelişmez: süreç adımları /teklif-al
   // sayfasındaki "Sonraki adımlar"la, sahiplik "Neden MGB"deki taahhütle aynı.
   // Fiyat, gün sayısı gibi taahhüt edilmemiş rakamlar bilinçli olarak yok.
   faq: {

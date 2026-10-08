@@ -71,7 +71,7 @@ export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
  * `NAV_PAGES` üzerinden menü kendiliğinden onlara döner.
  *
  * İletişim ile Proje Başlat aynı şey değil:
- *   • Proje Başlat → yeni proje için yapılandırılmış form (`/proje-baslat`).
+ *   • Proje Başlat → yeni proje için yapılandırılmış form (`/teklif-al`).
  *   • İletişim → kapanış bölümü; orada form ile doğrudan kanallar (e-posta,
  *     sosyal hesaplar) yan yana ve ayrı ayrı anlatılır — soru, iş birliği
  *     ya da proje dışı bir konu için forma girmek gerekmez.

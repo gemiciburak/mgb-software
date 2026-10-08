@@ -4,7 +4,7 @@ Kurumsal site — tek bir Next.js uygulaması. Türkçe varsayılan ve öneksiz,
 İngilizce `/en` altında. Ayrı bir backend ve veritabanı yok.
 
 ```
-src/app          Rotalar (App Router): ana sayfa, /proje-baslat, /kvkk, api/contact
+src/app          Rotalar (App Router): ana sayfa, /teklif-al, /kvkk, api/contact
 src/components   Bölümler, form, animasyonlar, UI parçaları
 src/content      Sayfa içerikleri (TR/EN, TypeScript) ve projeler
 src/messages     Kısa arayüz metinleri (next-intl)
@@ -145,7 +145,7 @@ olmayan sayfalara link verilmez: `src/lib/constants.ts` içindeki
 proje eklemek bir nesne eklemektir. Dizi boşken bölüm bilinçli bekleme
 durumunu gösterir — uydurma proje yok.
 
-**Proje başlatma formu** (`/proje-baslat` ↔ `/en/start`) dört adımdır: ihtiyaç,
+**Proje başlatma formu** (`/teklif-al` ↔ `/en/get-a-quote`) dört adımdır: ihtiyaç,
 kapsam, detaylar, iletişim. Seçenekler ve doğrulama `src/shared/contact.ts`
 içinde — istemci her adımda, sunucu gönderimde aynı fonksiyonu çalıştırır.
 Bütçe aralıkları TL (KDV hariç). Yarım kalan form `sessionStorage`'da durur.
