@@ -167,7 +167,7 @@ export const home: HomeContent = {
       {
         slug: 'endToEnd',
         title: 'Uçtan Uca',
-        description: 'Fikirden yayına tek ekip; aralarda kaybolan iş olmuyor.',
+        description: 'Fikirden yayına tek muhatap; aralarda kaybolan iş olmuyor.',
       },
     ],
   },

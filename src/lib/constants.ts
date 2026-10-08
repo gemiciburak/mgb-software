@@ -64,6 +64,12 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
   },
 ];
 
+/**
+ * Kurucu. Hakkımızda sayfasındaki metinler content/{tr,en}/about.ts içinde; bu sabit
+ * yalnızca yapılandırılmış veri (JSON-LD) için.
+ */
+export const FOUNDER = { name: 'Burak Gemici', jobTitle: 'Founder & Software Engineer' } as const;
+
 /** Marka imzası. Footer ve OG görselinde kullanılır; çevrilmez. */
 export const BRAND_SIGNATURE = 'Design. Build. Evolve.';
 
@@ -75,10 +81,10 @@ export const BRAND_SIGNATURE = 'Design. Build. Evolve.';
  * link verilmez, arama motorlarına da 404 adresi bildirilmez. Yeni bir sayfa
  * yayına alındığında yolu buraya eklenir.
  *
- * TODO: '/services', '/work', '/about' ve '/privacy' sayfaları yayına
+ * TODO: '/services', '/work' ve '/privacy' sayfaları yayına
  * alındıkça buraya eklenecek.
  */
-export const PUBLISHED_ROUTES: readonly AppPathname[] = ['/', '/contact', '/kvkk'];
+export const PUBLISHED_ROUTES: readonly AppPathname[] = ['/', '/about', '/contact', '/kvkk'];
 
 export function isPublished(pathname: AppPathname): boolean {
   return PUBLISHED_ROUTES.includes(pathname);

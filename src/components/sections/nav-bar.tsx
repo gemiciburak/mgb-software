@@ -8,12 +8,19 @@ import { MenuIcon } from '@/components/ui/icons';
 import { LocaleSwitcher } from '@/components/ui/locale-switcher';
 import { Logo } from '@/components/ui/logo';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
-import { Link } from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 import { useActiveSection } from '@/hooks/use-active-section';
 import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
 import { useScrolled } from '@/hooks/use-scrolled';
 import { cn } from '@/lib/cn';
-import { NAV_ITEMS, SECTION_ID, sectionHref, type SectionId } from '@/lib/sections';
+import {
+  NAV_ITEMS,
+  navHref,
+  navItemForPathname,
+  SECTION_ID,
+  sectionHref,
+  type SectionId,
+} from '@/lib/sections';
 import { MobileMenu } from './mobile-menu';
 
 /** Göstergenin satırlar arasında kayma hissi. Yumuşak ama tembel değil. */
@@ -60,7 +67,11 @@ export function NavBar() {
   const locale = useLocale();
   const scrolled = useScrolled(64);
   const reducedMotion = usePrefersReducedMotion();
-  const activeSection = useActiveSection();
+  const pathname = usePathname();
+  const scrolledSection = useActiveSection();
+  // Bir öğenin kendi sayfasındaysak (ör. Hakkımızda) o öğe işaretli kalır;
+  // değilse ana sayfada okunmakta olan bölüm.
+  const activeSection = navItemForPathname(pathname) ?? scrolledSection;
   const { scrollYProgress } = useScroll();
 
   const [hovered, setHovered] = useState<SectionId | null>(null);
@@ -131,7 +142,7 @@ export function NavBar() {
               return (
                 <a
                   key={item.id}
-                  href={sectionHref(locale, item.id)}
+                  href={navHref(locale, item.id)}
                   onMouseEnter={() => setHovered(item.id)}
                   onFocus={() => setHovered(item.id)}
                   onBlur={() => setHovered(null)}

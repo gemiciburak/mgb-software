@@ -15,7 +15,8 @@
     "viewService": "Hizmeti gör",
     "sendEmail": "E-posta gönder",
     "pauseMotion": "Akışı durdur",
-    "playMotion": "Akışı başlat"
+    "playMotion": "Akışı başlat",
+    "aboutStudio": "MGB Software’i tanıyın"
   },
   "theme": {
     "label": "Tema",

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { DEFAULT_LOCALE, LOCALE_TAGS, LOCALES, type Locale } from '@/shared';
 import type { AppPathname } from '@/shared';
 import { getPathname } from '@/i18n/navigation';
-import { SITE_NAME, SITE_URL } from './constants';
+import { FOUNDER, SITE_NAME, SITE_URL } from './constants';
 
 /**
  * Bir rotanın canonical ve hreflang bağlantılarını üretir.
@@ -37,5 +37,6 @@ export function organizationJsonLd(description: string) {
     url: SITE_URL,
     description,
     logo: `${SITE_URL}/icon.svg`,
+    founder: { '@type': 'Person', name: FOUNDER.name, jobTitle: FOUNDER.jobTitle },
   };
 }

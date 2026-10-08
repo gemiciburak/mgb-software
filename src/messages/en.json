@@ -15,7 +15,8 @@
     "viewService": "View service",
     "sendEmail": "Send an email",
     "pauseMotion": "Pause motion",
-    "playMotion": "Play motion"
+    "playMotion": "Play motion",
+    "aboutStudio": "Get to know MGB Software"
   },
   "theme": {
     "label": "Theme",

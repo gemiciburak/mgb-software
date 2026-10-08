@@ -114,9 +114,55 @@ export interface LegalDocument {
   note?: string;
 }
 
+/** Hakkımızda sayfasındaki kısa gerçek: etiket + değer. */
+export interface AboutFact {
+  label: string;
+  value: string;
+}
+
+/** Çalışma anlayışının tek maddesi. */
+export interface AboutPrinciple {
+  title: string;
+  description: string;
+}
+
+export interface FounderContent {
+  eyebrow: string;
+  name: string;
+  /** Unvan — iki dilde de İngilizce kalabilir, kartvizitteki gibi. */
+  role: string;
+  /** Birinci ağızdan, kısa. Kurumsal metnin "biz"inden bilinçli olarak ayrılır. */
+  bio: readonly string[];
+  /**
+   * İsteğe bağlı portre. `public/` altına konur (ör. `/founder.jpg`).
+   * Yokken yerinde baş harfler görünür — sahte/stok fotoğraf kullanılmaz.
+   */
+  photo?: { src: string; width: number; height: number; alt: string };
+  /** Kurucuya doğrudan ulaşma cümlesi; e-posta linkinin üstünde durur. */
+  contactLine: string;
+}
+
+export interface AboutContent {
+  meta: PageMeta;
+  /** 1 — MGB Software hakkında: kurumsal dil. */
+  intro: {
+    eyebrow: string;
+    title: string;
+    body: readonly string[];
+    /** Doğrulanabilir kısa gerçekler. Uydurma rakam (yıl, proje sayısı) yok. */
+    facts: readonly AboutFact[];
+  };
+  /** 2 — Kurucuyla tanışın. */
+  founder: FounderContent;
+  /** 3 — Çalışma anlayışımız. */
+  principles: SectionIntro & { entries: readonly AboutPrinciple[] };
+  cta: CtaContent;
+}
+
 export interface LocaleContent {
   meta: MetaContent;
   hero: HeroContent;
   home: HomeContent;
+  about: AboutContent;
   kvkk: LegalDocument;
 }

@@ -5,7 +5,7 @@ import { Logo } from '@/components/ui/logo';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/cn';
 import { BRAND_SIGNATURE, CONTACT_EMAIL, isPublished, SOCIAL_LINKS } from '@/lib/constants';
-import { NAV_ITEMS, sectionHref } from '@/lib/sections';
+import { NAV_ITEMS, navHref } from '@/lib/sections';
 
 const LINK_CLASS = 'rounded-xs text-body-sm text-fg-muted transition-colors hover:text-fg';
 
@@ -51,7 +51,7 @@ export async function Footer() {
             <ul className="mt-4 space-y-2">
               {NAV_ITEMS.map((item) => (
                 <li key={item.id}>
-                  <a href={sectionHref(locale, item.id)} className={LINK_CLASS}>
+                  <a href={navHref(locale, item.id)} className={LINK_CLASS}>
                     {tNav(item.labelKey)}
                   </a>
                 </li>

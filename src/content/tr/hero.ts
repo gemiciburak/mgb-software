@@ -9,7 +9,6 @@ import type { HeroContent } from '@/types/content';
 export const hero: HeroContent = {
   eyebrow: 'DİJİTAL TEKNOLOJİ STÜDYOSU',
   title: 'Dijital deneyimler tasarlıyor ve inşa ediyoruz.',
-  subtitle:
-    'Fikirden arayüze, altyapıdan yayına. Tasarım, yazılım ve mühendislik tek ekipte yürür.',
+  subtitle: 'Fikirden arayüze, altyapıdan yayına. Tasarım, yazılım ve mühendislik tek elden yürür.',
   axis: 'TASARIM / YAZILIM / MÜHENDİSLİK',
 };

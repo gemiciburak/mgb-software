@@ -93,8 +93,8 @@ export const kvkk: LegalDocument = {
         {
           type: 'list',
           items: [
-            'Resend, Inc. — form içeriğini ekibimizin e-posta kutusuna ileten e-posta altyapısı.',
-            'Google LLC (Gmail) — ekibimizin e-posta hesabı; talebiniz ve sonraki yazışmalar burada saklanır.',
+            'Resend, Inc. — form içeriğini MGB Software’in e-posta kutusuna ileten e-posta altyapısı.',
+            'Google LLC (Gmail) — MGB Software’in e-posta hesabı; talebiniz ve sonraki yazışmalar burada saklanır.',
             'Calendly LLC — yalnızca ön görüşme planlamayı seçerseniz; bu durumda Calendly kendi aydınlatma metnine tabi olarak veri işler.',
           ],
         },

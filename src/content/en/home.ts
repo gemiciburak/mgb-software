@@ -166,7 +166,7 @@ export const home: HomeContent = {
       {
         slug: 'endToEnd',
         title: 'End-to-End',
-        description: 'One team from idea to launch, so nothing falls between hands.',
+        description: 'One point of contact from idea to launch, so nothing falls between hands.',
       },
     ],
   },

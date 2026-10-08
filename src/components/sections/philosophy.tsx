@@ -1,7 +1,11 @@
+import { getTranslations } from 'next-intl/server';
 import { InkPolyhedra } from '@/components/animations/ink-polyhedra';
 import { ScrollReveal } from '@/components/animations/scroll-reveal';
 import { WordReveal } from '@/components/animations/word-reveal';
 import { Container } from '@/components/ui/container';
+import { ArrowRightIcon } from '@/components/ui/icons';
+import { Link } from '@/i18n/navigation';
+import { isPublished } from '@/lib/constants';
 import { SECTION_ID } from '@/lib/sections';
 import type { PhilosophyContent } from '@/types/content';
 
@@ -25,8 +29,13 @@ import type { PhilosophyContent } from '@/types/content';
  * Çizimin kendisi cümlenin görsel karşılığı: aynı iskelet, üzerine çekilen
  * mürekkeple okunur hale geliyor — tasarım ve yazılımın aynı işin iki yüzü
  * olması. İmlece göre eğiliyor, yani bakan kişi onu çeviriyormuş gibi.
+ *
+ * Metnin altındaki link Hakkımızda sayfasına gider — yalnızca sayfa
+ * yayındaysa render edilir.
  */
-export function Philosophy({ content }: { content: PhilosophyContent }) {
+export async function Philosophy({ content }: { content: PhilosophyContent }) {
+  const t = await getTranslations('actions');
+
   return (
     <section id={SECTION_ID.about} className="anchor-target border-t border-line py-section">
       <Container>
@@ -47,6 +56,15 @@ export function Philosophy({ content }: { content: PhilosophyContent }) {
                   <p key={paragraph.slice(0, 32)}>{paragraph}</p>
                 ))}
               </div>
+              {isPublished('/about') && (
+                <Link
+                  href="/about"
+                  className="group/about mt-10 inline-flex items-center gap-2.5 rounded-xs border-b border-line pb-1 text-body-sm text-fg transition-colors hover:border-accent hover:text-accent"
+                >
+                  {t('aboutStudio')}
+                  <ArrowRightIcon className="size-4 transition-transform duration-[var(--duration-fast)] group-hover/about:translate-x-0.5" />
+                </Link>
+              )}
             </ScrollReveal>
           </div>
 

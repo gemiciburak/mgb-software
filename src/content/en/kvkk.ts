@@ -81,8 +81,8 @@ export const kvkk: LegalDocument = {
         {
           type: 'list',
           items: [
-            'Resend, Inc. — the email service that delivers the form to our team’s inbox.',
-            'Google LLC (Gmail) — our team’s email account, where your request and later correspondence are stored.',
+            'Resend, Inc. — the email service that delivers the form to MGB Software’s inbox.',
+            'Google LLC (Gmail) — MGB Software’s email account, where your request and later correspondence are stored.',
             'Calendly LLC — only if you choose to book an intro call; Calendly then processes data under its own privacy notice.',
           ],
         },

@@ -1,5 +1,6 @@
-import type { Locale } from '@/shared';
+import type { AppPathname, Locale } from '@/shared';
 import { getPathname } from '@/i18n/navigation';
+import { isPublished } from './constants';
 
 /**
  * Ana sayfa bölüm kimlikleri.
@@ -54,10 +55,9 @@ export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
 /**
  * Navigasyon öğeleri — brief'teki sıra: İşler, Hizmetler, Hakkımızda, İletişim.
  *
- * Şimdilik ana sayfa bölümlerine çapa veriyorlar; ilgili bölümler zaten bu
- * sayfada mevcut. Hizmet/iş/hakkımızda sayfaları yayına alındığında `href`
- * değerleri yerelleştirilmiş rotalara çevrilecek
- * (`/services`, `/work`, ...) — PATHNAMES haritası bunun için hazır.
+ * Varsayılan hedef ana sayfadaki bölüm çapası. Öğenin kendi sayfası
+ * (`NAV_PAGES`) yayına alındığında link kendiliğinden o sayfaya döner —
+ * bkz. `navHref`.
  */
 export const NAV_ITEMS = [
   { id: SECTION_ID.work, labelKey: 'work' },
@@ -67,6 +67,34 @@ export const NAV_ITEMS = [
 ] as const;
 
 export type NavItem = (typeof NAV_ITEMS)[number];
+
+/**
+ * Kendi sayfası olan navigasyon öğeleri. İletişim bilinçli olarak yok:
+ * menüdeki "İletişim" sayfanın sonundaki çağrıya iner, form sayfasına
+ * birincil düğme götürür.
+ */
+const NAV_PAGES: Partial<Record<SectionId, AppPathname>> = {
+  [SECTION_ID.about]: '/about',
+  [SECTION_ID.services]: '/services',
+  [SECTION_ID.work]: '/work',
+};
+
+/**
+ * Navigasyon öğesinin hedefi: sayfası yayındaysa o sayfa, değilse ana
+ * sayfadaki bölüm çapası. Yayında olmayan sayfaya link verilmez.
+ */
+export function navHref(locale: Locale, id: SectionId): string {
+  const page = NAV_PAGES[id];
+  return page && isPublished(page) ? getPathname({ href: page, locale }) : sectionHref(locale, id);
+}
+
+/** Bulunulan sayfa bir navigasyon öğesinin sayfasıysa o öğe; değilse null. */
+export function navItemForPathname(pathname: string): SectionId | null {
+  for (const [id, page] of Object.entries(NAV_PAGES)) {
+    if (page === pathname && isPublished(page)) return id as SectionId;
+  }
+  return null;
+}
 
 /**
  * Bir bölümün mutlak çapası: `/#services`, `/en#services`.
