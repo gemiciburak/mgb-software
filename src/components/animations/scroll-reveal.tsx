@@ -30,6 +30,8 @@ export function ScrollReveal({
 
   return (
     <motion.div
+      // JS yoksa veya hareket azaltılmışsa içerik görünür kalır (bkz. base.css).
+      data-reveal=""
       className={className}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}

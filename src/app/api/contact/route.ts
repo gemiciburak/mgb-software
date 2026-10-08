@@ -20,6 +20,9 @@ import { serviceNumber, validateContactPayload, type ContactPayload } from '@/sh
 
 const MAX_BODY_BYTES = 20_000;
 
+/** İstemcinin ürettiği gönderim kimliği — crypto.randomUUID() biçimi. */
+const SUBMISSION_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 /**
  * Basit hız sınırı: IP başına 10 dakikada 5 talep.
  *
@@ -49,6 +52,51 @@ function isRateLimited(key: string): boolean {
 
 function json(body: Record<string, unknown>, status: number): Response {
   return Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
+}
+
+/** Origin başlığı kendi alan adımız mı? `null` veya bozuk değer reddedilir. */
+function isSameOrigin(origin: string, host: string): boolean {
+  try {
+    return new URL(origin).host === host;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Gövdeyi en fazla `limit` BAYT okuyarak alır; aşılırsa `null`.
+ *
+ * Önce Content-Length'e bakılır, ama ona güvenilmez: akış okunurken bayt
+ * sayılır ve sınır aşıldığı an okuma kesilir — dev bir gövde belleğe
+ * alınmaz. `string.length` UTF-16 birimi saydığı için bayt sınırı değildi.
+ */
+async function readBody(request: Request, limit: number): Promise<string | null> {
+  const declared = Number(request.headers.get('content-length'));
+  if (Number.isFinite(declared) && declared > limit) return null;
+  if (!request.body) return '';
+
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > limit) {
+      await reader.cancel();
+      return null;
+    }
+    chunks.push(value);
+  }
+
+  const bytes = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(bytes);
 }
 
 function escapeHtml(value: string): string {
@@ -115,12 +163,12 @@ export async function POST(request: Request): Promise<Response> {
   // her POST'ta gönderir; başka bir siteden form gönderimi burada kesilir.
   const origin = request.headers.get('origin');
   const host = request.headers.get('x-forwarded-host') ?? request.headers.get('host');
-  if (origin && host && new URL(origin).host !== host) {
+  if (origin && host && !isSameOrigin(origin, host)) {
     return json({ error: 'forbidden' }, 403);
   }
 
-  const raw = await request.text();
-  if (raw.length > MAX_BODY_BYTES) return json({ error: 'too-large' }, 413);
+  const raw = await readBody(request, MAX_BODY_BYTES);
+  if (raw === null) return json({ error: 'too-large' }, 413);
 
   let body: unknown;
   try {
@@ -151,10 +199,23 @@ export async function POST(request: Request): Promise<Response> {
 
   const email = buildEmail(result.data);
 
+  // Aynı gönderimin yeniden denenmesi (ör. istemci zaman aşımına düştü ama
+  // ilk istek aslında ulaştı) ikinci bir e-posta üretmesin: Resend aynı
+  // anahtarı 24 saat boyunca tek gönderim sayar.
+  const submissionId = request.headers.get('x-submission-id');
+  const idempotency: Record<string, string> =
+    submissionId && SUBMISSION_ID.test(submissionId)
+      ? { 'Idempotency-Key': `contact-${submissionId}` }
+      : {};
+
   try {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        ...idempotency,
+      },
       body: JSON.stringify({
         from,
         to: [to],

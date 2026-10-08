@@ -70,6 +70,9 @@ export function HeroBackdrop({ children }: { children: ReactNode }) {
   }, []);
 
   const shouldMount = !reducedMotion && browserIdle && hasBeenInView;
+  // Canvas hazır olduktan sonra hareket azaltma açılırsa canvas sökülür;
+  // statik katman o an geri gelmeli, `canvasReady` tek başına yetmez.
+  const canvasVisible = shouldMount && canvasReady;
 
   return (
     <div ref={containerRef} aria-hidden="true" className="absolute inset-0 overflow-hidden">
@@ -77,7 +80,7 @@ export function HeroBackdrop({ children }: { children: ReactNode }) {
       <div
         className={cn(
           'absolute inset-0 transition-opacity duration-[var(--duration-slow)] ease-[var(--ease-entrance)]',
-          canvasReady ? 'opacity-0' : 'opacity-100',
+          canvasVisible ? 'opacity-0' : 'opacity-100',
         )}
       >
         {children}
@@ -87,7 +90,7 @@ export function HeroBackdrop({ children }: { children: ReactNode }) {
         <div
           className={cn(
             'absolute inset-0 transition-opacity duration-[var(--duration-slow)] ease-[var(--ease-entrance)]',
-            canvasReady ? 'opacity-100' : 'opacity-0',
+            canvasVisible ? 'opacity-100' : 'opacity-0',
           )}
         >
           <InkSurface

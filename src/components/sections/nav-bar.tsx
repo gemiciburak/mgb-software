@@ -2,7 +2,7 @@
 
 import { motion, useScroll } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { buttonStyles } from '@/components/ui/button';
 import { MenuIcon } from '@/components/ui/icons';
 import { LocaleSwitcher } from '@/components/ui/locale-switcher';
@@ -18,6 +18,9 @@ import { MobileMenu } from './mobile-menu';
 
 /** Göstergenin satırlar arasında kayma hissi. Yumuşak ama tembel değil. */
 const MARKER_SPRING = { type: 'spring', stiffness: 260, damping: 30, mass: 0.9 } as const;
+
+/** Masaüstü navigasyonun göründüğü eşik — tokens.css'teki --breakpoint-lg. */
+const DESKTOP_QUERY = '(min-width: 64rem)';
 
 /**
  * Üst navigasyon — "paftanın üst kenarı".
@@ -70,8 +73,25 @@ export function NavBar() {
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
     // Odak, menüyü açan düğmeye döner — klavye kullanıcısı bağlamı kaybetmez.
-    triggerRef.current?.focus();
+    // Bir kare sonra: menü açıkken düğme de inert'tir, kapanış commit
+    // edilmeden odaklanamaz.
+    requestAnimationFrame(() => triggerRef.current?.focus());
   }, []);
+
+  // Menü açıkken pencere masaüstü genişliğine geçerse (ör. tablet yan
+  // çevrilince) panel CSS ile gizlenir ama durum açık kalır — kaydırma
+  // kilidi ve klavye dinleyicisi sürerdi. Eşik aşılınca menü kapanır.
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const mediaQueryList = window.matchMedia(DESKTOP_QUERY);
+    function handleChange(event: MediaQueryListEvent) {
+      if (event.matches) setMenuOpen(false);
+    }
+
+    mediaQueryList.addEventListener('change', handleChange);
+    return () => mediaQueryList.removeEventListener('change', handleChange);
+  }, [menuOpen]);
 
   return (
     <>

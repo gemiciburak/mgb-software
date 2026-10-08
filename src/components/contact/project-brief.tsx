@@ -35,6 +35,12 @@ import {
 
 const STORAGE_KEY = 'mgb-project-brief';
 
+/**
+ * İstek bu sürede sonuçlanmazsa vazgeçilir ve "e-posta ile gönder" yolu
+ * açılır. Sunucu Resend'i en fazla 10 sn bekliyor; üstüne pay bırakıldı.
+ */
+const SUBMIT_TIMEOUT_MS = 15_000;
+
 const STEPS = ['services', 'scope', 'details', 'contact'] as const;
 type StepName = (typeof STEPS)[number];
 
@@ -194,6 +200,13 @@ function BriefForm({
   const moveFocus = useRef(false);
 
   /**
+   * Gönderim kimliği, gövdeyle birlikte saklanır. Aynı içerik yeniden
+   * denenirse aynı kimlik gider ve sunucu ikinci bir e-posta üretmez;
+   * kullanıcı içeriği değiştirdiyse bu yeni bir gönderimdir, yeni kimlik.
+   */
+  const submission = useRef<{ body: string; id: string } | null>(null);
+
+  /**
    * Yeni adımın başlığı DOM'a girdiği an odağı alır.
    *
    * Effect ile yapılamıyor: AnimatePresence `mode="wait"` yeni adımı eski adımın
@@ -284,11 +297,17 @@ function BriefForm({
     setStatus('submitting');
     setRateLimited(false);
 
+    const body = JSON.stringify({ ...payload(), website: honeypot });
+    if (submission.current?.body !== body) {
+      submission.current = { body, id: crypto.randomUUID() };
+    }
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...payload(), website: honeypot }),
+        headers: { 'Content-Type': 'application/json', 'X-Submission-Id': submission.current.id },
+        body,
+        signal: AbortSignal.timeout(SUBMIT_TIMEOUT_MS),
       });
 
       if (response.ok) {
@@ -317,7 +336,7 @@ function BriefForm({
 
       setRateLimited(response.status === 429);
     } catch {
-      // Ağ hatası — aşağıdaki başarısız duruma düşer.
+      // Ağ hatası veya zaman aşımı — aşağıdaki başarısız duruma düşer.
     }
 
     setStatus('failed');

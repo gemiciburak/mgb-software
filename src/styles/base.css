@@ -89,6 +89,22 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Giriş animasyonlarının güvenlik ağı.
+   `data-reveal` taşıyan öğeler sunucu HTML'inde opacity: 0 ile gelir ve
+   görünür olmak için JavaScript'i bekler. İki durumda beklemezler:
+     • JavaScript yok → hiç çalışmayacak, içerik kalıcı olarak gizli kalırdı.
+     • Hareket azaltma → hook sunucuda `false` döndüğü için ilk HTML hareketli
+       varyantla gelir; hidrasyona kadar içerik görünmezdi.
+   Inline stili ezmek için !important gerekiyor.
+   --------------------------------------------------------------------------- */
+@media (scripting: none), (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* ===========================================================================
    Yeniden kullanılan yardımcılar
    =========================================================================== */

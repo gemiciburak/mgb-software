@@ -9,6 +9,7 @@ import { Container } from '@/components/ui/container';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { ServiceGlyph } from '@/components/ui/service-glyph';
 import { useIsTouch } from '@/hooks/use-is-touch';
+import { useMediaQuery } from '@/hooks/use-media-query';
 import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
 import { cn } from '@/lib/cn';
 import { DURATION, EASE_ENTRANCE } from '@/lib/motion';
@@ -54,6 +55,10 @@ export function Services({ content }: { content: ServicesContent }) {
   const reducedMotion = usePrefersReducedMotion();
   const isTouch = useIsTouch();
   const panelId = useId();
+  // Hangi panelin gerçekten görünür olduğu ARIA ilişkisini belirler: mobilde
+  // satır içi accordion, masaüstünde sağdaki yapışkan sütun.
+  const isDesktop = useMediaQuery('(min-width: 64rem)');
+  const desktopPanelId = `${panelId}-desktop`;
 
   // Masaüstünde hover/odak, mobilde açılan satır; hiçbiri yoksa ilki.
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
@@ -104,8 +109,18 @@ export function Services({ content }: { content: ServicesContent }) {
                     onMouseEnter={() => setFocusedIndex(index)}
                     onFocus={() => setFocusedIndex(index)}
                     onClick={() => setExpandedIndex(isExpanded ? null : index)}
-                    aria-expanded={isExpanded}
-                    aria-controls={`${panelId}-${service.slug}`}
+                    id={`${panelId}-${service.slug}-trigger`}
+                    {...(isDesktop
+                      ? {
+                          // Masaüstünde açılıp kapanan bir şey yok; satır sağdaki
+                          // sütunu seçer. Seçili satır aria-current ile bildirilir.
+                          'aria-controls': desktopPanelId,
+                          ...(isActive ? { 'aria-current': 'true' as const } : {}),
+                        }
+                      : {
+                          'aria-expanded': isExpanded,
+                          'aria-controls': `${panelId}-${service.slug}`,
+                        })}
                     className="group relative flex w-full items-baseline gap-5 py-6 text-left lg:gap-7 lg:py-8"
                   >
                     <span
@@ -147,7 +162,12 @@ export function Services({ content }: { content: ServicesContent }) {
           {/* Masaüstü sütunu — çerçeveli kart değil, dikey hairline ile ayrılmış
               bir pafta. Yapışkan, satır değiştikçe içeriği yenilenir. */}
           <div className="hidden lg:col-span-5 lg:col-start-8 lg:block lg:border-l lg:border-line lg:pl-10 xl:pl-14">
-            <div className="sticky top-32">
+            <div
+              id={desktopPanelId}
+              role="region"
+              {...(active ? { 'aria-labelledby': `${panelId}-${active.slug}-trigger` } : {})}
+              className="sticky top-32"
+            >
               <motion.div style={parallax ? { x: glyphX, y: glyphY } : undefined}>
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div

@@ -86,6 +86,30 @@ export function MobileMenu({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [open, onClose]);
 
+  // Arka plan inert: aria-modal yalnızca bir beyan, arka plandaki öğeleri
+  // ekran okuyucudan ve dokunmadan gerçekten çeken bu. Panelden <body>'ye
+  // kadar her atanın kardeşleri işaretlenir; zaten inert olanlara dokunulmaz.
+  useEffect(() => {
+    if (!open) return;
+
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    const marked: HTMLElement[] = [];
+    for (let node: HTMLElement = panel; node.parentElement; node = node.parentElement) {
+      for (const sibling of node.parentElement.children) {
+        if (sibling === node || !(sibling instanceof HTMLElement) || sibling.inert) continue;
+        sibling.setAttribute('inert', '');
+        marked.push(sibling);
+      }
+      if (node.parentElement === document.body) break;
+    }
+
+    return () => {
+      for (const element of marked) element.removeAttribute('inert');
+    };
+  }, [open]);
+
   // Hareket azaltma: panel kayarak değil, yalnızca görünürlükle açılır.
   const panelVariants = reducedMotion
     ? { closed: { opacity: 0 }, open: { opacity: 1 } }
@@ -132,7 +156,10 @@ export function MobileMenu({
 
           <motion.nav
             aria-label={t('menuLabel')}
-            className="flex flex-1 flex-col justify-center border-t border-line"
+            // Kısa ekranda veya büyütülmüş metinde linkler sığmazsa bu alan
+            // kayar. `justify-center-safe`: taşınca ortalama bırakılır, aksi
+            // halde ilk satırlar kaydırılamayan üst bölgeye kesilirdi.
+            className="flex min-h-0 flex-1 flex-col justify-center-safe overflow-y-auto overscroll-contain border-t border-line"
             initial="closed"
             animate="open"
             exit="closed"
@@ -179,7 +206,8 @@ export function MobileMenu({
             })}
           </motion.nav>
 
-          <div className="shrink-0 space-y-5 px-gutter py-6">
+          {/* Alt boşluk ev göstergesi / güvenli alanla çakışmaz. */}
+          <div className="shrink-0 space-y-5 px-gutter pt-6 pb-[max(--spacing(6),env(safe-area-inset-bottom))]">
             <Link
               href="/contact"
               onClick={onClose}

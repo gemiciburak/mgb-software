@@ -116,7 +116,8 @@ export function TechnologyGrid({ content }: { content: TechnologyContent }) {
             {content.entries.map((entry, index) => (
               <motion.li
                 key={entry.slug}
-                initial={reducedMotion ? false : { opacity: 0, ...scatter(index) }}
+                data-reveal=""
+                initial={interactive ? { opacity: 0, ...scatter(index) } : false}
                 whileInView={SETTLED}
                 transition={{ duration: 0.85, delay: index * 0.05, ease: EASE_ENTRANCE }}
                 viewport={{ once: true, margin: '-60px' }}
