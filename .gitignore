@@ -7,6 +7,8 @@ node_modules/
 out/
 dist/
 build/
+.open-next/
+.wrangler/
 *.tsbuildinfo
 
 
@@ -14,6 +16,7 @@ build/
 .env
 .env.local
 .env.*.local
+.dev.vars
 
 # editör ve işletim sistemi
 .DS_Store

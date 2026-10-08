@@ -9,7 +9,16 @@ import nextTypescript from 'eslint-config-next/typescript';
  * eslint-plugin-react'ın dairesel yapısıyla çakışıyordu.
  */
 const config = [
-  { ignores: ['.next/**', 'node_modules/**', 'next-env.d.ts', 'public/**'] },
+  {
+    ignores: [
+      '.next/**',
+      '.open-next/**',
+      '.wrangler/**',
+      'node_modules/**',
+      'next-env.d.ts',
+      'public/**',
+    ],
+  },
 
   ...nextCoreWebVitals,
   ...nextTypescript,

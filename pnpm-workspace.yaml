@@ -7,11 +7,15 @@ autoInstallPeers: true
 
 # Yalnızca gerçekten gereken native build'lere izin verilir.
 # @swc/core ve unrs-resolver eslint araç zincirinin, @parcel/watcher Next
-# dev sunucusunun dosya izleyicisinin parçası.
+# dev sunucusunun dosya izleyicisinin parçası. esbuild ve workerd Cloudflare
+# dağıtımının (OpenNext + wrangler) paketleyicisi ve yerel Workers çalışma
+# zamanı.
 allowBuilds:
   '@parcel/watcher': true
   '@swc/core': true
+  esbuild: true
   unrs-resolver: true
+  workerd: true
 
 # pnpm 11, yeni yayınlanmış paketleri tedarik zinciri saldırılarına karşı
 # varsayılan olarak bekletiyor. Aşağıdaki sürümler bilinçli olarak onaylandı:
@@ -29,3 +33,9 @@ minimumReleaseAgeExclude:
   - '@next/swc-win32-x64-msvc@16.4.0'
   - 'eslint-config-next@16.4.0'
   - 'next@16.4.0'
+  # wrangler'ın sabitlediği resmi miniflare sürümü (alpha etiketi upstream'den).
+  - miniflare@5.20261006.1-alpha
+  - wrangler@4.149.0
+
+patchedDependencies:
+  '@opennextjs/cloudflare@1.20.9': patches/@opennextjs__cloudflare@1.20.9.patch

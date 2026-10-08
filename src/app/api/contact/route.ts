@@ -26,10 +26,11 @@ const SUBMISSION_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]
 /**
  * Basit hız sınırı: IP başına 10 dakikada 5 talep.
  *
- * Bellekte tutulur, yani sunucu örneği başınadır — sunucusuz ortamda
- * örnekler arasında paylaşılmaz. Amaç tek kaynaktan gelen seri denemeleri
- * kesmek; dağıtık saldırıya karşı koruma değil. Spam artarsa Turnstile gibi
- * bir doğrulama eklenmeli.
+ * Bellekte tutulur, yani Worker isolate'i başınadır — Cloudflare'de
+ * isolate'ler arasında ve veri merkezleri arasında paylaşılmaz. Amaç tek
+ * kaynaktan gelen seri denemeleri kesmek; dağıtık saldırıya karşı koruma
+ * değil. Asıl sınır Cloudflare WAF'taki `/api/contact` hız kuralıdır; spam
+ * artarsa Turnstile eklenmeli.
  */
 const RATE_LIMIT = { max: 5, windowMs: 10 * 60 * 1000 } as const;
 const attempts = new Map<string, number[]>();
@@ -184,7 +185,13 @@ export async function POST(request: Request): Promise<Response> {
     return json({ ok: true }, 200);
   }
 
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+  // Cloudflare gerçek istemci IP'sini `cf-connecting-ip`'e kendisi yazar;
+  // istemcinin gönderdiği değer ezilir, taklit edilemez. `x-forwarded-for`
+  // yalnızca yerel geliştirme için yedek: istemci onu serbestçe doldurabilir.
+  const ip =
+    request.headers.get('cf-connecting-ip') ||
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    'unknown';
   if (isRateLimited(ip)) return json({ error: 'rate-limited' }, 429);
 
   const result = validateContactPayload(body);
