@@ -28,7 +28,7 @@ export const SITE_NAME = 'MGB Software';
  * `null` bırakılırsa footer ve Final CTA'daki e-posta satırı hiç render
  * edilmez — kırık bir `mailto:` üretilmez.
  */
-export const CONTACT_EMAIL: string | null = 'mgbsoftware.tr@gmail.com';
+export const CONTACT_EMAIL: string | null = 'info@mgbsoftware.com.tr';
 
 /**
  * İletişim numarası — WhatsApp. Sitedeki numara bağlantıları aramaya değil
