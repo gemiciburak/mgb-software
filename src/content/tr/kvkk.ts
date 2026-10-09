@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL, SITE_NAME } from '@/lib/constants';
+import { CONTACT_EMAIL, FOUNDER, SITE_NAME } from '@/lib/constants';
 import type { LegalDocument } from '@/types/content';
 
 /**
@@ -10,9 +10,8 @@ import type { LegalDocument } from '@/types/content';
  * veri işleme (analitik, yeni form alanı, yeni hizmet sağlayıcı) eklendiğinde
  * bu metin de güncellenmeli ve `updated` tarihi değişmeli.
  *
- * DİKKAT: Veri sorumlusunun ticari unvanı ve adresi henüz tanımlı değil;
- * bilindiğinde "Veri sorumlusu" bölümüne eklenmeli. Yayından önce bir
- * hukukçuya gözden geçirtilmesi önerilir.
+ * Veri sorumlusu gerçek kişi olarak kurucudur (`FOUNDER`, lib/constants.ts).
+ * Yayından önce bir hukukçuya gözden geçirtilmesi önerilir.
  */
 const email = CONTACT_EMAIL ?? '';
 
@@ -26,7 +25,7 @@ export const kvkk: LegalDocument = {
       blocks: [
         {
           type: 'p',
-          text: `Kişisel verileriniz, veri sorumlusu sıfatıyla ${SITE_NAME} (“MGB Software”) tarafından işlenmektedir. Bize ${email} adresinden ulaşabilirsiniz.`,
+          text: `Kişisel verileriniz, veri sorumlusu sıfatıyla ${SITE_NAME} adıyla faaliyet gösteren yazılım mühendisi ${FOUNDER.name} (“MGB Software”) tarafından işlenmektedir. Adres: Ataşehir / İstanbul. Bize ${email} adresinden ulaşabilirsiniz.`,
         },
       ],
     },
@@ -94,10 +93,10 @@ export const kvkk: LegalDocument = {
           type: 'list',
           items: [
             'Resend, Inc. — form içeriğini MGB Software’in e-posta kutusuna ileten e-posta altyapısı.',
-            'Google LLC (Gmail) — MGB Software’in e-posta hesabı; talebiniz ve sonraki yazışmalar burada saklanır.',
+            'Google LLC (Gmail) — MGB Software’in e-posta hesabı; info@mgbsoftware.com.tr adresine gelen e-postalar buraya yönlendirilir, talebiniz ve sonraki yazışmalar burada saklanır.',
             'Calendly LLC — yalnızca ön görüşme planlamayı seçerseniz; bu durumda Calendly kendi aydınlatma metnine tabi olarak veri işler.',
             'WhatsApp (Meta Platforms Ireland Ltd.) — yalnızca bize WhatsApp’tan yazmayı seçerseniz; bu durumda telefon numaranız, profil bilgileriniz ve mesajlarınız WhatsApp üzerinden bize ulaşır ve WhatsApp kendi gizlilik politikasına tabi olarak veri işler.',
-            'Cloudflare, Inc. — sitenin barındırıldığı ve sunulduğu altyapı; siteye her erişimde IP adresiniz ve tarayıcı bilgileriniz gibi teknik bağlantı verileri, siteyi size ulaştırmak ve saldırılara karşı korumak için işlenir.',
+            'Cloudflare, Inc. — sitenin barındırıldığı ve sunulduğu altyapı; siteye her erişimde IP adresiniz ve tarayıcı bilgileriniz gibi teknik bağlantı verileri, siteyi size ulaştırmak ve saldırılara karşı korumak için işlenir. Cloudflare ayrıca info@mgbsoftware.com.tr adresine gönderdiğiniz e-postaları MGB Software’in Gmail hesabına ileten e-posta yönlendirme hizmetini (Email Routing) sağlar.',
           ],
         },
         {

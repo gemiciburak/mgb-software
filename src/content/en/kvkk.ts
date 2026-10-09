@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL, SITE_NAME } from '@/lib/constants';
+import { CONTACT_EMAIL, FOUNDER, SITE_NAME } from '@/lib/constants';
 import type { LegalDocument } from '@/types/content';
 
 /** English translation of the KVKK notice. Keep in sync with content/tr/kvkk.ts. */
@@ -14,7 +14,7 @@ export const kvkk: LegalDocument = {
       blocks: [
         {
           type: 'p',
-          text: `Your personal data is processed by ${SITE_NAME} (“MGB Software”) as the data controller. You can reach us at ${email}.`,
+          text: `Your personal data is processed by ${FOUNDER.name}, a software engineer operating as ${SITE_NAME} (“MGB Software”), as the data controller. Address: Ataşehir, Istanbul, Türkiye. You can reach us at ${email}.`,
         },
       ],
     },
@@ -82,10 +82,10 @@ export const kvkk: LegalDocument = {
           type: 'list',
           items: [
             'Resend, Inc. — the email service that delivers the form to MGB Software’s inbox.',
-            'Google LLC (Gmail) — MGB Software’s email account, where your request and later correspondence are stored.',
+            'Google LLC (Gmail) — MGB Software’s email account; email sent to info@mgbsoftware.com.tr is forwarded here, and your request and later correspondence are stored here.',
             'Calendly LLC — only if you choose to book an intro call; Calendly then processes data under its own privacy notice.',
             'WhatsApp (Meta Platforms Ireland Ltd.) — only if you choose to message us on WhatsApp; your phone number, profile details and messages then reach us through WhatsApp, which processes data under its own privacy policy.',
-            'Cloudflare, Inc. — the infrastructure that hosts and serves the site; on every visit, technical connection data such as your IP address and browser details is processed to deliver the site and protect it against attacks.',
+            'Cloudflare, Inc. — the infrastructure that hosts and serves the site; on every visit, technical connection data such as your IP address and browser details is processed to deliver the site and protect it against attacks. Cloudflare also provides the email forwarding service (Email Routing) that delivers email sent to info@mgbsoftware.com.tr to MGB Software’s Gmail account.',
           ],
         },
         {

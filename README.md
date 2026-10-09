@@ -183,15 +183,17 @@ Kullanılan üç fontun da (Clash Display, Inter, JetBrains Mono) Türkçe kapsa
   canonical, hreflang, sitemap ve OG görseli ondan üretilir.
   `NEXT_PUBLIC_SITE_URL` yalnızca farklı bir adres gerektiğinde doldurulur —
   localhost yazılmamalı, build'e gömülür.
-- **Resend** — hesap aç, alan adını DNS ile doğrula, `.env` içine
-  `RESEND_API_KEY` ve `CONTACT_FROM_EMAIL` gir (bkz. `.env.example`). Bunlar
-  olmadan form gönderimi "e-posta ile gönder" yedeğine düşer.
-- **KVKK metni** — veri sorumlusunun ticari unvanı ve adresi eklenmeli;
-  saklama süresi (talep sözleşmeye dönüşmezse 1 yıl) iç süreçle uyumlu
+- **Resend** — `mgbsoftware.com.tr` doğrulandı. `RESEND_API_KEY` ve
+  `CONTACT_FROM_EMAIL` Cloudflare'e secret olarak yazılmalı (aşağıda 4. adım);
+  yoksa form gönderimi "e-posta ile gönder" yedeğine düşer.
+- **Gelen kutusu** — `info@mgbsoftware.com.tr` Cloudflare Email Routing ile
+  Gmail'e yönlenir. Form talepleri ve sitedeki `mailto:` bağlantıları bu
+  adrese gider; yayından önce bir test e-postasıyla doğrulanmalı.
+- **KVKK metni** — veri sorumlusu gerçek kişi olarak kurucu (Ataşehir /
+  İstanbul); saklama süresi (talep sözleşmeye dönüşmezse 1 yıl) iç süreçle uyumlu
   olmalı; metin bir hukukçuya gözden geçirtilmeli. Barındırma (Cloudflare)
-  aktarım listesinde.
-- **Kurucu fotoğrafı** — kare kırpılmış olarak `public/founder.jpg`; ardından
-  `content/{tr,en}/home.ts` içindeki `founder.photo` alanı doldurulur.
+  aktarım listesinde; `info@` Cloudflare Email Routing ile Gmail'e yönlenir.
+  E-posta altyapısı değişirse aktarım listesi de güncellenmeli.
 - **Sonraki sayfalar** — hizmet detayları, işler, gizlilik. Yolları
   `PATHNAMES`'te hazır; yayına alınınca `PUBLISHED_ROUTES`'a eklenir ve
   menüdeki ilgili öğe kendiliğinden o sayfaya döner (`navHref`).
