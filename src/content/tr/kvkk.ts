@@ -6,7 +6,7 @@ import type { LegalDocument } from '@/types/content';
  * Yerine Getirilmesinde Uyulacak Usul ve Esaslar Hakkında Tebliğ'e göre.
  *
  * Yalnızca sitede GERÇEKTEN olan işlemeleri anlatır (bkz. api/contact,
- * i18n/routing.ts çerez ayarı, lib/theme.ts, components/contact). Yeni bir
+ * lib/theme.ts, components/contact). Yeni bir
  * veri işleme (analitik, yeni form alanı, yeni hizmet sağlayıcı) eklendiğinde
  * bu metin de güncellenmeli ve `updated` tarihi değişmeli.
  *
@@ -129,10 +129,8 @@ export const kvkk: LegalDocument = {
         {
           type: 'list',
           items: [
-            'MGB_LOCALE çerezi — seçtiğiniz dili hatırlar, bir yıl saklanır.',
             'Tema tercihi — açık/koyu tema seçiminiz tarayıcınızda (localStorage) tutulur, sunucuya gönderilmez.',
-            'Form taslağı — teklif formunu yarıda bırakırsanız doldurduğunuz alanlar yalnızca o sekmede (sessionStorage) tutulur; sekme kapanınca silinir, gönderene kadar sunucuya iletilmez.',
-            'Form taslağı — doldurduğunuz form, sekmeyi kapatana kadar tarayıcınızda (sessionStorage) tutulur ve gönderimden sonra silinir.',
+            'Form taslağı — teklif formunu yarıda bırakırsanız doldurduğunuz alanlar yalnızca o sekmede (sessionStorage) tutulur; sekme kapanınca veya form gönderilince silinir, gönderene kadar sunucuya iletilmez.',
           ],
         },
         {

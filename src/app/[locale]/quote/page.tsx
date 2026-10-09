@@ -6,11 +6,9 @@ import { ProjectBrief } from '@/components/contact/project-brief';
 import { Container } from '@/components/ui/container';
 import { MailIcon } from '@/components/ui/icons';
 import { getContent } from '@/content';
-import { getPathname } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
-import { CONTACT_EMAIL, SITE_NAME, SITE_URL } from '@/lib/constants';
-import { buildAlternates } from '@/lib/seo';
-import { LOCALE_TAGS } from '@/shared';
+import { CONTACT_EMAIL } from '@/lib/constants';
+import { subpageMetadata } from '@/lib/seo';
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -19,21 +17,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!hasLocale(routing.locales, locale)) notFound();
   const t = await getTranslations({ locale, namespace: 'contact' });
 
-  return {
+  return subpageMetadata({
+    pathname: '/quote',
+    locale,
     title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates: buildAlternates('/quote', locale),
-    // openGraph üst düzeyde birleşmez, layout'taki nesnenin yerine geçer;
-    // bu yüzden ortak alanlar burada da yazılır.
-    openGraph: {
-      type: 'website',
-      siteName: SITE_NAME,
-      locale: LOCALE_TAGS[locale],
-      title: t('metaTitle'),
-      description: t('metaDescription'),
-      url: `${SITE_URL}${getPathname({ href: '/quote', locale })}`,
-    },
-  };
+  });
 }
 
 /** Yan paftadaki adımlar — sıra, müşterinin gerçekten yaşayacağı sıra. */

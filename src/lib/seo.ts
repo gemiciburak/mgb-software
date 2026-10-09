@@ -29,6 +29,56 @@ export function buildAlternates(pathname: AppPathname, locale: Locale): Metadata
 }
 
 /**
+ * Alt sayfaların metadata'sı: başlık, açıklama, canonical/hreflang ve paylaşım
+ * kartı (Open Graph + Twitter).
+ *
+ * Sayfa kendi `openGraph`/`twitter` nesnesini verince layout'takiler
+ * birleşmiyor, YERİNE geçiyor — `[locale]/opengraph-image` görseli de onlarla
+ * birlikte düşüyordu ve Twitter kartında ana sayfanın başlığı kalıyordu.
+ * Bu yüzden görsel burada açıkça eklenir; adresi `metadataBase`'e göre çözülür.
+ */
+export function subpageMetadata({
+  pathname,
+  locale,
+  title,
+  description,
+}: {
+  pathname: AppPathname;
+  locale: Locale;
+  title: string;
+  description: string;
+}): Metadata {
+  const image = {
+    url: `/${locale}/opengraph-image`,
+    width: 1200,
+    height: 630,
+    alt: SITE_NAME,
+    type: 'image/png',
+  };
+
+  return {
+    title,
+    description,
+    alternates: buildAlternates(pathname, locale),
+    openGraph: {
+      type: 'website',
+      siteName: SITE_NAME,
+      locale: LOCALE_TAGS[locale],
+      title,
+      description,
+      url: `${SITE_URL}${getPathname({ href: pathname, locale })}`,
+      images: [image],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
+
+/**
  * SSS yapılandırılmış verisi (FAQPage). Metin ekrandakiyle birebir aynı —
  * yalnızca sayfada görünen soru ve cevaplar işaretlenir.
  */

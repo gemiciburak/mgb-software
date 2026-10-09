@@ -21,13 +21,21 @@ export const routing = defineRouting({
    * Açık olsaydı, İngilizce kurulu bir işletim sistemi kullanan Türk ziyaretçi
    * (macOS'ta çok yaygın) `/` adresinden `/en`'e yönlendirilirdi. Hedef kitlenin
    * ağırlığı Türkiye olduğu için `/` her zaman Türkçedir ve dil, kullanıcının
-   * açık seçimidir. Seçim aşağıdaki çerezde hatırlanır.
+   * açık seçimidir; adres (`/` ya da `/en`) seçimin kendisini taşır.
    */
   localeDetection: false,
 
-  localeCookie: {
-    name: 'MGB_LOCALE',
-    sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 365,
-  },
+  /**
+   * Dil çerezi KAPALI. Algılama kapalıyken next-intl çerezi hiç okumuyor;
+   * açık kalsaydı her ziyarette işe yaramayan bir çerez yazılırdı (KVKK
+   * metninde de anlatılması gerekirdi).
+   */
+  localeCookie: false,
+
+  /**
+   * `Link` HTTP başlığındaki hreflang'ler KAPALI. Aynı bilgi sayfa
+   * metadata'sında `tr-TR` etiketiyle zaten var (lib/seo.ts); başlık ise `tr`
+   * yazıyordu — arama motoruna çelişen iki sinyal gidiyordu.
+   */
+  alternateLinks: false,
 });

@@ -4,6 +4,13 @@
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-10-08",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  // Site yalnızca kendi alan adında yayınlanır. `*.workers.dev` ve sürüm
+  // önizleme adresleri kapalı: açık kalsalar aynı içerik ikinci bir adreste
+  // indekslenebilirdi. Alan adının DNS'i Cloudflare'de olmalı; deploy
+  // sırasında özel alan adı bağlantısı kendiliğinden kurulur.
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{ "pattern": "mgbsoftware.com.tr", "custom_domain": true }],
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS",

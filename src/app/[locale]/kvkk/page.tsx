@@ -4,10 +4,8 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Container } from '@/components/ui/container';
 import { getContent } from '@/content';
-import { getPathname } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
-import { SITE_NAME, SITE_URL } from '@/lib/constants';
-import { buildAlternates } from '@/lib/seo';
+import { subpageMetadata } from '@/lib/seo';
 import { LOCALE_TAGS } from '@/shared';
 
 type PageProps = { params: Promise<{ locale: string }> };
@@ -17,19 +15,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!hasLocale(routing.locales, locale)) notFound();
   const t = await getTranslations({ locale, namespace: 'kvkk' });
 
-  return {
+  return subpageMetadata({
+    pathname: '/kvkk',
+    locale,
     title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates: buildAlternates('/kvkk', locale),
-    openGraph: {
-      type: 'website',
-      siteName: SITE_NAME,
-      locale: LOCALE_TAGS[locale],
-      title: t('metaTitle'),
-      description: t('metaDescription'),
-      url: `${SITE_URL}${getPathname({ href: '/kvkk', locale })}`,
-    },
-  };
+  });
 }
 
 /**

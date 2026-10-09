@@ -179,8 +179,10 @@ Kullanılan üç fontun da (Clash Display, Inter, JetBrains Mono) Türkçe kapsa
 
 ## Yayına almadan önce
 
-- **Alan adı** — `NEXT_PUBLIC_SITE_URL`; canonical, hreflang, sitemap ve OG
-  görseli ondan üretilir.
+- **Alan adı** — `mgbsoftware.com.tr` (`SITE_URL`, lib/constants.ts);
+  canonical, hreflang, sitemap ve OG görseli ondan üretilir.
+  `NEXT_PUBLIC_SITE_URL` yalnızca farklı bir adres gerektiğinde doldurulur —
+  localhost yazılmamalı, build'e gömülür.
 - **Resend** — hesap aç, alan adını DNS ile doğrula, `.env` içine
   `RESEND_API_KEY` ve `CONTACT_FROM_EMAIL` gir (bkz. `.env.example`). Bunlar
   olmadan form gönderimi "e-posta ile gönder" yedeğine düşer.
@@ -203,10 +205,12 @@ Site OpenNext ile Cloudflare Workers'ta çalışır (`wrangler.jsonc`,
 1. Cloudflare'de alan adını ekle, nameserver'ları kayıt firmasında güncelle.
 2. Workers & Pages → GitHub reposunu bağla.
    Build: `pnpm opennextjs-cloudflare build` · Deploy: `pnpm opennextjs-cloudflare deploy`
-3. Build değişkeni: `NEXT_PUBLIC_SITE_URL=https://alanadi.com` (koda gömülür).
+3. Build değişkeni gerekmez: varsayılan adres `https://mgbsoftware.com.tr`.
 4. Sırlar: `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, isteğe bağlı
    `CONTACT_TO_EMAIL` (`wrangler secret put <AD>`). Yerelde `.dev.vars`.
-5. Worker'ı alan adına bağla (Settings → Domains & Routes).
+5. Alan adı bağlantısı `wrangler.jsonc`'deki `routes` ile deploy sırasında
+   kurulur; `*.workers.dev` adresi kapalıdır. `www.mgbsoftware.com.tr` için
+   Cloudflare'de köke 301 yönlendirme kuralı ekle.
 6. WAF'ta `/api/contact` için hız sınırı kuralı aç — koddaki sayaç Worker
    örnekleri arasında paylaşılmaz.
 

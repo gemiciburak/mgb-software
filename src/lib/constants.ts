@@ -8,8 +8,14 @@ import type { AppPathname } from '@/shared';
  * Bilgi geldiğinde yalnızca bu dosya güncellenir.
  */
 
-/** Yayındaki tam adres. canonical, hreflang, sitemap ve OG görseli bundan üretilir. */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000').replace(
+/**
+ * Yayındaki tam adres. canonical, hreflang, sitemap ve OG görseli bundan üretilir.
+ *
+ * Varsayılan bilinçli olarak yayın adresi, localhost değil: build sırasında koda
+ * gömüldüğü için değişken unutulursa arama motorlarına localhost bildirilirdi.
+ * Geliştirmede canonical'ın yayın adresini göstermesi zararsız.
+ */
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://mgbsoftware.com.tr').replace(
   /\/+$/,
   '',
 );

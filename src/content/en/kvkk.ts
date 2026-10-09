@@ -117,10 +117,8 @@ export const kvkk: LegalDocument = {
         {
           type: 'list',
           items: [
-            'MGB_LOCALE cookie — remembers your language choice, kept for one year.',
             'Theme preference — your light/dark choice is kept in your browser (localStorage) and never sent to the server.',
-            'Form draft — if you leave the quote form unfinished, what you have entered is kept only in that tab (sessionStorage); it is deleted when the tab closes and is not sent to the server until you submit.',
-            'Form draft — what you type in the form is kept in your browser (sessionStorage) until you close the tab, and deleted after sending.',
+            'Form draft — if you leave the quote form unfinished, what you have entered is kept only in that tab (sessionStorage); it is deleted when the tab closes or the form is sent, and is not sent to the server until you submit.',
           ],
         },
         {
