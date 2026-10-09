@@ -11,20 +11,20 @@ import { isPublished } from './constants';
  */
 export const SECTION_ID = {
   hero: 'hero',
-  about: 'about',
   services: 'services',
+  technology: 'technology',
   build: 'build',
   work: 'work',
-  process: 'process',
-  technology: 'technology',
+  about: 'about',
   why: 'why',
+  process: 'process',
   faq: 'faq',
   contact: 'contact',
 } as const;
 
 export type SectionId = (typeof SECTION_ID)[keyof typeof SECTION_ID];
 
-/** Bölümler sayfadaki sırayla — `SECTION_ID` zaten o sırada tanımlı. */
+/** Bölümler sayfadaki sırayla — `SECTION_ID` zaten o sırada tanımlı (bkz. app/[locale]/page.tsx). */
 export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
 
 /**
@@ -32,35 +32,31 @@ export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
  *
  * Sayfada on bölüm var, navigasyonda dört başlık. Bir bölüm yalnızca
  * gerçekten o başlığın içeriğiyse sahiplenilir: Hizmetler'in altında
- * "Ürettiklerimiz", İşler'in altında yalnızca İşler, İletişim'in altında
- * kapanış bölümü, Hakkımızda'nın altında yalnızca Hakkımızda bölümü
- * (stüdyo + kurucu kartı).
+ * "Ne ile kuruyoruz" ve "Ürettiklerimiz", İşler'in altında yalnızca İşler, Hakkımızda'nın altında
+ * stüdyo + kurucu kartı ve hemen ardından gelen "Neden MGB", İletişim'in
+ * altında kapanış bölümü.
  *
- * Süreç, Teknoloji, Neden MGB ve SSS sahipsizdir (`null`): gösterge
- * oradayken hiçbir başlığı işaretlemez. Önceki sürümde bu üçü Hakkımızda'ya
- * bağlıydı; bölümler İşler'in iki yanına dağıldığı için gösterge kaydırırken
- * sürekli Hakkımızda'ya geri dönüyordu. Yanlış başlığı işaretlemektense
- * hiçbirini işaretlememek doğru.
+ * Süreç ve SSS sahipsizdir (`null`): gösterge oradayken hiçbir
+ * başlığı işaretlemez. Yanlış başlığı işaretlemektense hiçbirini
+ * işaretlememek doğru.
  */
 export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
   [SECTION_ID.hero]: null,
-  [SECTION_ID.about]: SECTION_ID.about,
   [SECTION_ID.services]: SECTION_ID.services,
+  [SECTION_ID.technology]: SECTION_ID.services,
   [SECTION_ID.build]: SECTION_ID.services,
   [SECTION_ID.work]: SECTION_ID.work,
+  [SECTION_ID.about]: SECTION_ID.about,
+  [SECTION_ID.why]: SECTION_ID.about,
   [SECTION_ID.process]: null,
-  [SECTION_ID.technology]: null,
-  [SECTION_ID.why]: null,
   [SECTION_ID.faq]: null,
   [SECTION_ID.contact]: SECTION_ID.contact,
 };
 
 /**
- * Navigasyon öğeleri — sayfadaki sırayla: Hakkımızda, Hizmetler, İşler,
+ * Navigasyon öğeleri — sayfadaki sırayla: Hizmetler, İşler, Hakkımızda,
  * İletişim. Sıra sayfayla aynı olunca kaydırırken gösterge soldan sağa
- * ilerler; geri sıçramaz. (İlk sürümde brief'teki sıra kullanılıyordu —
- * İşler önce — hem bölüm sırasıyla çelişiyor hem de ilk öğe henüz boş olan
- * İşler bölümüne gidiyordu.)
+ * ilerler; geri sıçramaz.
  *
  * Kural: menü ana sayfanın haritasıdır; her öğe ana sayfadaki bölümüne
  * kaydırır. Ayrı sayfa olarak yalnızca teklif formu var (sağdaki
@@ -77,9 +73,9 @@ export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
  *     ya da proje dışı bir konu için forma girmek gerekmez.
  */
 export const NAV_ITEMS = [
-  { id: SECTION_ID.about, labelKey: 'about' },
   { id: SECTION_ID.services, labelKey: 'services' },
   { id: SECTION_ID.work, labelKey: 'work' },
+  { id: SECTION_ID.about, labelKey: 'about' },
   { id: SECTION_ID.contact, labelKey: 'contact' },
 ] as const;
 

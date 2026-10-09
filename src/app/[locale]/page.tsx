@@ -23,7 +23,11 @@ import { faqJsonLd } from '@/lib/seo';
  * (Services, WhatWeBuild, SelectedWork, ProcessTimeline) içeriği prop olarak
  * alır — düz veri olduğu için serileştirilebilir ve bileşenler içerik bilmez.
  *
- * Bölüm sırası brief'teki bilgi mimarisiyle birebir aynı.
+ * Bölüm sırası ziyaretçinin sorduğu sırayla: ne yapıyorsunuz, ne ile
+ * (Hizmetler + Teknoloji) →
+ * kanıtı ne (İşler) → kimsiniz (Hakkımızda) → nasıl çalışıyorsunuz (Süreç) →
+ * sorularım var / başlayalım (SSS + İletişim). Hakkımızda bilinçli olarak
+ * işlerin arkasında: ziyaretçi önce ne aldığını görür, sonra kimden aldığını.
  */
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -37,11 +41,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     // tabIndex: skip link odağı gerçekten içeriğe taşısın, yalnızca kaydırmasın.
     <main id="main" tabIndex={-1} className="outline-none">
       <Hero locale={locale} />
-      <Philosophy content={home.philosophy} founder={home.founder} />
+      {/* 2 — Hizmetler: ne yapıyoruz, ne ile kuruyoruz ve elle tutulur çıktılar. */}
       <Services content={home.services} />
+      <TechnologyGrid content={home.technology} />
       <WhatWeBuild content={home.build} />
       {/*
-        Projeler content/projects.ts'ten gelir (services/projects.ts üzerinden).
+        3 — Seçilmiş işler. Projeler content/projects.ts'ten gelir (services/projects.ts üzerinden).
         Dizi boşken bileşen bilinçli boş durumu render ediyor; proje eklenince
         burada hiçbir şey değişmiyor.
       */}
@@ -52,9 +57,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           home.services.entries.map((service) => [service.slug, service.title]),
         )}
       />
-      <ProcessTimeline content={home.process} />
-      <TechnologyGrid content={home.technology} />
+      {/* 4 — Hakkımızda: stüdyo, kurucu ve neden MGB. */}
+      <Philosophy content={home.philosophy} founder={home.founder} />
       <WhyMgb content={home.values} />
+      {/* 5 — Çalışma süreci. */}
+      <ProcessTimeline content={home.process} />
+      {/* 6 — SSS ve iletişim. */}
       <Faq content={home.faq} />
       <FinalCta content={home.cta} />
       <script
