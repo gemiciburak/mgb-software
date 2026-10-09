@@ -93,8 +93,15 @@ export async function Philosophy({
             aria-labelledby="founder-name"
             className="grid border border-line bg-bg md:grid-cols-12"
           >
-            {/* Portre hücreyi kenardan kenara doldurur; çerçeveyi hücre taşır. */}
-            <div className="border-b border-line md:col-span-4 md:border-r md:border-b-0 lg:col-span-3">
+            {/*
+              Portre hücreyi kenardan kenara doldurur; çerçeveyi hücre taşır.
+              Hücre 4 sütun (tablette 5): 3 sütunda metin satırının boyu hücreyi fotoğrafın
+              4:5 oranından çok daha dar-uzun yapıyor ve `object-cover` omuzları
+              yandan kesiyordu (1024px'te genişliğin yalnızca %64'ü görünüyordu).
+              Bu yüzden üç sütunlu şerit xl'den itibaren; altında iletişim
+              hücresi alta iner.
+            */}
+            <div className="border-b border-line md:col-span-5 md:border-r md:border-b-0 lg:col-span-4">
               <FounderPortrait
                 founder={founder}
                 className="w-full border-0 md:aspect-auto md:h-full md:min-h-72"
@@ -102,7 +109,7 @@ export async function Philosophy({
               />
             </div>
 
-            <div className="p-6 md:col-span-8 md:p-8 lg:col-span-5 lg:p-10">
+            <div className="p-6 md:col-span-7 md:p-8 lg:col-span-8 lg:p-10 xl:col-span-5">
               <p className="font-mono text-label text-accent">{founder.eyebrow}</p>
               <h3 id="founder-name" className="mt-5 text-display-3">
                 {founder.name}
@@ -122,7 +129,7 @@ export async function Philosophy({
             </div>
 
             {hasChannels && (
-              <div className="flex flex-col border-t border-line p-6 md:col-span-12 md:p-8 lg:col-span-4 lg:border-t-0 lg:border-l lg:p-10">
+              <div className="flex flex-col border-t border-line p-6 md:col-span-12 md:p-8 lg:p-10 xl:col-span-3 xl:border-t-0 xl:border-l xl:p-8">
                 <p className="font-mono text-mono-sm text-fg-subtle">{founder.contactLabel}</p>
                 <ul className="mt-5 space-y-3">
                   {CONTACT_EMAIL !== null && (
@@ -171,7 +178,7 @@ export async function Philosophy({
                   ))}
                 </ul>
                 {/* Antet kutusunun alt satırı. Marka adı çevrilmez. */}
-                <p className="mt-8 font-mono text-mono-sm text-fg-subtle lg:mt-auto">
+                <p className="mt-8 font-mono text-mono-sm text-fg-subtle xl:mt-auto">
                   {SITE_NAME.toUpperCase()}
                 </p>
               </div>

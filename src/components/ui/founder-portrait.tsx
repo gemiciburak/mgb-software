@@ -43,7 +43,9 @@ export function FounderPortrait({
           alt={founder.photo.alt}
           loading="lazy"
           decoding="async"
-          className="size-full object-cover"
+          // Portre 4:5, hücre kare ya da değişken boyda: kırpma yüzü
+          // ortalayacak şekilde üstten yapılır, baş kesilmez.
+          className="size-full object-cover object-[50%_22%]"
         />
       ) : (
         <>

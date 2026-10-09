@@ -29,6 +29,7 @@ export const home: HomeContent = {
     eyebrow: 'KURUCUSUYLA TANIŞIN',
     name: 'Burak Gemici',
     role: 'Founder & Software Engineer',
+    photo: { src: '/founder.webp', width: 960, height: 1200, alt: 'Burak Gemici’nin portresi' },
     bio: [
       'MGB Software’i, yazılım geliştirme ve dijital tasarıma duyduğum tutkuyla kurdum. Her projenin kendine özgü ihtiyaçları olduğuna inanıyor; modern, işlevsel ve uzun ömürlü dijital çözümler geliştirmeyi hedefliyorum.',
       'Bir projeye başladığınızda karşınızda bir satış temsilcisi değil, ürününüzü tasarlayan ve kodunu yazan kişi olur. Sorunuzu doğrudan bana sorar, cevabı aracısız alırsınız.',
