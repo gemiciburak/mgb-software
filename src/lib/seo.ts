@@ -2,7 +2,15 @@ import type { Metadata } from 'next';
 import { DEFAULT_LOCALE, LOCALE_TAGS, LOCALES, type Locale } from '@/shared';
 import type { AppPathname } from '@/shared';
 import { getPathname } from '@/i18n/navigation';
-import { CONTACT_EMAIL, CONTACT_PHONE, FOUNDER, SITE_NAME, SITE_URL } from './constants';
+import {
+  BUSINESS_LOCATION,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  FOUNDER,
+  SITE_NAME,
+  SITE_URL,
+  SOCIAL_LINKS,
+} from './constants';
 
 /**
  * Bir rotanın canonical ve hreflang bağlantılarını üretir.
@@ -94,17 +102,48 @@ export function faqJsonLd(entries: readonly { question: string; answer: string }
   };
 }
 
-/** Organizasyon yapılandırılmış verisi. Uydurma veri içermez — yalnızca doğrulanabilir alanlar. */
+/** Organizasyonun sabit kimliği — diğer JSON-LD blokları buna `@id` ile bağlanır. */
+const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+
+/**
+ * Organizasyon yapılandırılmış verisi. Uydurma veri içermez — yalnızca doğrulanabilir alanlar.
+ *
+ * Logo PNG: Google logo için raster görseli en güvenilir şekilde işliyor (en az
+ * 112×112). Adres yalnızca ilçe/il düzeyinde — KVKK metnindekiyle aynı.
+ */
 export function organizationJsonLd(description: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': ORGANIZATION_ID,
     name: SITE_NAME,
     url: SITE_URL,
     description,
-    logo: `${SITE_URL}/icon.svg`,
+    logo: `${SITE_URL}/icons/icon-512.png`,
     founder: { '@type': 'Person', name: FOUNDER.name, jobTitle: FOUNDER.jobTitle },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: BUSINESS_LOCATION.locality,
+      addressRegion: BUSINESS_LOCATION.region,
+      addressCountry: BUSINESS_LOCATION.country,
+    },
     ...(CONTACT_EMAIL !== null ? { email: CONTACT_EMAIL } : {}),
     ...(CONTACT_PHONE !== null ? { telephone: `+${CONTACT_PHONE.digits}` } : {}),
+    ...(SOCIAL_LINKS.length > 0 ? { sameAs: SOCIAL_LINKS.map((social) => social.href) } : {}),
+  };
+}
+
+/**
+ * WebSite yapılandırılmış verisi — Google arama sonuçlarındaki site adını
+ * ("MGB Software") buradan alır. Yalnızca ana sayfada verilir.
+ */
+export function websiteJsonLd(locale: Locale) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: `${SITE_URL}${getPathname({ href: '/', locale })}`,
+    inLanguage: LOCALE_TAGS[locale],
+    publisher: { '@id': ORGANIZATION_ID },
   };
 }

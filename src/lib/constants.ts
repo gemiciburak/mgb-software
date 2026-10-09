@@ -95,6 +95,13 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
  */
 export const FOUNDER = { name: 'Burak Gemici', jobTitle: 'Founder & Software Engineer' } as const;
 
+/** İşletmenin konumu — yapılandırılmış veride (JSON-LD) kullanılır. KVKK metniyle aynı düzeyde. */
+export const BUSINESS_LOCATION = {
+  locality: 'Ataşehir',
+  region: 'İstanbul',
+  country: 'TR',
+} as const;
+
 /** Marka imzası. Footer ve OG görselinde kullanılır; çevrilmez. */
 export const BRAND_SIGNATURE = 'Design. Build. Evolve.';
 

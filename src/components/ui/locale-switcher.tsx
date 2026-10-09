@@ -1,8 +1,9 @@
 'use client';
 
+import NextLink from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { LOCALES } from '@/shared';
-import { Link, usePathname } from '@/i18n/navigation';
+import { getPathname, usePathname } from '@/i18n/navigation';
 import { cn } from '@/lib/cn';
 
 /**
@@ -12,6 +13,12 @@ import { cn } from '@/lib/cn';
  * dil tıklanabilir. `usePathname` next-intl'in dahili yolunu döndürdüğü için
  * kullanıcı bulunduğu sayfanın karşılığına gider (`/hizmetler` → `/en/services`),
  * ana sayfaya düşmez.
+ *
+ * Adres `getPathname` ile hesaplanıp düz `next/link`'e verilir. next-intl'in
+ * `Link`'i varsayılan dile geçerken `/tr/kvkk` gibi önekli bir adres üretiyor
+ * (dil çerezini güncellemek için); çerez kapalı olduğundan bu her tıklamada
+ * gereksiz bir 307 yönlendirmesi ve arama motoruna yönlendiren iç link
+ * demekti. Hesaplanan adres doğrudan öneksiz kanonik yol: `/kvkk`.
  */
 export function LocaleSwitcher({ className }: { className?: string }) {
   const t = useTranslations('locale');
@@ -40,9 +47,8 @@ export function LocaleSwitcher({ className }: { className?: string }) {
                 {label}
               </span>
             ) : (
-              <Link
-                href={pathname}
-                locale={locale}
+              <NextLink
+                href={getPathname({ href: pathname, locale })}
                 // Görünen etiket erişilebilir ismin başında kalmalı (WCAG 2.5.3):
                 // sesli komutla "EN" diyen kullanıcı linki bulabilsin.
                 aria-label={`${label} — ${t('switchTo')}`}
@@ -51,7 +57,7 @@ export function LocaleSwitcher({ className }: { className?: string }) {
                 className="rounded-xs text-fg-subtle transition-colors duration-[var(--duration-fast)] hover:text-fg"
               >
                 {label}
-              </Link>
+              </NextLink>
             )}
           </span>
         );

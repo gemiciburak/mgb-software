@@ -14,7 +14,7 @@ import { WhyMgb } from '@/components/sections/why-mgb';
 import { getContent } from '@/content';
 import { fetchPublishedProjects } from '@/services/projects';
 import { routing } from '@/i18n/routing';
-import { faqJsonLd } from '@/lib/seo';
+import { faqJsonLd, websiteJsonLd } from '@/lib/seo';
 
 /**
  * Ana sayfa.
@@ -68,6 +68,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(home.faq.entries)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd(locale)) }}
       />
     </main>
   );
