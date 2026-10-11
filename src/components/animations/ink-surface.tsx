@@ -2,7 +2,7 @@
 
 import { shaderMaterial } from '@react-three/drei';
 import { Canvas, extend, useFrame, useThree } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { useTheme } from '@/hooks/use-theme';
 import {
@@ -132,6 +132,16 @@ function geometryFromPositions(positions: number[]): THREE.BufferGeometry {
 }
 
 /**
+ * Prop olarak verilen geometriyi R3F kendisi bırakmıyor. Geometri yeniden
+ * kurulduğunda (ör. pencere 768px eşiğini geçip grid seyreldiğinde) eskisi
+ * GPU belleğinde kalıyordu; yenisi gelince ya da sahne sökülünce bırakılır.
+ */
+function useDisposable(geometry: THREE.BufferGeometry): THREE.BufferGeometry {
+  useEffect(() => () => geometry.dispose(), [geometry]);
+  return geometry;
+}
+
+/**
  * Yatay ve dikey çizgilerden oluşan grid.
  *
  * `PlaneGeometry` + `wireframe` yerine elle kurulmuş `LineSegments`
@@ -142,7 +152,7 @@ function geometryFromPositions(positions: number[]): THREE.BufferGeometry {
 function useGridGeometry({ rows, cols, samples }: GridConfig, field: Field) {
   const { halfWidth: hw, halfHeight: hh } = field;
 
-  return useMemo(() => {
+  const geometry = useMemo(() => {
     const positions: number[] = [];
 
     for (let r = 0; r < rows; r += 1) {
@@ -175,6 +185,8 @@ function useGridGeometry({ rows, cols, samples }: GridConfig, field: Field) {
 
     return geometryFromPositions(positions);
   }, [rows, cols, samples, hw, hh]);
+
+  return useDisposable(geometry);
 }
 
 /**
@@ -182,7 +194,7 @@ function useGridGeometry({ rows, cols, samples }: GridConfig, field: Field) {
  * yüzeyle birlikte bükülsün; toparlandığında düz ve okunur hale gelir.
  */
 function useFrameGeometry(variant: InkVariant, subdivisions: number) {
-  return useMemo(() => {
+  const geometry = useMemo(() => {
     const positions: number[] = [];
 
     for (const [x1, y1, x2, y2] of frameSegments(variant)) {
@@ -202,6 +214,8 @@ function useFrameGeometry(variant: InkVariant, subdivisions: number) {
 
     return geometryFromPositions(positions);
   }, [variant, subdivisions]);
+
+  return useDisposable(geometry);
 }
 
 /* ---------------------------------------------------------------------------

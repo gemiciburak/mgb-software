@@ -289,27 +289,34 @@ export function InkPolyhedra({ className }: { className?: string }) {
     const container = containerRef.current;
     if (!container) return;
 
+    // Kutuya göre normalize edilen konum [-1, 1]'e sıkıştırılır: imleç kutunun
+    // çok dışındayken değer -4'e kadar çıkıyor ve kompozisyon `POINTER_RANGE`
+    // sınırını aşıp ~115° dönüyordu.
+    const clamp = (value: number) => Math.min(Math.max(value, -1), 1);
+
     function handlePointerMove(event: PointerEvent) {
       if (!container) return;
       const bounds = container.getBoundingClientRect();
       pointerTarget.current = {
-        x: ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
-        y: ((event.clientY - bounds.top) / bounds.height) * 2 - 1,
+        x: clamp(((event.clientX - bounds.left) / bounds.width) * 2 - 1),
+        y: clamp(((event.clientY - bounds.top) / bounds.height) * 2 - 1),
       };
     }
 
-    function handlePointerLeave() {
-      pointerTarget.current = { x: 0, y: 0 };
+    // `window` üzerinde `pointerleave` tetiklenmiyor. İmlecin pencereden
+    // çıktığı an, hedefi olmayan bir `pointerout` olarak gelir.
+    function handlePointerOut(event: PointerEvent) {
+      if (event.relatedTarget === null) pointerTarget.current = { x: 0, y: 0 };
     }
 
     // Pencere üzerinden dinlenir: imleç kutunun dışındayken de kompozisyon
     // ona doğru hafifçe yönelsin, kutuya girince ani sıçrama olmasın.
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
-    window.addEventListener('pointerleave', handlePointerLeave);
+    document.addEventListener('pointerout', handlePointerOut);
 
     return () => {
       window.removeEventListener('pointermove', handlePointerMove);
-      window.removeEventListener('pointerleave', handlePointerLeave);
+      document.removeEventListener('pointerout', handlePointerOut);
     };
   }, [isTouch, reducedMotion]);
 

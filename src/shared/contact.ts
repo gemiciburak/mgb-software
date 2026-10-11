@@ -77,6 +77,15 @@ function text(value: unknown): string {
 }
 
 /**
+ * Tek satırlık alan (ad, şirket): satır sonu ve diğer kontrol karakterleri
+ * boşluğa çevrilir. Ad e-posta konusuna girdiği için satır sonu Resend'de
+ * reddedilip gönderimi düşürebiliyordu.
+ */
+function line(value: unknown): string {
+  return text(value).replace(/[\u0000-\u001f\u007f]+/g, ' ');
+}
+
+/**
  * Ham girdiyi doğrular ve temizlenmiş yükü döner.
  *
  * `fields` verilirse yalnızca o alanlar kontrol edilir — çok adımlı formda her
@@ -106,7 +115,7 @@ export function validateContactPayload(
     else if (message.length > CONTACT_LIMITS.messageMax) errors.message = 'too-long';
   }
 
-  const name = text(raw.name);
+  const name = line(raw.name);
   if (check('name')) {
     if (!name) errors.name = 'required';
     else if (name.length > CONTACT_LIMITS.nameMax) errors.name = 'too-long';
@@ -120,7 +129,7 @@ export function validateContactPayload(
     }
   }
 
-  const company = text(raw.company);
+  const company = line(raw.company);
   if (check('company') && company.length > CONTACT_LIMITS.companyMax) errors.company = 'too-long';
 
   if (check('channel') && !oneOf(CONTACT_CHANNELS, raw.channel)) errors.channel = 'required';

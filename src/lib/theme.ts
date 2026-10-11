@@ -60,7 +60,8 @@ export function applyThemeChoice(next: ThemeChoice, { persist = true } = {}): vo
 }
 
 /**
- * `<head>` içinde, boyamadan ÖNCE senkron çalışan script.
+ * `<body>`'nin ilk çocuğu olarak, boyamadan ÖNCE senkron çalışan script
+ * (bkz. app/[locale]/layout.tsx).
  *
  * Kayıtlı seçimi okuyup `<html>` üzerine `data-theme` koyar. Seçim 'system'
  * ise attribute hiç konmaz; CSS'teki `prefers-color-scheme` devralır. Böylece

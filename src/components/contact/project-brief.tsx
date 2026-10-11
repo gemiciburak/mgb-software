@@ -418,11 +418,11 @@ function BriefForm({
     if (code === 'too-short') return t('errors.too-short', { min: CONTACT_LIMITS.messageMin });
     if (code === 'too-long') {
       const max =
-        field === 'message'
-          ? CONTACT_LIMITS.messageMax
-          : field === 'email'
-            ? CONTACT_LIMITS.emailMax
-            : CONTACT_LIMITS.nameMax;
+        {
+          message: CONTACT_LIMITS.messageMax,
+          email: CONTACT_LIMITS.emailMax,
+          company: CONTACT_LIMITS.companyMax,
+        }[field as string] ?? CONTACT_LIMITS.nameMax;
       return t('errors.too-long', { max });
     }
     return t(`errors.${code}`);

@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Container } from '@/components/ui/container';
+import { Copyright } from '@/components/ui/copyright';
 import { ArrowUpRightIcon, MailIcon, WhatsAppIcon, SocialIcon } from '@/components/ui/icons';
 import { Logo } from '@/components/ui/logo';
 import { Link } from '@/i18n/navigation';
@@ -19,8 +20,9 @@ const LINK_CLASS = 'rounded-xs text-body-sm text-fg-muted transition-colors hove
 /**
  * Footer.
  *
- * İletişim sütunu koşullu kalır: `CONTACT_EMAIL` null veya `SOCIAL_LINKS`
- * boşsa hiç render edilmez — uydurma adres ya da kırık link üretilmez.
+ * İletişim sütunu koşullu kalır: her kanal yalnızca tanımlıysa görünür;
+ * `CONTACT_EMAIL` ve `CONTACT_PHONE` null, `SOCIAL_LINKS` boşsa sütun hiç
+ * render edilmez — uydurma adres ya da kırık link üretilmez.
  * Kanallar lib/constants.ts'ten gelir, buradan değil.
  *
  * Yasal sütun da aynı kurala uyar: gizlilik ve KVKK sayfaları yayına
@@ -33,9 +35,6 @@ export async function Footer() {
   const tNav = await getTranslations('nav');
   const tReach = await getTranslations('reach');
   const locale = await getLocale();
-
-  // Sabit yıl yerine build anındaki yıl: 2027'de "© 2026" kalmaz.
-  const year = new Date().getFullYear();
 
   const legalLinks = (
     [
@@ -144,7 +143,7 @@ export async function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-2 border-t border-line pt-6 font-mono text-mono-sm text-fg-subtle sm:flex-row sm:items-center sm:justify-between">
-          <span>{t('copyright', { year })}</span>
+          <Copyright buildYear={new Date().getFullYear()} />
           <span className="text-accent">{BRAND_SIGNATURE}</span>
         </div>
       </Container>
