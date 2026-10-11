@@ -274,8 +274,10 @@
    hemen altına gelir. Değer dolgunun kendi token'ından okunur, iki yerde ayrı
    sayı tutulmaz.
 
-   Yalnızca navigasyon hedeflerine verilir: "Neden MGB" sabitlenmiş bir
-   track'tir, dolgusu yoktur ve ileri kaydırmak ilk kademeyi atlatırdı.
+   Navigasyon hedeflerine ve doğrudan bağlantı verilebilecek dolgulu
+   bölümlere (Ürettiklerimiz, Teknoloji) verilir. "Neden MGB"ye verilmez:
+   sabitlenmiş bir track'tir, dolgusu yoktur ve ileri kaydırmak ilk kademeyi
+   atlatırdı.
    --------------------------------------------------------------------------- */
 @utility anchor-target {
   scroll-margin-top: calc(-1 * var(--spacing-section));

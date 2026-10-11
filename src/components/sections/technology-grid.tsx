@@ -95,7 +95,10 @@ export function TechnologyGrid({ content }: { content: TechnologyContent }) {
   }
 
   return (
-    <section id={SECTION_ID.technology} className="overflow-x-clip border-t border-line py-section">
+    <section
+      id={SECTION_ID.technology}
+      className="anchor-target overflow-x-clip border-t border-line py-section"
+    >
       <Container>
         <ScrollReveal>
           <SectionHeading

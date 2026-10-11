@@ -37,7 +37,10 @@ export function WhatWeBuild({ content }: { content: BuildContent }) {
   const rows = [content.entries.slice(0, half), content.entries.slice(half)];
 
   return (
-    <section id={SECTION_ID.build} className="overflow-hidden border-t border-line py-section">
+    <section
+      id={SECTION_ID.build}
+      className="anchor-target overflow-hidden border-t border-line py-section"
+    >
       <Container>
         <ScrollReveal className="flex items-end justify-between gap-6">
           <SectionHeading eyebrow={content.eyebrow} title={content.title} />
