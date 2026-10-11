@@ -49,4 +49,31 @@ export const projects: readonly Project[] = [
     },
     liveUrl: 'https://daphne-atelier.vercel.app',
   },
+  {
+    // Hayali bir restoran için uçtan uca sipariş platformu (NestJS + Next.js).
+    // Yemek fotoğrafları Unsplash'ten; sitedeki puan ve müşteri sayıları demo
+    // verisi. Kapak, sitenin ana sayfasından alınmış ekran görüntüsü.
+    id: 'pierre-kitchen',
+    slug: 'pierre-kitchen',
+    title: { tr: 'Pierre Kitchen', en: 'Pierre Kitchen' },
+    summary: {
+      tr: 'Hayali bir restoran için menü, sepet, canlı sipariş takibi ve yönetim paneli olan sipariş platformu.',
+      en: 'An ordering platform for a fictional restaurant, with menu, cart, live order tracking and an admin panel.',
+    },
+    services: ['web-development', 'software-backend', 'e-commerce'],
+    year: 2026,
+    concept: true,
+    cover: {
+      url: '/work/pierre.webp',
+      alt: {
+        tr: 'Pierre Kitchen ana sayfası: “Canın ne çekiyorsa, kapına gelsin” başlığının yanında bir tabak dilimlenmiş biftek.',
+        en: 'Pierre Kitchen home page: the headline “Canın ne çekiyorsa, kapına gelsin” beside a plate of sliced steak.',
+      },
+      width: 960,
+      height: 720,
+      // Kare kartta başlık ve yemek fotoğrafı birlikte kalsın diye sola yakın kırpılır.
+      focus: '15% 50%',
+    },
+    liveUrl: 'https://pierre.burakgemici.com.tr',
+  },
 ];
