@@ -103,6 +103,10 @@ export const home: HomeContent = {
     title: 'Projects are being crafted.',
     body: 'MGB Software is a new studio. We are not filling this space with work we did not do — the first projects will appear right here the moment they ship.',
     status: 'IN PRODUCTION',
+    concept: 'Concept',
+    indexTitle: 'The first one is live. More are on the way.',
+    soon: 'COMING SOON',
+    visit: 'Visit site',
   },
 
   process: {

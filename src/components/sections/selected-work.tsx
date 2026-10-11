@@ -1,16 +1,18 @@
 'use client';
 
-import { AnimatePresence, motion, useMotionValue, useSpring } from 'motion/react';
-import { useLocale } from 'next-intl';
-import { type PointerEvent, useState } from 'react';
+import { motion, useMotionValue, useSpring } from 'motion/react';
+import { useLocale, useTranslations } from 'next-intl';
+import { Fragment, type PointerEvent, useState } from 'react';
 import type { Locale, Project, ServiceSlug } from '@/shared';
+import { ProjectDeck } from '@/components/animations/project-deck';
 import { ScrollReveal } from '@/components/animations/scroll-reveal';
 import { WordReveal } from '@/components/animations/word-reveal';
 import { Container } from '@/components/ui/container';
+import { ArrowUpRightIcon, PauseIcon, PlayIcon } from '@/components/ui/icons';
+import { SectionHeading } from '@/components/ui/section-heading';
 import { useIsTouch } from '@/hooks/use-is-touch';
 import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
-import { cn } from '@/lib/cn';
-import { DURATION, EASE_ENTRANCE } from '@/lib/motion';
+import { EASE_ENTRANCE } from '@/lib/motion';
 import { SECTION_ID } from '@/lib/sections';
 import type { WorkContent } from '@/types/content';
 
@@ -27,17 +29,15 @@ const CARD_PATHS = [
   'M25 161h270',
 ];
 
-/** Önizleme görselinin boyutu (px) — konum ofseti buradan hesaplanır. */
-const PREVIEW = { width: 320, height: 240 } as const;
 const FOLLOW_SPRING = { stiffness: 140, damping: 22, mass: 0.5 } as const;
 const PARALLAX = 18;
 
 /**
  * Seçilmiş İşler.
  *
- * Bileşen `projects` dizisini alır: doluysa editorial proje dizini, boşsa
- * bilinçli bir bekleme durumu render eder. Proje eklemek için bu dosyaya
- * dokunmaya gerek yok — veri content/projects.ts'ten gelir.
+ * Bileşen `projects` dizisini alır: doluysa döner proje destesi ve proje
+ * dizini, boşsa bilinçli bir bekleme durumu render eder. Proje eklemek için
+ * bu dosyaya dokunmaya gerek yok — veri content/projects.ts'ten gelir.
  */
 export function SelectedWork({
   content,
@@ -57,19 +57,16 @@ export function SelectedWork({
 }
 
 /* ---------------------------------------------------------------------------
-   Dolu durum — proje dizini
+   Dolu durum — deste + proje dizini
    --------------------------------------------------------------------------- */
 
 /**
- * Projeler kart ızgarası olarak değil, numaralı bir dizin olarak duruyor:
- * bir yayınevi künyesi gibi. Görsel satırın içinde değil, imlecin peşinde —
- * böylece liste tipografik ve sakin kalıyor, görsel ise yalnızca ilgilenilen
- * satır için ortaya çıkıyor.
+ * Bölümün gösterisi döner deste (`ProjectDeck`); proje kapakları ve henüz
+ * dolmamış yerler için "Yakında" kartları aynı halkada döner.
  *
- * Satır başlıkları hiçbir zaman soldurulmuyor. "Diğerlerini karart" kalıbı
- * iyi görünür ama okunabilirliği bozar; ayrım bunun yerine hareketle
- * kuruluyor: ilgilenilen satır sağa kayıyor, soldan vurgu çizgisi çıkıyor ve
- * künyesi açılıyor.
+ * Deste dekoratif kaldığı için asıl bağlantılar altındaki dizinde: numara,
+ * başlık, özet ve künye. Satırlar hareket etmiyor ve önizleme açmıyor — görsel
+ * zaten destede.
  */
 function WorkIndex({
   content,
@@ -81,118 +78,104 @@ function WorkIndex({
   serviceLabels: Readonly<Partial<Record<ServiceSlug, string>>>;
 }) {
   const locale = useLocale() as Locale;
+  const t = useTranslations('actions');
   const reducedMotion = usePrefersReducedMotion();
-  const isTouch = useIsTouch();
-  const follows = !reducedMotion && !isTouch;
-
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const active = activeIndex === null ? null : projects[activeIndex];
-
-  const rawX = useMotionValue(0);
-  const rawY = useMotionValue(0);
-  const previewX = useSpring(rawX, FOLLOW_SPRING);
-  const previewY = useSpring(rawY, FOLLOW_SPRING);
-
-  /**
-   * Önizleme imlecin TAM ÜSTÜNDE durmuyor: sağ kenara demirli, dikeyde imleci
-   * izliyor ve yatayda birkaç piksel sürükleniyor. Tam imleç altında olsaydı
-   * okumaya çalıştığınız proje adının üstünü kapatırdı.
-   */
-  function handlePointerMove(event: PointerEvent<HTMLElement>) {
-    if (!follows) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    const drift = ((event.clientX - rect.left) / rect.width - 0.5) * 2 * PARALLAX;
-    rawX.set(rect.width - PREVIEW.width - 48 + drift);
-    rawY.set(
-      Math.min(
-        Math.max(event.clientY - rect.top - PREVIEW.height / 2, 16),
-        rect.height - PREVIEW.height - 16,
-      ),
-    );
-  }
+  const [paused, setPaused] = useState(false);
 
   return (
     <section
       id={SECTION_ID.work}
-      className="relative anchor-target border-t border-line py-section"
-      onPointerMove={handlePointerMove}
-      onPointerLeave={() => setActiveIndex(null)}
+      className="anchor-target overflow-hidden border-t border-line py-section"
     >
-      {/* İmleci takip eden önizleme. Yayda gecikmeli olduğu için imlecin
-          arkasından sürükleniyor; anında yapışsaydı ucuz görünürdü. */}
-      {follows && (
-        <motion.div
-          aria-hidden="true"
-          className="pointer-events-none absolute top-0 left-0 z-10"
-          style={{ x: previewX, y: previewY, width: PREVIEW.width, height: PREVIEW.height }}
-        >
-          <AnimatePresence>
-            {active?.cover && (
-              <motion.img
-                key={active.id}
-                src={active.cover.url}
-                alt=""
-                width={active.cover.width}
-                height={active.cover.height}
-                initial={{ opacity: 0, scale: 1.06 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.02 }}
-                transition={{ duration: DURATION.base, ease: EASE_ENTRANCE }}
-                className="size-full object-cover"
-              />
-            )}
-          </AnimatePresence>
-        </motion.div>
-      )}
-
-      <Container className="relative">
-        <ScrollReveal>
-          <p className="font-mono text-label text-accent">{content.eyebrow}</p>
+      <Container>
+        <ScrollReveal className="flex items-end justify-between gap-6">
+          <SectionHeading eyebrow={content.eyebrow} title={content.indexTitle} />
+          {/* WCAG 2.2.2: kendiliğinden dönen deste için herkese açık durdurma. */}
+          {!reducedMotion && (
+            <button
+              type="button"
+              onClick={() => setPaused((value) => !value)}
+              aria-pressed={paused}
+              aria-label={t('pauseMotion')}
+              title={paused ? t('playMotion') : t('pauseMotion')}
+              className="inline-flex size-11 shrink-0 items-center justify-center rounded-sm border border-line text-fg-muted transition-colors duration-[var(--duration-fast)] hover:border-accent hover:text-accent"
+            >
+              {paused ? <PlayIcon className="size-4" /> : <PauseIcon className="size-4" />}
+            </button>
+          )}
         </ScrollReveal>
+      </Container>
 
-        <ul className="mt-12 border-t border-line">
+      <ProjectDeck
+        projects={projects}
+        locale={locale}
+        soonLabel={content.soon}
+        paused={paused}
+        className="mt-8 lg:mt-10"
+      />
+
+      <Container>
+        <ul className="mt-8 border-t border-line lg:mt-10">
           {projects.map((project, index) => {
-            const isActive = activeIndex === index;
+            const row = (
+              <>
+                <span className="font-mono text-label text-fg-subtle tabular-nums transition-colors duration-[var(--duration-fast)] group-hover:text-accent">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
+                <span className="min-w-0 flex-1 lg:grid lg:grid-cols-12 lg:items-baseline lg:gap-8">
+                  <span className="block lg:col-span-6">
+                    <span className="block text-display-3 text-fg">{project.title[locale]}</span>
+                    {/* Künye. Konsept etiketi hep görünür: iş müşteri işi gibi
+                        okunmasın. Her parça kendi içinde kırılmaz ve ayırıcı
+                        noktayı sonunda taşır: dar ekranda alt satır "·" ile
+                        başlamasın. */}
+                    <span className="mt-3 block font-mono text-mono-sm text-fg-subtle tabular-nums">
+                      {[
+                        String(project.year),
+                        ...(project.concept ? [content.concept] : []),
+                        ...project.services.map((slug) => serviceLabels[slug] ?? slug),
+                      ].map((part, partIndex, parts) => (
+                        <Fragment key={part}>
+                          {partIndex > 0 && ' '}
+                          <span className="whitespace-nowrap">
+                            {part}
+                            {partIndex < parts.length - 1 && ' ·'}
+                          </span>
+                        </Fragment>
+                      ))}
+                    </span>
+                  </span>
+                  <span className="mt-4 block max-w-[46ch] text-body text-fg-muted lg:col-span-5 lg:mt-0">
+                    {project.summary[locale]}
+                  </span>
+                </span>
+
+                {project.liveUrl && (
+                  <span className="mt-2 inline-flex shrink-0 items-center gap-2 self-start font-mono text-mono-sm text-fg-muted transition-colors duration-[var(--duration-fast)] group-hover:text-accent lg:mt-0 lg:self-center">
+                    <span className="hidden sm:inline">{content.visit}</span>
+                    <ArrowUpRightIcon className="size-3.5" />
+                  </span>
+                )}
+              </>
+            );
+
+            const className = 'group flex items-baseline gap-5 py-8 lg:gap-8 lg:py-10';
 
             return (
               <li key={project.id} className="border-b border-line">
-                <a
-                  href={project.liveUrl ?? `#${SECTION_ID.work}`}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  onFocus={() => setActiveIndex(index)}
-                  onBlur={() => setActiveIndex(null)}
-                  className="group relative flex items-baseline gap-5 py-7 lg:gap-8 lg:py-9"
-                >
-                  <span
-                    className={cn(
-                      'font-mono text-label tabular-nums transition-colors duration-[var(--duration-base)]',
-                      isActive ? 'text-accent' : 'text-fg-subtle',
-                    )}
+                {project.liveUrl ? (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className={className}
                   >
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-
-                  <motion.div
-                    animate={reducedMotion || !isActive ? { x: 0 } : { x: 18 }}
-                    transition={{ duration: DURATION.base, ease: EASE_ENTRANCE }}
-                  >
-                    <span className="block text-display-3 text-fg">{project.title[locale]}</span>
-
-                    {/* Künye başlığın ALTINDA: sağ taraf tamamen boş kalsın ki
-                        önizleme hiçbir metnin üstünü kapatmasın. Hizmet adı
-                        görünmezken de yerini koruyor, satır yüksekliği sabit. */}
-                    <span className="mt-3 block font-mono text-mono-sm text-fg-subtle">
-                      <span className="tabular-nums">{project.year}</span>
-                      <motion.span
-                        animate={{ opacity: isActive ? 1 : 0 }}
-                        transition={{ duration: DURATION.fast }}
-                      >
-                        {' · '}
-                        {project.services.map((slug) => serviceLabels[slug] ?? slug).join(' · ')}
-                      </motion.span>
-                    </span>
-                  </motion.div>
-                </a>
+                    {row}
+                  </a>
+                ) : (
+                  <div className={className}>{row}</div>
+                )}
               </li>
             );
           })}

@@ -8,6 +8,11 @@ export interface ProjectImage {
   alt: LocalizedText;
   width: number;
   height: number;
+  /**
+   * Kare kartta kırpılırken görselin hangi kısmı kalsın (CSS
+   * `object-position`, örn. '30% 50%'). Verilmezse ortası.
+   */
+  focus?: string;
 }
 
 export interface Project {
@@ -20,6 +25,11 @@ export interface Project {
   /** Projede verilen hizmetler — ana sayfadaki filtreleme buradan beslenir. */
   services: ServiceSlug[];
   year: number;
+  /**
+   * Gerçek bir müşteri için değil, stüdyonun kendi yaptığı konsept iş.
+   * Künyede her zaman "Konsept" olarak yazılır — müşteri işi gibi sunulmaz.
+   */
+  concept?: boolean;
   cover?: ProjectImage;
   /** Yayındaki projenin adresi, varsa. */
   liveUrl?: string;

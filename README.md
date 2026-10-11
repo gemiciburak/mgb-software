@@ -91,9 +91,30 @@ tek bir güçlü fikri var; efektler biriktirilmiyor:
   Kontur rengi `--fg-muted` — ölçüldü, açık temada 7.24:1, koyuda 8.51:1
   (büyük metin eşiği 3:1). Kontur yalnızca `lg` ve üzerinde: mobilde hover
   olmadığı için altı satırın beşi kalıcı kontur kalırdı.
-- **İşler** — imleci takip eden önizleme. Görsel imlecin tam altında değil,
-  sağ kenara demirli ve dikeyde imleci izliyor; tam altında olsaydı okunan
-  proje adının üstünü kapatırdı. Künye başlığın altında, sağ taraf boş.
+- **İşler** — döner kart destesi (`components/animations/project-deck.tsx`;
+  referans: Andreas Storm'un macOS simge ekran koruyucusu). Kartlar dikey
+  eksenli bir silindirde yüzleri yarıçap doğrultusunda durur: öndeki kart
+  profilden görünür, kenarlara doğru açılıp üst üste biner. Kartlar katıdır:
+  iki yüz ve köşeleri de izleyen yan duvarlar. Kalınlık önce ince katmanlarla
+  veriliyordu; kart tam profile gelince hepsi sıfır genişliğe inip kart bir an
+  kayboluyordu. Boyutlar `--r` (yarıçap) ve `--s` (kart) CSS değişkenlerinden
+  türer, ölçüm yok. Proje
+  kapaklarının yanında boş yerler numaralı "Yakında" kartlarıdır; sekiz kartlık
+  dizi on altı kartlık halkada iki kez döner. Kart sayısı bilinçli olarak az:
+  projeler azken çok sayıda boş kart stüdyoyu eksik gösteriyordu. Döngü
+  ref'lerle yürür (kare başına render yok), ekran dışında ve sekme gizliyken
+  durur. İmleç sahnedeyken yavaşlar, bir kartın üstüne gelince durur; o kart
+  büyüyüp izleyiciye döner, komşuları Dock büyütmesi gibi yana açılır. Öne
+  çıkan kart üst katmandaki bir kopyayla çizilir: aynı 3B uzayda büyüyüp
+  dönerken komşularının içinden geçiyordu. Dokunmatikte ilk dokunuş kartı öne
+  çıkarır, ikincisi projeyi açar. Kartlar iki yüzlüdür ve hiç ters çevrilmeden
+  döner (ortada 180° çevirmek kalınlık yüzünden sıçrama yapıyordu); uçlarda
+  sönme yok: kart ~105°'de, öndeki komşularının arkasındayken gizlenir
+  (saydamlık 3B katmanlara tek tek uygulanınca titrek bir hayalet çerçeve
+  bırakıyordu). Hover yalnızca gerçek fare hareketinde güncellenir; imleç
+  dururken altından kayan kart desteyi dur-kalk yaptırmaz. Yatay sürüklemeyle
+  çevrilir; durdur düğmesi var (WCAG 2.2.2). Deste `aria-hidden`: bağlantılar
+  altındaki dizinde tekrar eder.
 - **Yaklaşım** — kelime kelime açılan tez cümlesi
   (`components/animations/word-reveal.tsx`). Sayfadaki tek "ekranı domine
   eden" an; ikincisi olsaydı ikisi de sıradanlaşırdı.
@@ -144,6 +165,9 @@ olmayan sayfalara link verilmez: `src/lib/constants.ts` içindeki
 **Projeler** (`İşler` bölümü) `src/content/projects.ts` dizisinden gelir;
 proje eklemek bir nesne eklemektir. Dizi boşken bölüm bilinçli bekleme
 durumunu gösterir — uydurma proje yok.
+Müşteri için değil stüdyonun kendisi için yapılan işler `concept: true` ile
+işaretlenir; künyede hover'dan bağımsız olarak "Konsept" yazar. Kapak
+görseli `public/work/` altında, projenin kendi sayfasından ekran görüntüsüdür.
 
 **Teklif formu** (`/teklif-al` ↔ `/en/get-a-quote`) dört adımdır: ihtiyaç,
 kapsam, detaylar, iletişim. Seçenekler ve doğrulama `src/shared/contact.ts`

@@ -106,6 +106,10 @@ export const home: HomeContent = {
     title: 'Projelerimiz şu an üretimde.',
     body: 'MGB Software yeni kurulmuş bir stüdyo. Vitrini doldurmak için yapmadığımız işleri buraya koymuyoruz — ilk projeler yayına girdiğinde tam olarak burada olacaklar.',
     status: 'ÜRETİMDE',
+    concept: 'Konsept',
+    indexTitle: 'İlk iş yayında, yenileri yolda.',
+    soon: 'YAKINDA',
+    visit: 'Siteyi aç',
   },
 
   process: {

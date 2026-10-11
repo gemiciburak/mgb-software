@@ -87,6 +87,14 @@ export interface WorkContent extends SectionIntro {
   body: string;
   /** Mono durum göstergesi. */
   status: string;
+  /** Konsept işlerin künyesindeki etiket. */
+  concept: string;
+  /** Proje varken bölüm başlığı (boş durumda `title` kullanılır). */
+  indexTitle: string;
+  /** Destede henüz dolmamış kartların mono etiketi (büyük harfle yazılır). */
+  soon: string;
+  /** Proje satırındaki dış bağlantı etiketi. */
+  visit: string;
 }
 
 export interface FaqEntry {
