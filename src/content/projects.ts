@@ -77,12 +77,13 @@ export const projects: readonly Project[] = [
     liveUrl: 'https://pierre.burakgemici.com.tr',
   },
   {
-    // Gerçek bir çift için dijital düğün davetiyesi; bağlantı çiftin onayıyla
-    // paylaşılıyor. Çizimler ve monogram çiftin gönderdiği PDF'lerden. Kapak,
-    // davetiyenin açılış ekranından alınmış ekran görüntüsü.
-    id: 'gizem-ahmet',
-    slug: 'gizem-ahmet',
-    title: { tr: 'Gizem & Ahmet', en: 'Gizem & Ahmet' },
+    // Gerçek bir çift için dijital düğün davetiyesi. Davetiyede isimler, aile
+    // adları, tarih ve mekân olduğu için bilinçli olarak anonim: isim yok,
+    // canlı bağlantı yok. Çizimler ve monogram çiftin gönderdiği PDF'lerden.
+    // Kapak, davetiyenin açılış ekranından alınmış ekran görüntüsü.
+    id: 'wedding-invitation',
+    slug: 'wedding-invitation',
+    title: { tr: 'Düğün Davetiyesi', en: 'Wedding Invitation' },
     summary: {
       tr: 'Damgaya dokununca açılan, geri sayımlı, yol tarifi ve takvim kaydı olan dijital düğün davetiyesi.',
       en: 'A digital wedding invitation that opens at a tap on its seal, with a countdown, directions and a calendar entry.',
@@ -90,14 +91,13 @@ export const projects: readonly Project[] = [
     services: ['web-development'],
     year: 2026,
     cover: {
-      url: '/work/gizem-ahmet.webp',
+      url: '/work/wedding-invitation.webp',
       alt: {
-        tr: 'Gizem & Ahmet davetiyesinin kapağı: üstte ve altta çiçek bantları, ortada yeşil çerçeveli G ve A monogramı.',
-        en: 'Cover of the Gizem & Ahmet invitation: floral bands above and below, a green-framed G and A monogram in the middle.',
+        tr: 'Davetiyenin kapağı: üstte ve altta çiçek bantları, ortada yeşil çerçeveli bir monogram.',
+        en: 'Cover of the invitation: floral bands above and below, a green-framed monogram in the middle.',
       },
       width: 960,
       height: 720,
     },
-    liveUrl: 'https://gizemveahmet.vercel.app',
   },
 ];
