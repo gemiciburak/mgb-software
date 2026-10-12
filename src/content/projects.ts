@@ -76,28 +76,4 @@ export const projects: readonly Project[] = [
     },
     liveUrl: 'https://pierre.burakgemici.com.tr',
   },
-  {
-    // Gerçek bir çift için dijital düğün davetiyesi. Davetiyede isimler, aile
-    // adları, tarih ve mekân olduğu için bilinçli olarak anonim: isim yok,
-    // canlı bağlantı yok. Çizimler ve monogram çiftin gönderdiği PDF'lerden.
-    // Kapak, davetiyenin açılış ekranından alınmış ekran görüntüsü.
-    id: 'wedding-invitation',
-    slug: 'wedding-invitation',
-    title: { tr: 'Düğün Davetiyesi', en: 'Wedding Invitation' },
-    summary: {
-      tr: 'Damgaya dokununca açılan, geri sayımlı, yol tarifi ve takvim kaydı olan dijital düğün davetiyesi.',
-      en: 'A digital wedding invitation that opens at a tap on its seal, with a countdown, directions and a calendar entry.',
-    },
-    services: ['web-development'],
-    year: 2026,
-    cover: {
-      url: '/work/wedding-invitation.webp',
-      alt: {
-        tr: 'Davetiyenin kapağı: üstte ve altta çiçek bantları, ortada yeşil çerçeveli bir monogram.',
-        en: 'Cover of the invitation: floral bands above and below, a green-framed monogram in the middle.',
-      },
-      width: 960,
-      height: 720,
-    },
-  },
 ];
