@@ -51,7 +51,7 @@ export async function Philosophy({
       <Container>
         {/* 1 — Stüdyo. */}
         {/* Üstten hizalı: ortalanınca uzun çizim başlığı aşağı itiyordu. */}
-        <div className="grid gap-y-14 md:grid-cols-12 md:items-start md:gap-y-0">
+        <div className="relative grid md:grid-cols-12 md:items-start">
           <ScrollReveal className="md:col-span-6">
             <p className="font-mono text-label text-accent">{content.eyebrow}</p>
             <h2 className="mt-6 max-w-[14ch] text-display-2 text-balance">{content.title}</h2>
@@ -77,10 +77,12 @@ export async function Philosophy({
           </ScrollReveal>
 
           {/* Çizim kanvasın ortasında durur, üstünde boşluk kalır; negatif
-              kenar boşluğu küpün tepesini soldaki etiketle aynı hizaya alır. */}
-          <div className="border-t border-line pt-10 md:col-span-5 md:col-start-8 md:-mt-9 md:border-t-0 md:pt-0">
-            <InkPolyhedra className="mx-auto aspect-square w-full max-w-[28rem]" />
-            <p className="mt-4 border-t border-line pt-4 font-mono text-mono-sm text-fg-subtle">
+              kenar boşluğu küpün tepesini soldaki etiketle aynı hizaya alır.
+              Mobilde ayrı bir blok değil: başlığın sağındaki boşlukta küçük
+              bir işaret olarak durur, metin akışına yer kaplamaz. */}
+          <div className="pointer-events-none absolute -top-10 right-0 w-28 md:pointer-events-auto md:static md:col-span-5 md:col-start-8 md:-mt-9 md:w-auto">
+            <InkPolyhedra className="mx-auto aspect-square w-full max-w-md" />
+            <p className="mt-4 hidden border-t border-line pt-4 font-mono text-mono-sm text-fg-subtle md:block">
               {content.caption}
             </p>
           </div>

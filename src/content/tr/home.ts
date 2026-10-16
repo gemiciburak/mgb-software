@@ -20,7 +20,7 @@ export const home: HomeContent = {
       { label: 'KAPSAM', value: 'Tasarımdan yayına' },
       { label: 'DİL', value: 'Türkçe · English' },
     ],
-    caption: 'TEL KAFES + MÜREKKEP',
+    caption: 'YAZILIM + TASARIM',
   },
 
   // Ses kuralı: stüdyo "biz" der, kurucu birinci tekil konuşur. "Ekibimiz",

@@ -19,7 +19,7 @@ export const home: HomeContent = {
       { label: 'SCOPE', value: 'Design to launch' },
       { label: 'LANGUAGES', value: 'Türkçe · English' },
     ],
-    caption: 'WIREFRAME + INK',
+    caption: 'SOFTWARE + DESIGN',
   },
 
   founder: {
