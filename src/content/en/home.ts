@@ -210,6 +210,11 @@ export const home: HomeContent = {
           'You do. The source code and access to the services your product runs on are handed over to you on delivery, so another team can keep building on it later if you wish.',
       },
       {
+        question: 'What technologies do you use?',
+        answer:
+          'Tools are chosen for how long the project has to live, not for what is trending. On the web we use Next.js, React and TypeScript; on the backend Node.js and NestJS; MongoDB for data and Docker for deployment. Design happens in Figma, and Apple platforms are built with Swift. All mature, well documented tools: maintainable years from now, and easy for another team to pick up.',
+      },
+      {
         question: 'Do you offer support after launch?',
         answer:
           'Yes. Launch is not the finish line for us: we watch real usage, fix what is not working and keep improving the product. The scope of maintenance and further development is stated separately in the proposal.',

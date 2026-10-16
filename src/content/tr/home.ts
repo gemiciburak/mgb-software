@@ -216,6 +216,11 @@ export const home: HomeContent = {
           'Size. Kaynak kodu ve ürünün çalıştığı servislerin erişimleri teslimatla birlikte size devrediliyor. Böylece ürününüzü ileride başka bir ekip de geliştirmeye devam edebilir.',
       },
       {
+        question: 'Hangi teknolojileri kullanıyorsunuz?',
+        answer:
+          'Araç seçimini modaya değil, projenin ömrüne göre yapıyoruz. Web tarafında Next.js, React ve TypeScript; backend’de Node.js ve NestJS; veritabanında MongoDB; dağıtımda Docker kullanıyoruz. Tasarım Figma’da, Apple platformları için geliştirme Swift ile yapılıyor. Hepsi olgun ve iyi belgelenmiş araçlar: yıllar sonra da bakımı yapılabilir, başka bir ekip de kolayca devralabilir.',
+      },
+      {
         question: 'Yayından sonra destek veriyor musunuz?',
         answer:
           'Evet. Yayın bizim için bitiş değil: gerçek kullanımı izliyor, aksayanı düzeltiyor ve ürünü geliştirmeye devam ediyoruz. Bakım ve geliştirmenin kapsamı teklifte ayrıca belirtiliyor.',
