@@ -44,7 +44,8 @@ const PARALLAX_SPRING = { stiffness: 70, damping: 18, mass: 0.7 } as const;
  * olmasın diye:
  *   • lg ve üzeri → satıra gelince (hover veya klavye odağı) sağdaki yapışkan
  *     sütun o hizmete geçer.
- *   • lg altı → satır bir accordion; dokununca açıklama altında açılır.
+ *   • lg altı → satır bir accordion; dokununca altında solda küçük bir çizim,
+ *     sağda çıktılar açılır. Açıklama yalnızca masaüstünde.
  *
  * TODO: hizmet detay sayfaları yayına alınınca satırlar onlara bağlanacak
  * (`/hizmetler/[slug]` ↔ `/en/services/[slug]`). O zaman <button> yerine
@@ -159,14 +160,27 @@ export function Services({ content }: { content: ServicesContent }) {
                     hidden={!isExpanded}
                     className="pb-7 lg:hidden"
                   >
-                    <p className="max-w-[48ch] text-body-sm text-fg-muted">{service.summary}</p>
-                    <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
-                      {service.deliverables.map((item) => (
-                        <li key={item} className="font-mono text-mono-sm text-fg-subtle">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Açıklama mobilde görünmüyor: ilk cümlesi çıktıları tekrar
+                        ediyor. Yine de ekran okuyucular ve arama motorları için
+                        işaretlemede duruyor. */}
+                    <p className="sr-only">{service.summary}</p>
+                    {/* Solda çizimin küçük hali, sağda çıktılar. Çizim yalnızca
+                        açıkken bağlanıyor ki her açılışta yeniden çizilsin. */}
+                    <div className="flex items-center gap-6 pt-5">
+                      <div className="w-28 shrink-0 text-line-strong">
+                        {isExpanded && <ServiceGlyph slug={service.slug} className="w-full" />}
+                      </div>
+                      <ul className="min-w-0 space-y-1.5">
+                        {service.deliverables.map((item) => (
+                          <li
+                            key={item}
+                            className="pl-[2ch] indent-[-2ch] font-mono text-mono-sm tracking-[0.06em] text-fg-subtle"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </li>
               );

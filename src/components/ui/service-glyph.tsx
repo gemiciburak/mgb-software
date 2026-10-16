@@ -51,10 +51,10 @@ const GLYPHS: Record<ServiceSlug, readonly string[]> = {
   ],
   // izometrik küp
   'technical-design-3d': [
-    'M60 8L104 32v36L60 92 16 68V32z',
-    'M60 8v40M60 48l44-16M60 48L16 32',
-    'M60 48v44',
-    'M16 68l44-20 44 20',
+    'M60 2L104 26v36L60 86 16 62V26z',
+    'M60 2v40M60 42l44-16M60 42L16 26',
+    'M60 42v44',
+    'M16 62l44-20 44 20',
   ],
 };
 
