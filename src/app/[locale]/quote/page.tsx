@@ -59,7 +59,7 @@ export default async function ContactPage({ params }: PageProps) {
             <ProjectBrief services={services} />
           </div>
 
-          <aside className="space-y-6 lg:col-span-4 lg:col-start-9 lg:pl-12">
+          <aside className="space-y-6 lg:col-span-4 lg:col-start-9 lg:pl-8 xl:pl-12">
             {/*
               Bilgi paftası. Ön görüşme bilinçli olarak buradan doğrudan
               açılmaz: görüşmeye talep okunmadan girilmesin diye takvim yalnızca
@@ -102,11 +102,12 @@ export default async function ContactPage({ params }: PageProps) {
 
               {CONTACT_EMAIL !== null && (
                 <div className="border-t border-line bg-bg-subtle px-6 py-5">
-                  <h2 className="font-mono text-mono-sm text-fg-subtle">{t('aside.filesTitle')}</h2>
+                  {/* fg-muted: bg-subtle zeminde fg-subtle 4.19:1 kalıyordu (axe). */}
+                  <h2 className="font-mono text-mono-sm text-fg-muted">{t('aside.filesTitle')}</h2>
                   <p className="mt-2 text-body-sm text-fg-muted">{t('aside.filesBody')}</p>
                   <a
                     href={`mailto:${CONTACT_EMAIL}`}
-                    className="group/mail mt-3 inline-flex items-center gap-2.5 rounded-xs text-body font-medium break-all text-fg transition-colors hover:text-accent"
+                    className="group/mail mt-3 inline-flex items-center gap-2.5 rounded-xs text-body-sm font-medium break-all text-fg transition-colors hover:text-accent xl:text-body"
                   >
                     <MailIcon className="size-4 shrink-0 text-accent" />
                     {CONTACT_EMAIL}
