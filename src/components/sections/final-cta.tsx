@@ -3,15 +3,9 @@ import { Magnetic } from '@/components/animations/magnetic';
 import { ScrollReveal } from '@/components/animations/scroll-reveal';
 import { buttonStyles } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
-import {
-  ArrowRightIcon,
-  ArrowUpRightIcon,
-  MailIcon,
-  WhatsAppIcon,
-  SocialIcon,
-} from '@/components/ui/icons';
+import { ContactChannels, HAS_CONTACT_CHANNELS } from '@/components/ui/contact-channels';
+import { ArrowRightIcon } from '@/components/ui/icons';
 import { Link } from '@/i18n/navigation';
-import { CONTACT_EMAIL, CONTACT_PHONE, whatsappHref, SOCIAL_LINKS } from '@/lib/constants';
 import { SECTION_ID } from '@/lib/sections';
 import type { CtaContent } from '@/types/content';
 
@@ -36,7 +30,6 @@ import type { CtaContent } from '@/types/content';
 export async function FinalCta({ content }: { content: CtaContent }) {
   const t = await getTranslations('actions');
   const tReach = await getTranslations('reach');
-  const hasChannels = CONTACT_EMAIL !== null || CONTACT_PHONE !== null || SOCIAL_LINKS.length > 0;
 
   return (
     <section
@@ -69,7 +62,7 @@ export async function FinalCta({ content }: { content: CtaContent }) {
           </ScrollReveal>
 
           {/* 2 — Doğrudan kanallar: soru, iş birliği, proje dışı konular. */}
-          {hasChannels && (
+          {HAS_CONTACT_CHANNELS && (
             <ScrollReveal
               delay={0.1}
               className="border-t border-line pt-10 lg:col-span-4 lg:col-start-9 lg:self-end lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10"
@@ -77,52 +70,7 @@ export async function FinalCta({ content }: { content: CtaContent }) {
               <h3 className="font-mono text-label text-accent">{tReach('eyebrow')}</h3>
               <p className="mt-4 max-w-[34ch] text-body text-fg-muted">{tReach('body')}</p>
 
-              <ul className="mt-7 space-y-4">
-                {CONTACT_EMAIL !== null && (
-                  <li>
-                    <a
-                      href={`mailto:${CONTACT_EMAIL}`}
-                      className="group/link inline-flex items-center gap-2.5 rounded-xs text-body break-all text-fg transition-colors hover:text-accent"
-                    >
-                      <MailIcon className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent" />
-                      {CONTACT_EMAIL}
-                    </a>
-                  </li>
-                )}
-                {CONTACT_PHONE !== null && (
-                  <li>
-                    <a
-                      href={whatsappHref(CONTACT_PHONE.digits, tReach('whatsappDraft'))}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      aria-label={`${tReach('whatsappLabel')} — ${CONTACT_PHONE.display}`}
-                      className="group/link inline-flex items-center gap-2.5 rounded-xs text-body text-fg transition-colors hover:text-accent"
-                    >
-                      <WhatsAppIcon className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent" />
-                      {CONTACT_PHONE.display}
-                      <ArrowUpRightIcon className="size-3 shrink-0 text-fg-subtle" />
-                    </a>
-                  </li>
-                )}
-                {SOCIAL_LINKS.map((social) => (
-                  <li key={social.href}>
-                    <a
-                      href={social.href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      aria-label={`${social.label} — ${social.handle}`}
-                      className="group/link inline-flex items-center gap-2.5 rounded-xs text-body text-fg transition-colors hover:text-accent"
-                    >
-                      <SocialIcon
-                        id={social.id}
-                        className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent"
-                      />
-                      {social.handle}
-                      <ArrowUpRightIcon className="size-3 shrink-0 text-fg-subtle" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <ContactChannels size="md" className="mt-7" />
             </ScrollReveal>
           )}
         </div>

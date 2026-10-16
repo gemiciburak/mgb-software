@@ -1,16 +1,9 @@
-import { getTranslations } from 'next-intl/server';
 import { InkPolyhedra } from '@/components/animations/ink-polyhedra';
 import { ScrollReveal } from '@/components/animations/scroll-reveal';
 import { Container } from '@/components/ui/container';
+import { ContactChannels, HAS_CONTACT_CHANNELS } from '@/components/ui/contact-channels';
 import { FounderPortrait } from '@/components/ui/founder-portrait';
-import { ArrowUpRightIcon, MailIcon, WhatsAppIcon, SocialIcon } from '@/components/ui/icons';
-import {
-  CONTACT_EMAIL,
-  CONTACT_PHONE,
-  whatsappHref,
-  SITE_NAME,
-  SOCIAL_LINKS,
-} from '@/lib/constants';
+import { SITE_NAME } from '@/lib/constants';
 import { SECTION_ID } from '@/lib/sections';
 import type { FounderContent, PhilosophyContent } from '@/types/content';
 
@@ -30,16 +23,14 @@ import type { FounderContent, PhilosophyContent } from '@/types/content';
  * Çizim metnin görsel karşılığı: aynı iskelet, üzerine çekilen mürekkeple
  * okunur hale geliyor — tasarım ve yazılımın aynı işin iki yüzü olması.
  */
-export async function Philosophy({
+export function Philosophy({
   content,
   founder,
 }: {
   content: PhilosophyContent;
   founder: FounderContent;
 }) {
-  const tReach = await getTranslations('reach');
   const [lead, ...rest] = content.body;
-  const hasChannels = CONTACT_EMAIL !== null || CONTACT_PHONE !== null || SOCIAL_LINKS.length > 0;
 
   return (
     // Üst boşluk genel `py-section`dan dar: başlık bölüm çizgisine bağlı
@@ -130,55 +121,10 @@ export async function Philosophy({
               ))}
             </div>
 
-            {hasChannels && (
+            {HAS_CONTACT_CHANNELS && (
               <div className="flex flex-col border-t border-line p-6 md:col-span-12 md:p-8 lg:p-10 xl:col-span-3 xl:border-t-0 xl:border-l xl:p-8">
                 <p className="font-mono text-mono-sm text-fg-subtle">{founder.contactLabel}</p>
-                <ul className="mt-5 space-y-3">
-                  {CONTACT_EMAIL !== null && (
-                    <li>
-                      <a
-                        href={`mailto:${CONTACT_EMAIL}`}
-                        className="group/link inline-flex items-center gap-2.5 rounded-xs text-body-sm break-all text-fg transition-colors hover:text-accent lg:break-normal"
-                      >
-                        <MailIcon className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent" />
-                        {CONTACT_EMAIL}
-                      </a>
-                    </li>
-                  )}
-                  {CONTACT_PHONE !== null && (
-                    <li>
-                      <a
-                        href={whatsappHref(CONTACT_PHONE.digits, tReach('whatsappDraft'))}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        aria-label={`${tReach('whatsappLabel')} — ${CONTACT_PHONE.display}`}
-                        className="group/link inline-flex items-center gap-2.5 rounded-xs text-body-sm text-fg transition-colors hover:text-accent"
-                      >
-                        <WhatsAppIcon className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent" />
-                        {CONTACT_PHONE.display}
-                        <ArrowUpRightIcon className="size-3 shrink-0 text-fg-subtle" />
-                      </a>
-                    </li>
-                  )}
-                  {SOCIAL_LINKS.map((social) => (
-                    <li key={social.href}>
-                      <a
-                        href={social.href}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        aria-label={`${social.label} — ${social.handle}`}
-                        className="group/link inline-flex items-center gap-2.5 rounded-xs text-body-sm text-fg transition-colors hover:text-accent"
-                      >
-                        <SocialIcon
-                          id={social.id}
-                          className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent"
-                        />
-                        {social.handle}
-                        <ArrowUpRightIcon className="size-3 shrink-0 text-fg-subtle" />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                <ContactChannels className="mt-5" />
                 {/* Antet kutusunun alt satırı. Marka adı çevrilmez. */}
                 <p className="mt-8 font-mono text-mono-sm text-fg-subtle xl:mt-auto">
                   {SITE_NAME.toUpperCase()}

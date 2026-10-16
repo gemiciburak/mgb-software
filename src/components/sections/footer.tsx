@@ -1,18 +1,11 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Container } from '@/components/ui/container';
 import { Copyright } from '@/components/ui/copyright';
-import { ArrowUpRightIcon, MailIcon, WhatsAppIcon, SocialIcon } from '@/components/ui/icons';
+import { ContactChannels, HAS_CONTACT_CHANNELS } from '@/components/ui/contact-channels';
 import { Logo } from '@/components/ui/logo';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/cn';
-import {
-  BRAND_SIGNATURE,
-  CONTACT_EMAIL,
-  CONTACT_PHONE,
-  SOCIAL_LINKS,
-  isPublished,
-  whatsappHref,
-} from '@/lib/constants';
+import { BRAND_SIGNATURE, isPublished } from '@/lib/constants';
 import { NAV_ITEMS, navHref } from '@/lib/sections';
 
 const LINK_CLASS = 'rounded-xs text-body-sm text-fg-muted transition-colors hover:text-fg';
@@ -33,7 +26,6 @@ const LINK_CLASS = 'rounded-xs text-body-sm text-fg-muted transition-colors hove
 export async function Footer() {
   const t = await getTranslations('footer');
   const tNav = await getTranslations('nav');
-  const tReach = await getTranslations('reach');
   const locale = await getLocale();
 
   const legalLinks = (
@@ -47,13 +39,18 @@ export async function Footer() {
   return (
     <footer className="border-t border-line">
       <Container width="wide" className="py-16">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className={cn('lg:col-span-4', hasLegal ? 'md:col-span-6' : 'md:col-span-4')}>
+        {/* Mobilde iki sütun: kısa link listeleri (Sayfalar, Yasal) yan yana
+            durur; marka ve iletişim tam genişlik. Tek sütunda footer telefonda
+            neredeyse bir buçuk ekran tutuyordu. */}
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-12 md:gap-x-12">
+          <div
+            className={cn('col-span-2 lg:col-span-4', hasLegal ? 'md:col-span-6' : 'md:col-span-4')}
+          >
             <Logo size="lg" />
             <p className="mt-4 max-w-[28ch] text-body-sm text-fg-muted">{t('tagline')}</p>
           </div>
 
-          <nav aria-label={t('navHeading')} className="md:col-span-3 lg:col-span-2">
+          <nav aria-label={t('navHeading')} className="col-span-1 md:col-span-3 lg:col-span-2">
             <h2 className="font-mono text-mono-sm text-fg-subtle">{t('navHeading')}</h2>
             <ul className="mt-4 space-y-2">
               {NAV_ITEMS.map((item) => (
@@ -67,7 +64,7 @@ export async function Footer() {
           </nav>
 
           {hasLegal && (
-            <div className="md:col-span-3 lg:col-span-2">
+            <div className="col-span-1 md:col-span-3 lg:col-span-2">
               <h2 className="font-mono text-mono-sm text-fg-subtle">{t('legalHeading')}</h2>
               <ul className="mt-4 space-y-2">
                 {legalLinks.map((link) => (
@@ -81,63 +78,16 @@ export async function Footer() {
             </div>
           )}
 
-          {(CONTACT_EMAIL !== null || CONTACT_PHONE !== null || SOCIAL_LINKS.length > 0) && (
+          {HAS_CONTACT_CHANNELS && (
             <div
               className={cn(
-                'lg:col-span-4',
+                'col-span-2 lg:col-span-4',
                 // Tablette 5 sütun: e-posta adresi 4 sütunda satır ortasından kırılıyordu.
                 hasLegal ? 'md:col-span-6' : 'md:col-span-5 lg:col-start-9',
               )}
             >
               <h2 className="font-mono text-mono-sm text-fg-subtle">{t('contactHeading')}</h2>
-              <ul className="mt-4 space-y-3">
-                {CONTACT_EMAIL !== null && (
-                  <li>
-                    {/* İkon dekoratif: linkin erişilebilir adı zaten adresin
-                        kendisi. İkon ayrıca okunursa gereksiz tekrar olur. */}
-                    <a
-                      href={`mailto:${CONTACT_EMAIL}`}
-                      className="group/link inline-flex items-center gap-2.5 rounded-xs text-body-sm break-all text-fg-muted transition-colors hover:text-fg"
-                    >
-                      <MailIcon className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent" />
-                      {CONTACT_EMAIL}
-                    </a>
-                  </li>
-                )}
-                {CONTACT_PHONE !== null && (
-                  <li>
-                    <a
-                      href={whatsappHref(CONTACT_PHONE.digits, tReach('whatsappDraft'))}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      aria-label={`${tReach('whatsappLabel')} — ${CONTACT_PHONE.display}`}
-                      className="group/link inline-flex items-center gap-2.5 rounded-xs text-body-sm text-fg-muted transition-colors hover:text-fg"
-                    >
-                      <WhatsAppIcon className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent" />
-                      {CONTACT_PHONE.display}
-                      <ArrowUpRightIcon className="size-3 shrink-0 text-fg-subtle" />
-                    </a>
-                  </li>
-                )}
-                {SOCIAL_LINKS.map((social) => (
-                  <li key={social.href}>
-                    <a
-                      href={social.href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      aria-label={`${social.label} — ${social.handle}`}
-                      className="group/link inline-flex items-center gap-2.5 rounded-xs text-body-sm text-fg-muted transition-colors hover:text-fg"
-                    >
-                      <SocialIcon
-                        id={social.id}
-                        className="size-4 shrink-0 text-fg-subtle transition-colors group-hover/link:text-accent"
-                      />
-                      {social.handle}
-                      <ArrowUpRightIcon className="size-3 shrink-0" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <ContactChannels tone="muted" className="mt-4" />
             </div>
           )}
         </div>
