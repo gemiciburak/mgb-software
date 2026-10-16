@@ -1,6 +1,6 @@
 'use client';
 
-import { useInView } from 'motion/react';
+import { motion, useInView, useMotionValueEvent, useScroll } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { ScrollReveal } from '@/components/animations/scroll-reveal';
 import { Container } from '@/components/ui/container';
@@ -23,8 +23,9 @@ type ProcessContent = SectionIntro & { steps: readonly ProcessStep[] };
  *   • yalnızca bölüm görünüme yaklaşınca indiriliyor,
  *   • yalnızca masaüstünde ve hareket azaltma kapalıyken kuruluyor.
  *
- * Masaüstü dışında yapışkan davranış yok: adımlar normal bir dikey liste
- * olarak akıyor, aynı bilgi aynı sırayla okunuyor.
+ * Masaüstü dışında yapışkan davranış yok: adımlar numaralı düğümlerin dikey
+ * bir rayla bağlandığı bir zaman çizelgesi olarak akıyor. Ray scroll ile
+ * doluyor; bunu GSAP değil Motion yapıyor (aşağıda `RailSegment`).
  */
 export function ProcessTimeline({ content }: { content: ProcessContent }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -135,7 +136,8 @@ export function ProcessTimeline({ content }: { content: ProcessContent }) {
           </div>
 
           {/* Adımlar. Masaüstünde her biri ekranın yarısı kadar yer kaplar ki
-              scroll ile tek tek öne çıksınlar; mobilde sıradan bir liste. */}
+              scroll ile tek tek öne çıksınlar; mobilde numaralı düğümlerin
+              dikey bir rayla bağlandığı bir zaman çizelgesi. */}
           <ol className="lg:col-span-6 lg:col-start-7">
             {content.steps.map((step, index) => {
               /**
@@ -146,6 +148,7 @@ export function ProcessTimeline({ content }: { content: ProcessContent }) {
                */
               const dimmed = isDesktop && !reducedMotion && index !== activeIndex;
               const tone = 'transition-colors duration-[var(--duration-base)]';
+              const isLast = index === content.steps.length - 1;
 
               return (
                 <li key={step.title}>
@@ -154,38 +157,46 @@ export function ProcessTimeline({ content }: { content: ProcessContent }) {
                       stepRefs.current[index] = element;
                     }}
                     className={cn(
-                      'border-t border-line py-10',
-                      'lg:flex lg:min-h-[52vh] lg:flex-col lg:justify-center lg:py-16',
+                      'relative',
+                      !isLast && 'max-lg:pb-10',
+                      'lg:flex lg:min-h-[52vh] lg:flex-col lg:justify-center lg:border-t lg:border-line lg:py-16',
                     )}
                   >
+                    {!isLast && <RailSegment reducedMotion={reducedMotion} />}
+
+                    <div className="max-lg:flex max-lg:items-center max-lg:gap-4">
+                      <StepNode number={index + 1} reducedMotion={reducedMotion} />
+                      <p
+                        className={cn(
+                          'font-mono text-mono-sm tabular-nums max-lg:hidden',
+                          tone,
+                          dimmed ? 'text-fg-subtle' : 'text-accent',
+                        )}
+                      >
+                        {String(index + 1).padStart(2, '0')}
+                      </p>
+                      <h3
+                        className={cn(
+                          'mt-4 text-display-3 max-lg:mt-0',
+                          tone,
+                          dimmed ? 'text-fg-muted' : 'text-fg',
+                        )}
+                      >
+                        {step.title}
+                      </h3>
+                    </div>
                     <p
                       className={cn(
-                        'font-mono text-mono-sm tabular-nums',
-                        tone,
-                        dimmed ? 'text-fg-subtle' : 'text-accent',
-                      )}
-                    >
-                      {String(index + 1).padStart(2, '0')}
-                    </p>
-                    <h3
-                      className={cn(
-                        'mt-4 text-display-3',
-                        tone,
-                        dimmed ? 'text-fg-muted' : 'text-fg',
-                      )}
-                    >
-                      {step.title}
-                    </h3>
-                    <p
-                      className={cn(
-                        'mt-5 max-w-[46ch] text-body-lg',
+                        'mt-5 max-w-[46ch] text-body-lg max-lg:mt-3 max-lg:pl-12',
                         tone,
                         dimmed ? 'text-fg-subtle' : 'text-fg-muted',
                       )}
                     >
                       {step.description}
                     </p>
-                    <p className="mt-6 font-mono text-mono-sm text-fg-subtle">{step.deliverable}</p>
+                    <p className="mt-6 font-mono text-mono-sm text-fg-subtle max-lg:mt-4 max-lg:pl-12 max-lg:tracking-[0.06em] max-lg:text-fg-muted">
+                      {step.deliverable}
+                    </p>
                   </div>
                 </li>
               );
@@ -194,5 +205,62 @@ export function ProcessTimeline({ content }: { content: ProcessContent }) {
         </div>
       </Container>
     </section>
+  );
+}
+
+/** Mobil düğümün vurgu rengine döndüğü ve rayın dolduğu ekran çizgisi. */
+const RAIL_LINE = '60%';
+
+/**
+ * Mobil: adımın numaralı düğümü. Ekranın {@link RAIL_LINE} çizgisini geçince
+ * vurgu rengine döner, geri kaydırınca söner — rayın dolumuyla aynı anda.
+ */
+function StepNode({ number, reducedMotion }: { number: number; reducedMotion: boolean }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [reached, setReached] = useState(false);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', `center ${RAIL_LINE}`],
+  });
+  useMotionValueEvent(scrollYProgress, 'change', (value) => setReached(value >= 1));
+  const lit = reached || reducedMotion;
+
+  return (
+    <span
+      ref={ref}
+      aria-hidden="true"
+      className={cn(
+        'grid size-8 shrink-0 place-items-center rounded-full border bg-bg font-mono text-mono-sm tracking-normal tabular-nums lg:hidden',
+        'transition-colors duration-[var(--duration-base)]',
+        lit ? 'border-accent text-accent' : 'border-line-strong text-fg-subtle',
+      )}
+    >
+      {String(number).padStart(2, '0')}
+    </span>
+  );
+}
+
+/**
+ * Mobil: bir düğümden sonrakine uzanan ray parçası. Sönük zeminin üstünde
+ * vurgu çizgisi scroll'a bağlı dolar. GSAP gerekmez — Motion zaten yüklü.
+ */
+function RailSegment({ reducedMotion }: { reducedMotion: boolean }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: [`start ${RAIL_LINE}`, `end ${RAIL_LINE}`],
+  });
+
+  return (
+    <span
+      ref={ref}
+      aria-hidden="true"
+      className="absolute top-8 bottom-0 left-4 w-px -translate-x-1/2 bg-line lg:hidden"
+    >
+      <motion.span
+        className="absolute inset-0 origin-top bg-accent"
+        style={{ scaleY: reducedMotion ? 1 : scrollYProgress }}
+      />
+    </span>
   );
 }
