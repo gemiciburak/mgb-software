@@ -76,4 +76,29 @@ export const projects: readonly Project[] = [
     },
     liveUrl: 'https://pierre.burakgemici.com.tr',
   },
+  {
+    // Stüdyonun kendi oyunu: Unity 2D + C#, iOS/Android için yazıldı, web'de
+    // PWA olarak yayında. Çizimler ve sesler koddan üretildi. Kapak, oyunun
+    // kendi logosu, 1. dünya katmanları ve kostüm görsellerinden kurulmuş
+    // yatay bir afiş.
+    id: 'catch-me',
+    slug: 'catch-me',
+    title: { tr: 'Catch Me!', en: 'Catch Me!' },
+    summary: {
+      tr: 'Bambu ormanında saklanan pandaları yakaladığın, 50 bölümlük bir refleks ve dikkat oyunu.',
+      en: 'A 50-level reflex and focus game about catching pandas before they hide in a bamboo forest.',
+    },
+    services: ['mobile-apple', 'ui-ux-design'],
+    year: 2026,
+    cover: {
+      url: '/work/pandas.webp',
+      alt: {
+        tr: 'Catch Me! logosunun altında bambu ormanında yan yana duran beş panda: ortada Altın Panda, yanlarında ninja, astronot, ateş ve şimşek kostümlüler.',
+        en: 'Five pandas side by side in a bamboo forest under the Catch Me! logo: the Golden Panda in the middle, flanked by ninja, astronaut, fire and lightning costumes.',
+      },
+      width: 1440,
+      height: 1080,
+    },
+    liveUrl: 'https://pandas.mgbsoftware.com.tr',
+  },
 ];
