@@ -46,13 +46,13 @@ export async function Philosophy({
     // okunsun, üstünde kopuk bir boşluk kalmasın.
     <section
       id={SECTION_ID.about}
-      className="anchor-target border-t border-line pt-20 pb-section lg:pt-28"
+      className="anchor-target overflow-x-clip border-t border-line pt-20 pb-section lg:pt-28"
     >
       <Container>
         {/* 1 — Stüdyo. */}
         {/* Üstten hizalı: ortalanınca uzun çizim başlığı aşağı itiyordu. */}
         <div className="relative grid md:grid-cols-12 md:items-start">
-          <ScrollReveal className="md:col-span-6">
+          <ScrollReveal className="relative z-10 md:col-span-6">
             <p className="font-mono text-label text-accent">{content.eyebrow}</p>
             <h2 className="mt-6 max-w-[14ch] text-display-2 text-balance">{content.title}</h2>
 
@@ -80,7 +80,7 @@ export async function Philosophy({
               kenar boşluğu küpün tepesini soldaki etiketle aynı hizaya alır.
               Mobilde ayrı bir blok değil: başlığın sağındaki boşlukta küçük
               bir işaret olarak durur, metin akışına yer kaplamaz. */}
-          <div className="pointer-events-none absolute -top-10 right-0 w-28 md:pointer-events-auto md:static md:col-span-5 md:col-start-8 md:-mt-9 md:w-auto">
+          <div className="pointer-events-none absolute -top-18 -right-12 w-48 min-[375px]:w-52 md:pointer-events-auto md:static md:col-span-5 md:col-start-8 md:-mt-9 md:w-auto">
             <InkPolyhedra className="mx-auto aspect-square w-full max-w-md" />
             <p className="mt-4 hidden border-t border-line pt-4 font-mono text-mono-sm text-fg-subtle md:block">
               {content.caption}
