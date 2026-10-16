@@ -1,7 +1,5 @@
 import type { ServiceSlug } from '@/shared';
 
-import type { TechSlug } from '@/lib/tech-marks';
-
 /**
  * İçerik dosyalarının (content/tr, content/en) paylaştığı şekiller.
  * Her iki dilin aynı anahtarları taşıdığı tip düzeyinde garanti edilir —
@@ -64,15 +62,6 @@ export interface ProcessStep {
   deliverable: string;
 }
 
-export interface TechEntry {
-  /** Marka işaretini seçer (lib/tech-marks.ts). */
-  slug: TechSlug;
-  /** Marka adı — çevrilmez. */
-  name: string;
-  /** Tek kelimelik rol — çevrilir. */
-  role: string;
-}
-
 /** Dört değerin sabit kimlikleri; izometrik çizimler bunlara bağlı. */
 export type ValueSlug = 'direct' | 'transparent' | 'tailored' | 'quality';
 
@@ -122,7 +111,6 @@ export interface HomeContent {
   build: SectionIntro & { entries: readonly string[] };
   work: WorkContent;
   process: SectionIntro & { steps: readonly ProcessStep[] };
-  technology: SectionIntro & { entries: readonly TechEntry[] };
   values: SectionIntro & { entries: readonly ValueEntry[] };
   faq: FaqContent;
   cta: CtaContent;

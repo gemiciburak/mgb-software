@@ -147,24 +147,6 @@ export const home: HomeContent = {
     ],
   },
 
-  technology: {
-    eyebrow: 'TECHNOLOGY',
-    title: 'What we build with',
-    description:
-      'Tools are chosen for how long the project has to live, not for what is trending. All mature, well documented and maintainable years from now.',
-    entries: [
-      { slug: 'nextjs', name: 'Next.js', role: 'Web framework' },
-      { slug: 'react', name: 'React', role: 'Interface' },
-      { slug: 'typescript', name: 'TypeScript', role: 'Type safety' },
-      { slug: 'nestjs', name: 'NestJS', role: 'Backend framework' },
-      { slug: 'nodejs', name: 'Node.js', role: 'Runtime' },
-      { slug: 'mongodb', name: 'MongoDB', role: 'Database' },
-      { slug: 'docker', name: 'Docker', role: 'Deployment' },
-      { slug: 'figma', name: 'Figma', role: 'Design' },
-      { slug: 'swift', name: 'Swift', role: 'Apple platforms' },
-    ],
-  },
-
   values: {
     eyebrow: 'WHY MGB',
     title: 'The big advantages of a small studio',

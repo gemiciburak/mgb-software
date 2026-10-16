@@ -143,8 +143,7 @@ export function WhatsAppIcon(props: IconProps) {
  * Instagram.
  *
  * Markanın dolu işareti yerine kontur hali: ikon setinin geri kalanı da
- * konturdan oluşuyor, dolu bir logo aralarında yama gibi dururdu. Teknoloji
- * bölümündeki marka işaretleri ayrı bir mesele — orada logo zaten konu.
+ * konturdan oluşuyor, dolu bir logo aralarında yama gibi dururdu.
  */
 export function InstagramIcon(props: IconProps) {
   return (

@@ -150,24 +150,6 @@ export const home: HomeContent = {
     ],
   },
 
-  technology: {
-    eyebrow: 'TEKNOLOJİ',
-    title: 'Ne ile kuruyoruz',
-    description:
-      'Araç seçimi modaya değil, projenin ömrüne göre yapılır. Hepsi olgun, belgelenmiş ve uzun vadede bakımı yapılabilir.',
-    entries: [
-      { slug: 'nextjs', name: 'Next.js', role: 'Web çatısı' },
-      { slug: 'react', name: 'React', role: 'Arayüz' },
-      { slug: 'typescript', name: 'TypeScript', role: 'Tip güvenliği' },
-      { slug: 'nestjs', name: 'NestJS', role: 'Backend çatısı' },
-      { slug: 'nodejs', name: 'Node.js', role: 'Çalışma zamanı' },
-      { slug: 'mongodb', name: 'MongoDB', role: 'Veritabanı' },
-      { slug: 'docker', name: 'Docker', role: 'Dağıtım' },
-      { slug: 'figma', name: 'Figma', role: 'Tasarım' },
-      { slug: 'swift', name: 'Swift', role: 'Apple platformları' },
-    ],
-  },
-
   values: {
     eyebrow: 'NEDEN MGB',
     title: 'Küçük bir stüdyonun büyük avantajları',

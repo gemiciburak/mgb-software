@@ -8,7 +8,6 @@ import { Philosophy } from '@/components/sections/philosophy';
 import { ProcessTimeline } from '@/components/sections/process-timeline';
 import { SelectedWork } from '@/components/sections/selected-work';
 import { Services } from '@/components/sections/services';
-import { TechnologyGrid } from '@/components/sections/technology-grid';
 import { WhatWeBuild } from '@/components/sections/what-we-build';
 import { WhyMgb } from '@/components/sections/why-mgb';
 import { getContent } from '@/content';
@@ -23,8 +22,7 @@ import { faqJsonLd, websiteJsonLd } from '@/lib/seo';
  * (Services, WhatWeBuild, SelectedWork, ProcessTimeline) içeriği prop olarak
  * alır — düz veri olduğu için serileştirilebilir ve bileşenler içerik bilmez.
  *
- * Bölüm sırası ziyaretçinin sorduğu sırayla: ne yapıyorsunuz, ne ile
- * (Hizmetler + Teknoloji) →
+ * Bölüm sırası ziyaretçinin sorduğu sırayla: ne yapıyorsunuz (Hizmetler) →
  * kanıtı ne (İşler) → kimsiniz (Hakkımızda) → nasıl çalışıyorsunuz (Süreç) →
  * sorularım var / başlayalım (SSS + İletişim). Hakkımızda bilinçli olarak
  * işlerin arkasında: ziyaretçi önce ne aldığını görür, sonra kimden aldığını.
@@ -41,9 +39,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     // tabIndex: skip link odağı gerçekten içeriğe taşısın, yalnızca kaydırmasın.
     <main id="main" tabIndex={-1} className="outline-none">
       <Hero locale={locale} />
-      {/* 2 — Hizmetler: ne yapıyoruz, ne ile kuruyoruz ve elle tutulur çıktılar. */}
+      {/* 2 — Hizmetler: ne yapıyoruz ve elle tutulur çıktılar. */}
       <Services content={home.services} />
-      <TechnologyGrid content={home.technology} />
       <WhatWeBuild content={home.build} />
       {/*
         3 — Seçilmiş işler. Projeler content/projects.ts'ten gelir (services/projects.ts üzerinden).

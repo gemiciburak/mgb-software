@@ -12,7 +12,6 @@ import { isPublished } from './constants';
 export const SECTION_ID = {
   hero: 'hero',
   services: 'services',
-  technology: 'technology',
   build: 'build',
   work: 'work',
   about: 'about',
@@ -30,9 +29,9 @@ export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
 /**
  * Her bölümün navigasyondaki sahibi.
  *
- * Sayfada on bölüm var, navigasyonda dört başlık. Bir bölüm yalnızca
+ * Sayfada dokuz bölüm var, navigasyonda dört başlık. Bir bölüm yalnızca
  * gerçekten o başlığın içeriğiyse sahiplenilir: Hizmetler'in altında
- * "Ne ile kuruyoruz" ve "Ürettiklerimiz", İşler'in altında yalnızca İşler, Hakkımızda'nın altında
+ * "Ürettiklerimiz", İşler'in altında yalnızca İşler, Hakkımızda'nın altında
  * stüdyo + kurucu kartı ve hemen ardından gelen "Neden MGB", İletişim'in
  * altında kapanış bölümü.
  *
@@ -43,7 +42,6 @@ export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
 export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
   [SECTION_ID.hero]: null,
   [SECTION_ID.services]: SECTION_ID.services,
-  [SECTION_ID.technology]: SECTION_ID.services,
   [SECTION_ID.build]: SECTION_ID.services,
   [SECTION_ID.work]: SECTION_ID.work,
   [SECTION_ID.about]: SECTION_ID.about,
