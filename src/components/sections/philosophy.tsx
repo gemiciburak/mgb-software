@@ -1,8 +1,8 @@
 import { InkPolyhedra } from '@/components/animations/ink-polyhedra';
 import { ScrollReveal } from '@/components/animations/scroll-reveal';
 import { Container } from '@/components/ui/container';
-import { ContactChannels, HAS_CONTACT_CHANNELS } from '@/components/ui/contact-channels';
 import { FounderPortrait } from '@/components/ui/founder-portrait';
+import { cn } from '@/lib/cn';
 import { SITE_NAME } from '@/lib/constants';
 import { SECTION_ID } from '@/lib/sections';
 import type { FounderContent, PhilosophyContent } from '@/types/content';
@@ -16,9 +16,13 @@ import type { FounderContent, PhilosophyContent } from '@/types/content';
  *      bölüm başlıklarıyla aynı ölçekte (display-2); ekranı domine etmiyor — sayfanın
  *      "büyük an"ı hero.
  *   2. Kurucu şeridi (birinci tekil). Tam genişlikte, teknik çizimdeki antet
- *      kutusu gibi üç hücre: portre | isim + biyografi | doğrudan iletişim.
- *      Şirket öne çıkar, kişi gizlenmez; şerit ayrı bir bölüm gibi değil,
- *      paftanın alt kenarı gibi durur.
+ *      kutusu gibi iki hücre: portre | isim + biyografi. Şirket öne çıkar,
+ *      kişi gizlenmez; şerit ayrı bir bölüm gibi değil, paftanın alt kenarı
+ *      gibi durur.
+ *
+ *      Şeritte bir dönem üçüncü hücre olarak iletişim kanalları da vardı.
+ *      Aynı liste kapanış bölümünde ve footer'da zaten duruyor; ana sayfada
+ *      dördüncü kez tekrar etmek yerine kaldırıldı.
  *
  * Çizim metnin görsel karşılığı: aynı iskelet, üzerine çekilen mürekkeple
  * okunur hale geliyor — tasarım ve yazılımın aynı işin iki yüzü olması.
@@ -91,8 +95,6 @@ export function Philosophy({
               Hücre 4 sütun (tablette 5): 3 sütunda metin satırının boyu hücreyi fotoğrafın
               4:5 oranından çok daha dar-uzun yapıyor ve `object-cover` omuzları
               yandan kesiyordu (1024px'te genişliğin yalnızca %64'ü görünüyordu).
-              Bu yüzden üç sütunlu şerit xl'den itibaren; altında iletişim
-              hücresi alta iner.
             */}
             <div className="border-b border-line md:col-span-5 md:border-r md:border-b-0 lg:col-span-4">
               <FounderPortrait
@@ -102,7 +104,7 @@ export function Philosophy({
               />
             </div>
 
-            <div className="p-6 md:col-span-7 md:p-8 lg:col-span-8 lg:p-10 xl:col-span-5">
+            <div className="flex flex-col p-6 md:col-span-7 md:p-8 lg:col-span-8 lg:p-10">
               <p className="font-mono text-label text-accent">{founder.eyebrow}</p>
               <h3 id="founder-name" className="mt-5 text-display-3">
                 {founder.name}
@@ -112,25 +114,21 @@ export function Philosophy({
               {founder.bio.map((paragraph, index) => (
                 <p
                   key={paragraph.slice(0, 32)}
-                  className={
-                    index === 0 ? 'mt-6 text-body text-fg' : 'mt-3 text-body-sm text-fg-muted'
-                  }
+                  className={cn(
+                    'max-w-[62ch]',
+                    index === 0 ? 'mt-6 text-body text-fg' : 'mt-3 text-body-sm text-fg-muted',
+                  )}
                 >
                   {paragraph}
                 </p>
               ))}
-            </div>
 
-            {HAS_CONTACT_CHANNELS && (
-              <div className="flex flex-col border-t border-line p-6 md:col-span-12 md:p-8 lg:p-10 xl:col-span-3 xl:border-t-0 xl:border-l xl:p-8">
-                <p className="font-mono text-mono-sm text-fg-subtle">{founder.contactLabel}</p>
-                <ContactChannels className="mt-5" />
-                {/* Antet kutusunun alt satırı. Marka adı çevrilmez. */}
-                <p className="mt-8 font-mono text-mono-sm text-fg-subtle xl:mt-auto">
-                  {SITE_NAME.toUpperCase()}
-                </p>
-              </div>
-            )}
+              {/* Antet kutusunun alt satırı; hücre portreden kısa kaldığında
+                  dibe oturur. Marka adı çevrilmez. */}
+              <p className="mt-10 font-mono text-mono-sm text-fg-subtle md:mt-auto md:pt-10">
+                {SITE_NAME.toUpperCase()}
+              </p>
+            </div>
           </div>
         </ScrollReveal>
       </Container>

@@ -132,8 +132,6 @@ export interface FounderContent {
    * Yokken yerinde baş harfler görünür — sahte/stok fotoğraf kullanılmaz.
    */
   photo?: { src: string; width: number; height: number; alt: string };
-  /** Kurucu şeridindeki iletişim hücresinin mono etiketi. */
-  contactLabel: string;
 }
 
 export interface LocaleContent {

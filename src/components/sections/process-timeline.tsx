@@ -135,9 +135,11 @@ export function ProcessTimeline({ content }: { content: ProcessContent }) {
             </div>
           </div>
 
-          {/* Adımlar. Masaüstünde her biri ekranın yarısı kadar yer kaplar ki
+          {/* Adımlar. Masaüstünde her biri ekranın üçte biri kadar yer kaplar ki
               scroll ile tek tek öne çıksınlar; mobilde numaralı düğümlerin
-              dikey bir rayla bağlandığı bir zaman çizelgesi. */}
+              dikey bir rayla bağlandığı bir zaman çizelgesi.
+              İlk ayar ekranın yarısıydı: beş kısa adım için bölüm 2,5 ekran
+              tutuyordu ve adımlar arasında uzun boşluklar kalıyordu. */}
           <ol className="lg:col-span-6 lg:col-start-7">
             {content.steps.map((step, index) => {
               /**
@@ -159,7 +161,7 @@ export function ProcessTimeline({ content }: { content: ProcessContent }) {
                     className={cn(
                       'relative',
                       !isLast && 'max-lg:pb-10',
-                      'lg:flex lg:min-h-[52vh] lg:flex-col lg:justify-center lg:border-t lg:border-line lg:py-16',
+                      'lg:flex lg:min-h-[36vh] lg:flex-col lg:justify-center lg:border-t lg:border-line lg:py-12',
                     )}
                   >
                     {!isLast && <RailSegment reducedMotion={reducedMotion} />}

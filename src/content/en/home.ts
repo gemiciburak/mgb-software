@@ -31,7 +31,6 @@ export const home: HomeContent = {
       'I founded MGB Software out of a passion for software development and digital design. I believe every project has its own needs, and I aim to build modern, functional and long-lasting digital solutions.',
       'When you start a project, you are not talking to a sales rep — you are talking to the person who designs your product and writes its code. You ask me directly and get the answer first-hand.',
     ],
-    contactLabel: 'DIRECT CONTACT',
   },
 
   services: {
