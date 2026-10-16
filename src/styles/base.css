@@ -275,9 +275,7 @@
    sayı tutulmaz.
 
    Navigasyon hedeflerine ve doğrudan bağlantı verilebilecek dolgulu
-   bölümlere (Ürettiklerimiz) verilir. "Neden MGB"ye verilmez:
-   sabitlenmiş bir track'tir, dolgusu yoktur ve ileri kaydırmak ilk kademeyi
-   atlatırdı.
+   bölümlere (Ürettiklerimiz) verilir.
    --------------------------------------------------------------------------- */
 @utility anchor-target {
   scroll-margin-top: calc(-1 * var(--spacing-section));

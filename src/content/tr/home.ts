@@ -150,39 +150,8 @@ export const home: HomeContent = {
     ],
   },
 
-  values: {
-    eyebrow: 'NEDEN MGB',
-    title: 'Küçük bir stüdyonun büyük avantajları',
-    entries: [
-      {
-        slug: 'direct',
-        title: 'Doğrudan İletişim',
-        description:
-          'Konuştuğunuz kişi, ürününüzü geliştiren kişi; talepler aktarılırken kaybolmaz.',
-      },
-      {
-        slug: 'transparent',
-        title: 'Şeffaf Süreç',
-        description:
-          'Her hafta çalışan bir sürüm; ilerlemeyi rapordan değil, ürünün kendisinden görürsünüz.',
-      },
-      {
-        slug: 'tailored',
-        title: 'İhtiyaca Özel',
-        description:
-          'Hazır şablon uyarlamıyoruz; kapsamı işinizin gerçek ihtiyacına göre çiziyoruz.',
-      },
-      {
-        slug: 'quality',
-        title: 'Kaliteli Teslimat',
-        description:
-          'Aynı anda sınırlı sayıda proje; belgelenmiş kod, kaynak kodu ve erişimler size ait.',
-      },
-    ],
-  },
-
   // Cevaplar sitenin geri kalanıyla çelişmez: süreç adımları /teklif-al
-  // sayfasındaki "Sonraki adımlar"la, sahiplik "Neden MGB"deki taahhütle aynı.
+  // sayfasındaki "Sonraki adımlar"la aynı.
   // Fiyat, gün sayısı gibi taahhüt edilmemiş rakamlar bilinçli olarak yok.
   faq: {
     eyebrow: 'SSS',

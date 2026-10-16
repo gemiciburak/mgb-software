@@ -147,37 +147,6 @@ export const home: HomeContent = {
     ],
   },
 
-  values: {
-    eyebrow: 'WHY MGB',
-    title: 'The big advantages of a small studio',
-    entries: [
-      {
-        slug: 'direct',
-        title: 'Direct Communication',
-        description:
-          'The person you talk to is the person building your product; nothing gets lost in hand-offs.',
-      },
-      {
-        slug: 'transparent',
-        title: 'Transparent Process',
-        description:
-          'A working build every week; you see progress in the product itself, not in a report.',
-      },
-      {
-        slug: 'tailored',
-        title: 'Built for Your Needs',
-        description:
-          'No off-the-shelf templates; scope is drawn around what your business actually needs.',
-      },
-      {
-        slug: 'quality',
-        title: 'Quality Delivery',
-        description:
-          'A limited number of projects at a time; documented code, and source and accounts that are yours.',
-      },
-    ],
-  },
-
   faq: {
     eyebrow: 'FAQ',
     title: 'Frequently asked questions',

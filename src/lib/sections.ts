@@ -15,7 +15,6 @@ export const SECTION_ID = {
   build: 'build',
   work: 'work',
   about: 'about',
-  why: 'why',
   process: 'process',
   faq: 'faq',
   contact: 'contact',
@@ -29,11 +28,10 @@ export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
 /**
  * Her bölümün navigasyondaki sahibi.
  *
- * Sayfada dokuz bölüm var, navigasyonda dört başlık. Bir bölüm yalnızca
+ * Sayfada sekiz bölüm var, navigasyonda dört başlık. Bir bölüm yalnızca
  * gerçekten o başlığın içeriğiyse sahiplenilir: Hizmetler'in altında
  * "Ürettiklerimiz", İşler'in altında yalnızca İşler, Hakkımızda'nın altında
- * stüdyo + kurucu kartı ve hemen ardından gelen "Neden MGB", İletişim'in
- * altında kapanış bölümü.
+ * stüdyo + kurucu kartı, İletişim'in altında kapanış bölümü.
  *
  * Süreç ve SSS sahipsizdir (`null`): gösterge oradayken hiçbir
  * başlığı işaretlemez. Yanlış başlığı işaretlemektense hiçbirini
@@ -45,7 +43,6 @@ export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
   [SECTION_ID.build]: SECTION_ID.services,
   [SECTION_ID.work]: SECTION_ID.work,
   [SECTION_ID.about]: SECTION_ID.about,
-  [SECTION_ID.why]: SECTION_ID.about,
   [SECTION_ID.process]: null,
   [SECTION_ID.faq]: null,
   [SECTION_ID.contact]: SECTION_ID.contact,

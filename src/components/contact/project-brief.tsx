@@ -915,7 +915,7 @@ function TextField({
   );
 }
 
-/** Dört kademe: mono numara + dolan hairline, sitenin "Neden MGB" diliyle. */
+/** Dört kademe: mono numara + dolan hairline. */
 function StepProgress({ current }: { current: number }) {
   const t = useTranslations('contact');
 

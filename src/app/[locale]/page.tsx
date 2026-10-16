@@ -9,7 +9,6 @@ import { ProcessTimeline } from '@/components/sections/process-timeline';
 import { SelectedWork } from '@/components/sections/selected-work';
 import { Services } from '@/components/sections/services';
 import { WhatWeBuild } from '@/components/sections/what-we-build';
-import { WhyMgb } from '@/components/sections/why-mgb';
 import { getContent } from '@/content';
 import { fetchPublishedProjects } from '@/services/projects';
 import { routing } from '@/i18n/routing';
@@ -54,9 +53,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           home.services.entries.map((service) => [service.slug, service.title]),
         )}
       />
-      {/* 4 — Hakkımızda: stüdyo, kurucu ve neden MGB. */}
+      {/* 4 — Hakkımızda: stüdyo ve kurucu. */}
       <Philosophy content={home.philosophy} founder={home.founder} />
-      <WhyMgb content={home.values} />
       {/* 5 — Çalışma süreci. */}
       <ProcessTimeline content={home.process} />
       {/* 6 — SSS ve iletişim. */}

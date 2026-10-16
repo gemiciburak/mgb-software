@@ -62,15 +62,6 @@ export interface ProcessStep {
   deliverable: string;
 }
 
-/** Dört değerin sabit kimlikleri; izometrik çizimler bunlara bağlı. */
-export type ValueSlug = 'direct' | 'transparent' | 'tailored' | 'quality';
-
-export interface ValueEntry {
-  slug: ValueSlug;
-  title: string;
-  description: string;
-}
-
 export interface WorkContent extends SectionIntro {
   /** Boş durum metni. Sahte proje yerine dürüst bir cümle. */
   body: string;
@@ -111,7 +102,6 @@ export interface HomeContent {
   build: SectionIntro & { entries: readonly string[] };
   work: WorkContent;
   process: SectionIntro & { steps: readonly ProcessStep[] };
-  values: SectionIntro & { entries: readonly ValueEntry[] };
   faq: FaqContent;
   cta: CtaContent;
 }
