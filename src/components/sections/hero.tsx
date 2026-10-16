@@ -42,10 +42,15 @@ export async function Hero({ locale }: { locale: Locale }) {
         kadar uzanıyordu ve mürekkep yüzeyinin neredeyse tamamını siliyordu.
         Başlık zaten 18:1 kontrastta olduğu için metnin üzerinde tam örtü
         gerekmiyor — yalnızca gürültüyü kısmak yetiyor.
+
+        Mobilde metin genişliğin tamamını kapladığı için soldan gelen eğri işe
+        yaramıyor; çizgiler alt metnin ve ikincil düğmenin içinden geçiyordu.
+        Orada eğri dikey: metin bandında gürültü kısılır, üstte ve altta yüzey
+        olduğu gibi kalır.
       */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,var(--bg)_0%,var(--bg)_18%,color-mix(in_srgb,var(--bg)_62%,transparent)_42%,transparent_66%)]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,transparent_10%,color-mix(in_srgb,var(--bg)_72%,transparent)_28%,color-mix(in_srgb,var(--bg)_72%,transparent)_72%,transparent_90%)] md:bg-[linear-gradient(to_right,var(--bg)_0%,var(--bg)_18%,color-mix(in_srgb,var(--bg)_62%,transparent)_42%,transparent_66%)]"
       />
       <div
         aria-hidden="true"
@@ -83,7 +88,12 @@ export async function Hero({ locale }: { locale: Locale }) {
             {t('getQuote')}
             <ArrowRightIcon className="size-4" />
           </Link>
-          <a href={`#${SECTION_ID.services}`} className={buttonStyles({ variant: 'secondary' })}>
+          {/* Zemin rengi: ikincil düğme şeffaf olduğu için arka plan çizgileri
+              içinden geçiyordu. */}
+          <a
+            href={`#${SECTION_ID.services}`}
+            className={buttonStyles({ variant: 'secondary', className: 'bg-bg' })}
+          >
             {t('exploreServices')}
           </a>
         </div>
