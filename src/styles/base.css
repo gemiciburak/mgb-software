@@ -166,37 +166,6 @@
 }
 
 /* ---------------------------------------------------------------------------
-   "Ürettiklerimiz" şeridi. İçerik iki kez basıldığı için -50% kayma
-   kusursuz bir döngü verir. Hareket azaltma modunda bileşen zaten marquee
-   yerine sabit ızgara render eder; bu yüzden burada ayrıca durdurmaya
-   gerek yok.
-   --------------------------------------------------------------------------- */
-@keyframes marquee-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes marquee-right {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-/* Okumak isteyen durdurabilmeli. */
-@utility marquee-track {
-  &:hover {
-    animation-play-state: paused;
-  }
-}
-
-/* ---------------------------------------------------------------------------
    Kapanış bölümünün zemin ızgarası. Bir hücre boyu kadar kayıp başa döner,
    yani kayma sonsuz ve dikişsiz görünür. Hareket azaltma modunda yukarıdaki
    genel kural animasyonu durdurur ve ızgara sabit kalır — okunurluk için
@@ -274,8 +243,7 @@
    hemen altına gelir. Değer dolgunun kendi token'ından okunur, iki yerde ayrı
    sayı tutulmaz.
 
-   Navigasyon hedeflerine ve doğrudan bağlantı verilebilecek dolgulu
-   bölümlere (Ürettiklerimiz) verilir.
+   Navigasyon hedeflerine verilir.
    --------------------------------------------------------------------------- */
 @utility anchor-target {
   scroll-margin-top: calc(-1 * var(--spacing-section));

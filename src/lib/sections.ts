@@ -12,7 +12,6 @@ import { isPublished } from './constants';
 export const SECTION_ID = {
   hero: 'hero',
   services: 'services',
-  build: 'build',
   work: 'work',
   about: 'about',
   process: 'process',
@@ -28,10 +27,10 @@ export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
 /**
  * Her bölümün navigasyondaki sahibi.
  *
- * Sayfada sekiz bölüm var, navigasyonda dört başlık. Bir bölüm yalnızca
- * gerçekten o başlığın içeriğiyse sahiplenilir: Hizmetler'in altında
- * "Ürettiklerimiz", İşler'in altında yalnızca İşler, Hakkımızda'nın altında
- * stüdyo + kurucu kartı, İletişim'in altında kapanış bölümü.
+ * Sayfada yedi bölüm var, navigasyonda dört başlık. Bir bölüm yalnızca
+ * gerçekten o başlığın içeriğiyse sahiplenilir: her başlığın altında yalnızca
+ * kendi bölümü var — Hakkımızda'nın altında stüdyo + kurucu kartı, İletişim'in
+ * altında kapanış bölümü.
  *
  * Süreç ve SSS sahipsizdir (`null`): gösterge oradayken hiçbir
  * başlığı işaretlemez. Yanlış başlığı işaretlemektense hiçbirini
@@ -40,7 +39,6 @@ export const SECTION_ORDER = Object.values(SECTION_ID) as readonly SectionId[];
 export const SECTION_NAV_OWNER: Record<SectionId, SectionId | null> = {
   [SECTION_ID.hero]: null,
   [SECTION_ID.services]: SECTION_ID.services,
-  [SECTION_ID.build]: SECTION_ID.services,
   [SECTION_ID.work]: SECTION_ID.work,
   [SECTION_ID.about]: SECTION_ID.about,
   [SECTION_ID.process]: null,

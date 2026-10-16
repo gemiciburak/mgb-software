@@ -8,7 +8,6 @@ import { Philosophy } from '@/components/sections/philosophy';
 import { ProcessTimeline } from '@/components/sections/process-timeline';
 import { SelectedWork } from '@/components/sections/selected-work';
 import { Services } from '@/components/sections/services';
-import { WhatWeBuild } from '@/components/sections/what-we-build';
 import { getContent } from '@/content';
 import { fetchPublishedProjects } from '@/services/projects';
 import { routing } from '@/i18n/routing';
@@ -18,7 +17,7 @@ import { faqJsonLd, websiteJsonLd } from '@/lib/seo';
  * Ana sayfa.
  *
  * Sunucu bileşeni: tüm metin sunucu HTML'inde gelir. İstemci bileşenleri
- * (Services, WhatWeBuild, SelectedWork, ProcessTimeline) içeriği prop olarak
+ * (Services, SelectedWork, ProcessTimeline) içeriği prop olarak
  * alır — düz veri olduğu için serileştirilebilir ve bileşenler içerik bilmez.
  *
  * Bölüm sırası ziyaretçinin sorduğu sırayla: ne yapıyorsunuz (Hizmetler) →
@@ -38,9 +37,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     // tabIndex: skip link odağı gerçekten içeriğe taşısın, yalnızca kaydırmasın.
     <main id="main" tabIndex={-1} className="outline-none">
       <Hero locale={locale} />
-      {/* 2 — Hizmetler: ne yapıyoruz ve elle tutulur çıktılar. */}
+      {/* 2 — Hizmetler: ne yapıyoruz ve her hizmetin çıktıları. */}
       <Services content={home.services} />
-      <WhatWeBuild content={home.build} />
       {/*
         3 — Seçilmiş işler. Projeler content/projects.ts'ten gelir (services/projects.ts üzerinden).
         Dizi boşken bileşen bilinçli boş durumu render ediyor; proje eklenince

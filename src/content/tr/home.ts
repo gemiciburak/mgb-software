@@ -86,21 +86,6 @@ export const home: HomeContent = {
     ],
   },
 
-  build: {
-    eyebrow: 'ÜRETTİKLERİMİZ',
-    title: 'Elle tutulur çıktılar',
-    entries: [
-      'Web Siteleri',
-      'Web Uygulamaları',
-      'API’ler',
-      'Yönetim Panelleri',
-      'E-Ticaret',
-      'Mobil Uygulamalar',
-      'Otomasyon',
-      '3D & Teknik Çizim',
-    ],
-  },
-
   work: {
     eyebrow: 'SEÇİLMİŞ İŞLER',
     title: 'Projelerimiz şu an üretimde.',

@@ -83,21 +83,6 @@ export const home: HomeContent = {
     ],
   },
 
-  build: {
-    eyebrow: 'WHAT WE BUILD',
-    title: 'Things you can point at',
-    entries: [
-      'Websites',
-      'Web Apps',
-      'APIs',
-      'Dashboards',
-      'E-Commerce',
-      'Mobile Apps',
-      'Automation',
-      '3D & Technical Design',
-    ],
-  },
-
   work: {
     eyebrow: 'SELECTED WORK',
     title: 'Projects are being crafted.',

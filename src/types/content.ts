@@ -99,7 +99,6 @@ export interface HomeContent {
   /** Hakkımızda bölümünün ikinci yarısı — kurucu kartı. */
   founder: FounderContent;
   services: SectionIntro & { entries: readonly ServiceEntry[] };
-  build: SectionIntro & { entries: readonly string[] };
   work: WorkContent;
   process: SectionIntro & { steps: readonly ProcessStep[] };
   faq: FaqContent;
