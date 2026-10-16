@@ -81,6 +81,8 @@ export interface FaqEntry {
   question: string;
   /** Tek paragraf. Uydurma rakam (fiyat, gün sayısı) yazılmaz. */
   answer: string;
+  /** Mobilde gizlenir; liste kısa kalsın diye. Masaüstü ve FAQPage verisi etkilenmez. */
+  hideOnMobile?: boolean;
 }
 
 export interface FaqContent extends SectionIntro {

@@ -163,6 +163,7 @@ export const home: HomeContent = {
         question: 'Projemi kim geliştiriyor?',
         answer:
           'MGB Software kurucu liderliğinde bir stüdyo: projenizi kurucu Burak Gemici tasarlıyor ve geliştiriyor, aradaki bir hesap yöneticisi değil. Uzmanlık alanımızın dışında bir iş gerekirse güvendiğimiz bir uzmanla çalışıyor ve bunu en başta sizinle paylaşıyoruz.',
+        hideOnMobile: true,
       },
       {
         question: 'Kaynak kodu ve hesaplar kime ait?',
@@ -173,6 +174,7 @@ export const home: HomeContent = {
         question: 'Hangi teknolojileri kullanıyorsunuz?',
         answer:
           'Araç seçimini modaya değil, projenin ömrüne göre yapıyoruz. Web tarafında Next.js, React ve TypeScript; backend’de Node.js ve NestJS; veritabanında MongoDB; dağıtımda Docker kullanıyoruz. Tasarım Figma’da, Apple platformları için geliştirme Swift ile yapılıyor. Hepsi olgun ve iyi belgelenmiş araçlar: yıllar sonra da bakımı yapılabilir, başka bir ekip de kolayca devralabilir.',
+        hideOnMobile: true,
       },
       {
         question: 'Yayından sonra destek veriyor musunuz?',
@@ -188,6 +190,7 @@ export const home: HomeContent = {
         question: 'İngilizce ya da uzaktan çalışabiliyor musunuz?',
         answer:
           'Evet. Türkçe ve İngilizce çalışıyoruz; görüşmeler çevrim içi yapılabiliyor, yani konumunuz fark etmiyor.',
+        hideOnMobile: true,
       },
     ],
   },

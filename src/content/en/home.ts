@@ -157,6 +157,7 @@ export const home: HomeContent = {
         question: 'Who builds my project?',
         answer:
           'MGB Software is a founder-led studio: your project is designed and built by the founder, Burak Gemici, not handed down through an account manager. If something falls outside our expertise, we work with a specialist we trust and tell you from day one.',
+        hideOnMobile: true,
       },
       {
         question: 'Who owns the source code and accounts?',
@@ -167,6 +168,7 @@ export const home: HomeContent = {
         question: 'What technologies do you use?',
         answer:
           'Tools are chosen for how long the project has to live, not for what is trending. On the web we use Next.js, React and TypeScript; on the backend Node.js and NestJS; MongoDB for data and Docker for deployment. Design happens in Figma, and Apple platforms are built with Swift. All mature, well documented tools: maintainable years from now, and easy for another team to pick up.',
+        hideOnMobile: true,
       },
       {
         question: 'Do you offer support after launch?',
@@ -182,6 +184,7 @@ export const home: HomeContent = {
         question: 'Do you work in English or remotely?',
         answer:
           'Yes. We work in Turkish and English, and meetings can be held online, so your location does not matter.',
+        hideOnMobile: true,
       },
     ],
   },
