@@ -453,7 +453,12 @@ function BriefForm({
               <p id={`${uid}-services-hint`} className="text-body-sm text-fg-muted">
                 {t('services.hint')}
               </p>
-              <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {/* Hata kartların ÜSTÜNDE: odak ilk karta taşındığında görünür
+                  kalsın. Altta dururken mobilde altı kartın arkasında kalıyor,
+                  "Devam"a basan kullanıcı neden ilerleyemediğini göremiyordu. */}
+              <FieldError id={errorId('services')} message={error('services')} />
+              {/* Mobilde iki sütun: tek sütunda altı kart ekranı beş kez dolduruyordu. */}
+              <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-3">
                 {services.map((service, index) => {
                   const checked = draft.services.includes(service.slug);
                   return (
@@ -461,7 +466,7 @@ function BriefForm({
                       key={service.slug}
                       className={cn(
                         CARD_CLASS,
-                        'flex-col items-start gap-4 p-5',
+                        'flex-col items-start gap-3 p-4 sm:gap-4 sm:p-5',
                         checked && 'border-accent bg-accent-wash',
                       )}
                     >
@@ -495,11 +500,13 @@ function BriefForm({
                       <ServiceGlyph
                         slug={service.slug}
                         className={cn(
-                          'h-14 w-auto transition-colors',
+                          'h-10 w-auto transition-colors sm:h-14',
                           checked ? 'text-accent' : 'text-line-strong',
                         )}
                       />
-                      <span className="text-title">{service.title}</span>
+                      <span className="text-body font-semibold tracking-[-0.01em] sm:text-title">
+                        {service.title}
+                      </span>
                     </label>
                   );
                 })}
@@ -524,8 +531,6 @@ function BriefForm({
                 <CheckMark checked={draft.unsure} shape="square" />
                 <span className="text-body">{t('services.unsure')}</span>
               </label>
-
-              <FieldError id={errorId('services')} message={error('services')} />
             </fieldset>
           )}
 
