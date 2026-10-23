@@ -75,6 +75,10 @@ export interface WorkContent extends SectionIntro {
   soon: string;
   /** Proje satırındaki dış bağlantı etiketi. */
   visit: string;
+  /** Dizin kısaltılmışken altındaki "hepsini göster" düğmesi. */
+  showAll: string;
+  /** Dizin açıkken aynı düğmenin etiketi. */
+  showLess: string;
 }
 
 export interface FaqEntry {

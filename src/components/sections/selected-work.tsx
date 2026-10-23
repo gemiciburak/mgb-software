@@ -2,16 +2,17 @@
 
 import { motion, useMotionValue, useSpring } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
-import { Fragment, type PointerEvent, useState } from 'react';
+import { Fragment, type PointerEvent, useId, useState } from 'react';
 import type { Locale, Project, ServiceSlug } from '@/shared';
 import { ProjectDeck } from '@/components/animations/project-deck';
 import { ScrollReveal } from '@/components/animations/scroll-reveal';
 import { WordReveal } from '@/components/animations/word-reveal';
 import { Container } from '@/components/ui/container';
-import { ArrowUpRightIcon, PauseIcon, PlayIcon } from '@/components/ui/icons';
+import { ArrowRightIcon, ArrowUpRightIcon, PauseIcon, PlayIcon } from '@/components/ui/icons';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { useIsTouch } from '@/hooks/use-is-touch';
 import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
+import { cn } from '@/lib/cn';
 import { EASE_ENTRANCE } from '@/lib/motion';
 import { SECTION_ID } from '@/lib/sections';
 import type { WorkContent } from '@/types/content';
@@ -31,6 +32,8 @@ const CARD_PATHS = [
 
 const FOLLOW_SPRING = { stiffness: 140, damping: 22, mass: 0.5 } as const;
 const PARALLAX = 18;
+/** Dizinde ilk anda görünen proje sayısı; gerisi "hepsini göster" ile açılır. */
+const INDEX_PREVIEW = 3;
 
 /**
  * Seçilmiş İşler.
@@ -66,7 +69,8 @@ export function SelectedWork({
  *
  * Deste dekoratif kaldığı için asıl bağlantılar altındaki dizinde: numara,
  * başlık, özet ve künye. Satırlar hareket etmiyor ve önizleme açmıyor — görsel
- * zaten destede.
+ * zaten destede. Dizin ilk `INDEX_PREVIEW` projeyle başlar; fazlası varsa
+ * sağ alttaki düğme kalanını açar. Deste her zaman bütün projeleri döndürür.
  */
 function WorkIndex({
   content,
@@ -81,6 +85,10 @@ function WorkIndex({
   const t = useTranslations('actions');
   const reducedMotion = usePrefersReducedMotion();
   const [paused, setPaused] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const listId = useId();
+  const collapsible = projects.length > INDEX_PREVIEW;
+  const visibleProjects = expanded ? projects : projects.slice(0, INDEX_PREVIEW);
 
   return (
     <section
@@ -115,8 +123,8 @@ function WorkIndex({
       />
 
       <Container>
-        <ul className="mt-8 border-t border-line lg:mt-10">
-          {projects.map((project, index) => {
+        <ul id={listId} className="mt-8 border-t border-line lg:mt-10">
+          {visibleProjects.map((project, index) => {
             const row = (
               <>
                 <span className="font-mono text-label text-fg-subtle tabular-nums transition-colors duration-[var(--duration-fast)] group-hover:text-accent">
@@ -162,8 +170,22 @@ function WorkIndex({
 
             const className = 'group flex items-baseline gap-5 py-8 lg:gap-8 lg:py-10';
 
+            // Sonradan açılan satırlar yerine oturarak girsin; ilk üçü sayfayla
+            // birlikte zaten görünür.
+            const revealed = index >= INDEX_PREVIEW && !reducedMotion;
+
             return (
-              <li key={project.id} className="border-b border-line">
+              <motion.li
+                key={project.id}
+                className="border-b border-line"
+                initial={revealed ? { opacity: 0, y: 16 } : false}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  ease: EASE_ENTRANCE,
+                  delay: (index - INDEX_PREVIEW) * 0.06,
+                }}
+              >
                 {project.liveUrl ? (
                   <a
                     href={project.liveUrl}
@@ -176,10 +198,30 @@ function WorkIndex({
                 ) : (
                   <div className={className}>{row}</div>
                 )}
-              </li>
+              </motion.li>
             );
           })}
         </ul>
+
+        {collapsible && (
+          <div className="mt-6 flex justify-end lg:mt-8">
+            <button
+              type="button"
+              onClick={() => setExpanded((value) => !value)}
+              aria-expanded={expanded}
+              aria-controls={listId}
+              className="group inline-flex min-h-11 items-center gap-3 font-mono text-mono-sm text-fg-muted transition-colors duration-[var(--duration-fast)] hover:text-accent"
+            >
+              {expanded ? content.showLess : content.showAll}
+              <ArrowRightIcon
+                className={cn(
+                  'size-3.5 transition-transform duration-[var(--duration-fast)]',
+                  expanded ? '-rotate-90' : 'rotate-90',
+                )}
+              />
+            </button>
+          </div>
+        )}
       </Container>
     </section>
   );

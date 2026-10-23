@@ -101,4 +101,30 @@ export const projects: readonly Project[] = [
     },
     liveUrl: 'https://pandas.mgbsoftware.com.tr',
   },
+  {
+    // Gerçek müşteri işi: Samsun İlkadım'da 1993'ten beri tadilat yapan Özcan
+    // Yapı'nın tanıtım sitesi (Next.js). Fotoğraflar firmanın kendi işleri.
+    // Kapak, sitenin ana sayfasından alınmış ekran görüntüsü.
+    id: 'ozcan-yapi',
+    slug: 'ozcan-yapi',
+    title: { tr: 'Özcan Yapı', en: 'Özcan Yapı' },
+    summary: {
+      tr: "Samsun İlkadım'da 1993'ten beri ev ve iş yeri tadilatı yapan bir firmanın tanıtım sitesi.",
+      en: 'A website for a renovation company serving homes and workplaces in Samsun since 1993.',
+    },
+    services: ['web-development', 'ui-ux-design'],
+    year: 2026,
+    cover: {
+      url: '/work/ozcan.webp',
+      alt: {
+        tr: 'Özcan Yapı ana sayfası: “33 Yıldır Aynı Özenle.” başlığının yanında tadilatı bitmiş, beyaz tezgâhlı bir mutfak.',
+        en: 'Özcan Yapı home page: the headline “33 Yıldır Aynı Özenle.” beside a renovated kitchen with a white countertop.',
+      },
+      width: 960,
+      height: 663,
+      // Kare kartta başlık kalsın diye sola yakın kırpılır.
+      focus: '10% 50%',
+    },
+    liveUrl: 'https://ozcanyapisamsun.com.tr',
+  },
 ];

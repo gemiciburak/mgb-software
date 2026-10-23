@@ -91,6 +91,8 @@ export const home: HomeContent = {
     indexTitle: 'The first ones are live. More are on the way.',
     soon: 'COMING SOON',
     visit: 'Visit site',
+    showAll: 'Click to see all projects',
+    showLess: 'Show less',
   },
 
   process: {

@@ -94,6 +94,8 @@ export const home: HomeContent = {
     indexTitle: 'İlk işler yayında, yenileri yolda.',
     soon: 'YAKINDA',
     visit: 'Siteyi aç',
+    showAll: 'Bütün projeleri görmek için tıklayın',
+    showLess: 'Daha az göster',
   },
 
   process: {
