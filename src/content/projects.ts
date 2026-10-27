@@ -74,7 +74,7 @@ export const projects: readonly Project[] = [
       // Kare kartta başlık ve yemek fotoğrafı birlikte kalsın diye sola yakın kırpılır.
       focus: '15% 50%',
     },
-    liveUrl: 'https://pierre.burakgemici.com.tr',
+    liveUrl: 'https://pierre-restaurant.vercel.app',
   },
   {
     // Stüdyonun kendi oyunu: Unity 2D + C#, iOS/Android için yazıldı, web'de
