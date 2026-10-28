@@ -127,4 +127,28 @@ export const projects: readonly Project[] = [
     },
     liveUrl: 'https://ozcanyapisamsun.com.tr',
   },
+  {
+    // Burak Gemici'nin kişisel portfolyo sitesi (Next.js, statik üretim,
+    // GitHub Pages). Kaynak: github.com/gemiciburak/portfolio-site.
+    // Kapak, sitenin ana sayfasından alınmış ekran görüntüsü.
+    id: 'portfolio-site',
+    slug: 'portfolio-site',
+    title: { tr: 'Burak Gemici Portfolyo', en: 'Burak Gemici Portfolio' },
+    summary: {
+      tr: "Proje detay sayfaları ve iletişim formu olan, statik üretilip GitHub Pages'te yayınlanan kişisel portfolyo sitesi.",
+      en: 'A statically generated personal portfolio on GitHub Pages, with project detail pages and a contact form.',
+    },
+    services: ['web-development', 'ui-ux-design'],
+    year: 2026,
+    cover: {
+      url: '/work/portfolio.webp',
+      alt: {
+        tr: 'Burak Gemici portfolyo ana sayfası: koyu lacivert zemin üzerinde “Hi, I’m Burak Gemici” başlığı ve kısa bir tanıtım cümlesi.',
+        en: 'Burak Gemici portfolio home page: the headline “Hi, I’m Burak Gemici” and a short introduction on a dark navy background.',
+      },
+      width: 960,
+      height: 720,
+    },
+    liveUrl: 'https://burakgemici.com.tr',
+  },
 ];
